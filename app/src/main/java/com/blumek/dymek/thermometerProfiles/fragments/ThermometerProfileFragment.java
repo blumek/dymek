@@ -21,7 +21,6 @@ import com.blumek.dymek.thermometerProfiles.viewmodels.ThermometerProfileViewMod
 import java.util.List;
 
 public class ThermometerProfileFragment extends Fragment {
-    private static final String TAG = "ThermometerProfileFragment";
     private ThermometerProfileViewModel thermometerProfileViewModel;
     private RecyclerView thermometerProfileRecyclerView;
     private ThermometerProfileAdapter thermometerProfileAdapter;

@@ -7,14 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
 
+import java.util.Date;
+
 @Database(entities = {
-        ThermometerProfile.class
+        ThermometerProfile.class,
+        SensorSettings.class
         }, version = 1)
+@TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
@@ -46,9 +52,9 @@ public abstract class AppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            thermometerProfileDao.insert(new ThermometerProfile("Szynki święta"));
-            thermometerProfileDao.insert(new ThermometerProfile("Kiełbasy"));
-            thermometerProfileDao.insert(new ThermometerProfile("Sery"));
+            thermometerProfileDao.insert(new ThermometerProfile("Szynki święta", new Date()));
+            thermometerProfileDao.insert(new ThermometerProfile("Kiełbasy", new Date()));
+            thermometerProfileDao.insert(new ThermometerProfile("Sery", new Date()));
             return null;
         }
     }

@@ -22,7 +22,7 @@ public class ThermometerRepositoryImpl implements ThermometerProfileRepository {
     }
 
     @Override
-    public ThermometerProfile getThermometerProfileById(int id) {
+    public LiveData<ThermometerProfile> getThermometerProfileById(int id) {
         return thermometerProfileDao.getThermometerProfileById(id);
     }
 

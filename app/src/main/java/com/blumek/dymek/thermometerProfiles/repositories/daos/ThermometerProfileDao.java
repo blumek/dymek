@@ -16,5 +16,5 @@ public interface ThermometerProfileDao extends BaseDao<ThermometerProfile> {
     LiveData<List<ThermometerProfile>> getAllThermometerProfiles();
 
     @Query("SELECT * FROM ThermometerProfile WHERE id=:id")
-    ThermometerProfile getThermometerProfileById(int id);
+    LiveData<ThermometerProfile> getThermometerProfileById(int id);
 }

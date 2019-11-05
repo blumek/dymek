@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.thermometerProfiles.ThermometerProfile;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 
 import java.util.ArrayList;
 import java.util.List;

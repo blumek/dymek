@@ -1,9 +1,9 @@
-package com.blumek.dymek.thermometerProfiles;
+package com.blumek.dymek.thermometerProfiles.models;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "thermometer_profiles")
+@Entity
 public class ThermometerProfile {
     @PrimaryKey(autoGenerate = true)
     private int id;

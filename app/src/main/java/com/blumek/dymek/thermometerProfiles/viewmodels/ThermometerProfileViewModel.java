@@ -6,32 +6,24 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.thermometerProfiles.ThermometerProfile;
+import com.blumek.dymek.shared.AppDatabase;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepository;
+import com.blumek.dymek.thermometerProfiles.repositories.ThermometerRepositoryImpl;
 
 import java.util.List;
 
 public class ThermometerProfileViewModel extends AndroidViewModel {
-    private ThermometerProfileRepository repository;
+    private ThermometerProfileRepository thermometerProfileRepository;
     private LiveData<List<ThermometerProfile>> thermometerProfiles;
 
     public ThermometerProfileViewModel(@NonNull Application application) {
         super(application);
-        repository = new ThermometerProfileRepository(application);
-        thermometerProfiles = repository.getThermometerProfiles();
+        AppDatabase appDatabase = AppDatabase.getInstance(application);
+        thermometerProfileRepository = new ThermometerRepositoryImpl(appDatabase.thermometerProfileDao());
+        thermometerProfiles = thermometerProfileRepository.getAllThermometerProfiles();
     }
 
-    public void add(ThermometerProfile thermometerProfile) {
-        repository.add(thermometerProfile);
-    }
-
-    public void update(ThermometerProfile thermometerProfile) {
-        repository.update(thermometerProfile);
-    }
-
-    public void delete(ThermometerProfile thermometerProfile) {
-        repository.delete(thermometerProfile);
-    }
     public LiveData<List<ThermometerProfile>> getThermometerProfiles() {
         return thermometerProfiles;
     }

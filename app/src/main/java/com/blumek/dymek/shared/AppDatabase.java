@@ -1,4 +1,4 @@
-package com.blumek.dymek;
+package com.blumek.dymek.shared;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,14 +9,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.blumek.dymek.thermometerProfiles.ThermometerProfile;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
 
-@Database(entities = {ThermometerProfile.class}, version = 1)
+@Database(entities = {
+        ThermometerProfile.class
+        }, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
-
-    public abstract ThermometerProfileDao thermometerProfileDao();
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
@@ -32,7 +32,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
+            super.onOpen(db);
             new PopulateDbAsyncTask(instance).execute();
         }
     };
@@ -46,10 +46,14 @@ public abstract class AppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            thermometerProfileDao.add(new ThermometerProfile("Szynki święta"));
-            thermometerProfileDao.add(new ThermometerProfile("Kiełbasy"));
-            thermometerProfileDao.add(new ThermometerProfile("Sery"));
+            thermometerProfileDao.insert(new ThermometerProfile("Szynki święta"));
+            thermometerProfileDao.insert(new ThermometerProfile("Kiełbasy"));
+            thermometerProfileDao.insert(new ThermometerProfile("Sery"));
             return null;
         }
     }
+
+    public abstract ThermometerProfileDao thermometerProfileDao();
+
+
 }

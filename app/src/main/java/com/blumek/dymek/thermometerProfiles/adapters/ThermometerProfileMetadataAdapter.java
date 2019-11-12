@@ -9,20 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ThermometerProfileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<ThermometerProfile> thermometerProfiles;
+public class ThermometerProfileMetadataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<ThermometerProfileMetadata> thermometerProfileMetadata;
 
-    public ThermometerProfileAdapter() {
-        thermometerProfiles = new ArrayList<>();
+    public ThermometerProfileMetadataAdapter() {
+        thermometerProfileMetadata = Lists.newArrayList();
     }
 
-    public void setThermometerProfiles(List<ThermometerProfile> thermometerProfiles) {
-        this.thermometerProfiles = thermometerProfiles;
+    public void setThermometerProfileMetadata(List<ThermometerProfileMetadata> thermometerProfileMetadata) {
+        this.thermometerProfileMetadata = thermometerProfileMetadata;
         notifyDataSetChanged();
     }
 
@@ -35,12 +35,12 @@ public class ThermometerProfileAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        ((ViewHolder)viewHolder).profileName.setText(thermometerProfiles.get(position).getName());
+        ((ViewHolder)viewHolder).profileName.setText(thermometerProfileMetadata.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return thermometerProfiles.size();
+        return thermometerProfileMetadata.size();
     }
 
     private class ViewHolder extends RecyclerView.ViewHolder{
@@ -48,7 +48,7 @@ public class ThermometerProfileAdapter extends RecyclerView.Adapter<RecyclerView
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            profileName = itemView.findViewById(R.id.profile_name);
+            profileName = itemView.findViewById(R.id.profile_name_edit_text);
         }
     }
 }

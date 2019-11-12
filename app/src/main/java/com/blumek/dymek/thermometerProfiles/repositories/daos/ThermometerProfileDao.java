@@ -3,18 +3,20 @@ package com.blumek.dymek.thermometerProfiles.repositories.daos;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
-import com.blumek.dymek.shared.BaseDao;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 
 import java.util.List;
 
 @Dao
-public interface ThermometerProfileDao extends BaseDao<ThermometerProfile> {
+public interface ThermometerProfileDao {
 
-    @Query("SELECT * FROM ThermometerProfile")
+    @Transaction
+    @Query("SELECT * FROM ThermometerProfileMetadata")
     LiveData<List<ThermometerProfile>> getAllThermometerProfiles();
 
-    @Query("SELECT * FROM ThermometerProfile WHERE id=:id")
-    LiveData<ThermometerProfile> getThermometerProfileById(int id);
+    @Transaction
+    @Query("SELECT * FROM ThermometerProfileMetadata WHERE id=:id")
+    LiveData<List<ThermometerProfile>> getThermometerProfilesByMetadataId(int id);
 }

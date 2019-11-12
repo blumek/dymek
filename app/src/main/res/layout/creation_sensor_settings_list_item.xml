@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="sensorsSettings"
+            type="com.blumek.dymek.thermometerProfiles.models.SensorSettings" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/sensor_name"
+                android:text="@string/sensor_name"
+                android:textSize="15sp"
+                android:layout_marginBottom="6dp"/>
+
+            <EditText
+                android:id="@+id/sensor_name"
+                android:text="@={sensorsSettings.name}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginBottom="16dp"
+                tools:text="Test"
+                android:importantForAutofill="no"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/min_temp_val"
+                android:text="@string/min_temperature_value"
+                android:textSize="15sp"
+                android:layout_marginBottom="6dp"/>
+
+            <EditText
+                android:id="@+id/min_temp_val"
+                android:text="@={`` + sensorsSettings.minTemperatureValue}"
+                android:inputType="number|numberDecimal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginBottom="16dp"
+                tools:text="-127.0"
+                android:importantForAutofill="no" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:labelFor="@id/max_temp_val"
+                android:text="@string/max_temperature_value"
+                android:textSize="15sp"
+                android:layout_marginBottom="6dp"/>
+
+            <EditText
+                android:id="@+id/max_temp_val"
+                android:text="@={`` + sensorsSettings.maxTemperatureValue}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginBottom="16dp"
+                tools:text="127.0"
+                android:importantForAutofill="no"
+                android:inputType="number|numberDecimal" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

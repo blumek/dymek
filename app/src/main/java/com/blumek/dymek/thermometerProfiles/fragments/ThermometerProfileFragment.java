@@ -14,37 +14,31 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileAdapter;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.viewmodels.ThermometerProfileViewModel;
+import com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileMetadataAdapter;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.thermometerProfiles.viewmodels.ThermometerProfileFragmentViewModel;
 
 import java.util.List;
 
 public class ThermometerProfileFragment extends Fragment {
-    private ThermometerProfileViewModel thermometerProfileViewModel;
-    private RecyclerView thermometerProfileRecyclerView;
-    private ThermometerProfileAdapter thermometerProfileAdapter;
-
-    public static ThermometerProfileFragment newInstance() {
-        return new ThermometerProfileFragment();
-    }
+    private ThermometerProfileMetadataAdapter thermometerProfileMetadataAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        thermometerProfileViewModel = ViewModelProviders.of(this).get(ThermometerProfileViewModel.class);
-        thermometerProfileAdapter = new ThermometerProfileAdapter();
-        thermometerProfileViewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfile>>() {
+        ThermometerProfileFragmentViewModel viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
+        thermometerProfileMetadataAdapter = new ThermometerProfileMetadataAdapter();
+        viewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfileMetadata>>() {
             @Override
-            public void onChanged(List<ThermometerProfile> thermometerProfiles) {
-                thermometerProfileAdapter.setThermometerProfiles(thermometerProfiles);
+            public void onChanged(List<ThermometerProfileMetadata> thermometerProfileMetadata) {
+                thermometerProfileMetadataAdapter.setThermometerProfileMetadata(thermometerProfileMetadata);
             }
         });
 
         View view = inflater.inflate(R.layout.thermometer_profile_fragment, container, false);
-        thermometerProfileRecyclerView = view.findViewById(R.id.profile_recycler_view);
+        RecyclerView thermometerProfileRecyclerView = view.findViewById(R.id.profile_recycler_view);
         thermometerProfileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        thermometerProfileRecyclerView.setAdapter(thermometerProfileAdapter);
+        thermometerProfileRecyclerView.setAdapter(thermometerProfileMetadataAdapter);
         thermometerProfileRecyclerView.setHasFixedSize(true);
         return view;
     }

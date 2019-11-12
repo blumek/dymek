@@ -3,12 +3,15 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.blumek.dymek"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "2.01"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -22,6 +25,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    applicationVariants.all { variant ->
+        variant.resValue "string", "versionName", variant.versionName
+    }
 }
 
 dependencies {
@@ -34,6 +40,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    def guava_version = "28.1"
+    implementation("com.google.guava:guava:$guava_version-android")
+
     def lifecycle_version = "2.1.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
@@ -42,10 +51,10 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
-    def recyclerview_version = "1.0.0"
-    implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
+    def recyclerView_version = "1.0.0"
+    implementation "androidx.recyclerview:recyclerview:$recyclerView_version"
 
-    def cardview_version = "1.0.0"
-    implementation "androidx.cardview:cardview:$cardview_version"
+    def cardView_version = "1.0.0"
+    implementation "androidx.cardview:cardview:$cardView_version"
     implementation 'com.google.android.material:material:1.0.0'
 }

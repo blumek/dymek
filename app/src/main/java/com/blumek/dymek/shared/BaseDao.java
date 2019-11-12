@@ -6,7 +6,7 @@ import androidx.room.Update;
 
 public interface BaseDao<T> {
     @Insert
-    long insert(T entity);
+    long save(T entity);
 
     @Update
     void update(T entity);

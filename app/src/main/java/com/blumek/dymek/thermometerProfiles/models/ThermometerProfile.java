@@ -1,44 +1,49 @@
 package com.blumek.dymek.thermometerProfiles.models;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
+import androidx.room.Embedded;
+import androidx.room.Relation;
 
-import java.util.Date;
+import java.util.List;
 
-@Entity
 public class ThermometerProfile {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
-    private String name;
-    private Date lastUsage;
-    private Date createdAt;
+    @Embedded
+    private ThermometerProfileMetadata metadata;
+    @Relation(parentColumn = "id",
+            entityColumn = "thermometerProfileMetadataId",
+            entity = SensorSettings.class)
+    private List<SensorSettings> sensorSettings;
 
-    public ThermometerProfile(String name, Date createdAt) {
-        this.name = name;
-        this.createdAt = createdAt;
+    public ThermometerProfile() {
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public ThermometerProfile(ThermometerProfileMetadata metadata, List<SensorSettings> sensorSettings) {
+        this.metadata = metadata;
+        this.sensorSettings = sensorSettings;
     }
 
-    public void setLastUsage(Date lastUsage) {
-        this.lastUsage = lastUsage;
+    public ThermometerProfileMetadata getMetadata() {
+        return metadata;
     }
 
-    public int getId() {
-        return id;
+    public List<SensorSettings> getSensorSettings() {
+        return sensorSettings;
     }
 
-    public String getName() {
-        return name;
+    public void setMetadata(ThermometerProfileMetadata metadata) {
+        this.metadata = metadata;
     }
 
-    public Date getLastUsage() {
-        return lastUsage;
+    public void setSensorSettings(List<SensorSettings> sensorSettings) {
+        this.sensorSettings = sensorSettings;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    @NonNull
+    @Override
+    public String toString() {
+        return "ThermometerProfile{" +
+                "metadata=" + metadata +
+                ", sensorSettings=" + sensorSettings +
+                '}';
     }
 }

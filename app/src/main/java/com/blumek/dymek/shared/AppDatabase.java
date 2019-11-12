@@ -11,55 +11,70 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.thermometerProfiles.repositories.daos.SensorSettingsDao;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
+import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileMetadataDao;
 
 import java.util.Date;
 
 @Database(entities = {
-        ThermometerProfile.class,
+        ThermometerProfileMetadata.class,
         SensorSettings.class
         }, version = 1)
 @TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
+    private static final String DATABASE_NAME = "app_database";
     private static AppDatabase instance;
 
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, "app_database")
-                    .fallbackToDestructiveMigration()
-                    .addCallback(roomCallback)
-                    .build();
+            synchronized (AppDatabase.class) {
+                if (instance == null) {
+                    instance = Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class, DATABASE_NAME)
+                            .fallbackToDestructiveMigration()
+                            .addCallback(roomCallback)
+                            .build();
+                }
+            }
         }
         return instance;
     }
 
+    public abstract ThermometerProfileMetadataDao thermometerProfileMetadataDao();
+    public abstract SensorSettingsDao sensorSettingsDao();
+    public abstract ThermometerProfileDao thermometerProfileDao();
+
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onOpen(db);
+            super.onCreate(db);
             new PopulateDbAsyncTask(instance).execute();
         }
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ThermometerProfileDao thermometerProfileDao;
+        private ThermometerProfileMetadataDao thermometerProfileMetadataDao;
+        private SensorSettingsDao sensorSettingsDao;
 
         private PopulateDbAsyncTask(AppDatabase database) {
-            thermometerProfileDao = database.thermometerProfileDao();
+            thermometerProfileMetadataDao = database.thermometerProfileMetadataDao();
+            sensorSettingsDao = database.sensorSettingsDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            thermometerProfileDao.insert(new ThermometerProfile("Szynki święta", new Date()));
-            thermometerProfileDao.insert(new ThermometerProfile("Kiełbasy", new Date()));
-            thermometerProfileDao.insert(new ThermometerProfile("Sery", new Date()));
+            int index = (int) thermometerProfileMetadataDao.save(new ThermometerProfileMetadata("Profile Test 1", new Date()));
+            SensorSettings sensorSettings = new SensorSettings("Settings Test 1", 20, 40);
+            sensorSettings.setThermometerProfileMetadataId(index);
+            sensorSettingsDao.save(sensorSettings);
+            sensorSettings = new SensorSettings("Settings Test 2", 10, 30);
+            sensorSettings.setThermometerProfileMetadataId(index);
+            sensorSettingsDao.save(sensorSettings);
+            thermometerProfileMetadataDao.save(new ThermometerProfileMetadata("Profile Test 2", new Date()));
+            thermometerProfileMetadataDao.save(new ThermometerProfileMetadata("Profile Test 3", new Date()));
             return null;
         }
     }
-
-    public abstract ThermometerProfileDao thermometerProfileDao();
-
-
 }

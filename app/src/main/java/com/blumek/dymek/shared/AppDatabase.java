@@ -11,10 +11,14 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepository;
+import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepositoryImpl;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.SensorSettingsDao;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileMetadataDao;
+import com.google.common.collect.Lists;
 
 import java.util.Date;
 
@@ -55,25 +59,20 @@ public abstract class AppDatabase extends RoomDatabase {
     };
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ThermometerProfileMetadataDao thermometerProfileMetadataDao;
-        private SensorSettingsDao sensorSettingsDao;
+        private ThermometerProfileRepository thermometerProfileRepository;
 
         private PopulateDbAsyncTask(AppDatabase database) {
-            thermometerProfileMetadataDao = database.thermometerProfileMetadataDao();
-            sensorSettingsDao = database.sensorSettingsDao();
+            thermometerProfileRepository =
+                    new ThermometerProfileRepositoryImpl(database.thermometerProfileDao());
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            int index = (int) thermometerProfileMetadataDao.save(new ThermometerProfileMetadata("Profile Test 1", new Date()));
-            SensorSettings sensorSettings = new SensorSettings("Settings Test 1", 20, 40);
-            sensorSettings.setThermometerProfileMetadataId(index);
-            sensorSettingsDao.save(sensorSettings);
-            sensorSettings = new SensorSettings("Settings Test 2", 10, 30);
-            sensorSettings.setThermometerProfileMetadataId(index);
-            sensorSettingsDao.save(sensorSettings);
-            thermometerProfileMetadataDao.save(new ThermometerProfileMetadata("Profile Test 2", new Date()));
-            thermometerProfileMetadataDao.save(new ThermometerProfileMetadata("Profile Test 3", new Date()));
+            ThermometerProfileMetadata thermometerProfileMetadata = new ThermometerProfileMetadata("Profile Test 1", new Date());
+            SensorSettings sensorSettings1 = new SensorSettings("Settings Test 1", 20, 40);
+            SensorSettings sensorSettings2 = new SensorSettings("Settings Test 2", 10, 30);
+            ThermometerProfile thermometerProfile = new ThermometerProfile(thermometerProfileMetadata, Lists.newArrayList(sensorSettings1, sensorSettings2));
+            thermometerProfileRepository.save(thermometerProfile);
             return null;
         }
     }

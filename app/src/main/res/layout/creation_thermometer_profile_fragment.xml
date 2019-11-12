@@ -71,6 +71,14 @@
                     android:onClick="@{() -> viewModel.addNewEmptyTemplate()}"
                     android:layout_gravity="center"/>
 
+                <Button
+                    android:id="@+id/save_thermometer_profile_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="@string/save"
+                    android:onClick="@{() -> viewModel.saveThermometerProfile()}"
+                    android:layout_gravity="center"/>
             </LinearLayout>
 
         </ScrollView>

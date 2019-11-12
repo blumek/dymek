@@ -7,4 +7,5 @@
     <string name="sensor_name">Sensor name</string>
     <string name="min_temperature_value">Min temperature value</string>
     <string name="max_temperature_value">Max temperature value</string>
+    <string name="save">Save</string>
 </resources>

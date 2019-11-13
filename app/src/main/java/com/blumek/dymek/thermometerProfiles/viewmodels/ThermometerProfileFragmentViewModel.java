@@ -1,12 +1,16 @@
 package com.blumek.dymek.thermometerProfiles.viewmodels;
 
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.blumek.dymek.shared.AppDatabase;
+import com.blumek.dymek.thermometerProfiles.fragments.ThermometerProfileFragmentDirections;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
 import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileMetadataRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileMetadataRepositoryImpl;
@@ -26,5 +30,11 @@ public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
 
     public LiveData<List<ThermometerProfileMetadata>> getThermometerProfiles() {
         return thermometerProfiles;
+    }
+
+    public void onCreateClicked(View view) {
+        NavDirections directions = ThermometerProfileFragmentDirections
+                        .actionThermometerProfileFragmentToCreationThermometerProfileFragment();
+        Navigation.findNavController(view).navigate(directions);
     }
 }

@@ -3,54 +3,23 @@ package com.blumek.dymek.thermometerProfiles.viewmodels;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
-import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepository;
-import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepositoryImpl;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class CreationThermometerProfileFragmentViewModel extends AndroidViewModel {
-    private ThermometerProfileRepository thermometerProfileRepository;
-    private MutableLiveData<ThermometerProfileMetadata> metadata;
-    private MutableLiveData<List<SensorSettings>> sensorsSettings;
+public class CreationThermometerProfileFragmentViewModel extends PersistenceThermometerProfileFragmentViewModel {
 
     public CreationThermometerProfileFragmentViewModel(@NonNull Application application) {
         super(application);
-        thermometerProfileRepository =
-                new ThermometerProfileRepositoryImpl(AppDatabase.getInstance(application)
-                        .thermometerProfileDao());
 
         setEmptyMetadata();
         setEmptySensorsSettingsList();
-        addNewEmptyTemplate();
-    }
-
-    public LiveData<List<SensorSettings>> getSensorsSettings() {
-        return sensorsSettings;
-    }
-
-    public LiveData<ThermometerProfileMetadata> getMetadata() {
-        return metadata;
-    }
-
-    public void addNewEmptyTemplate() {
-        List<SensorSettings> currentSensorsSettings = getSensorsSettingsValue();
-        currentSensorsSettings.add(SensorSettings.emptySensorSettings());
-        sensorsSettings.setValue(currentSensorsSettings);
-    }
-
-    private List<SensorSettings> getSensorsSettingsValue() {
-        if (sensorsSettings.getValue() == null)
-            return Lists.newArrayList();
-        return Lists.newArrayList(sensorsSettings.getValue());
+        addNewEmptySensorSettingsTemplate();
     }
 
     private void setEmptyMetadata() {
@@ -62,9 +31,7 @@ public class CreationThermometerProfileFragmentViewModel extends AndroidViewMode
         sensorsSettings = new MutableLiveData<>(emptySensorsSettings);
     }
 
-    public void saveThermometerProfile() {
-        ThermometerProfile thermometerProfile =
-                new ThermometerProfile(metadata.getValue(), sensorsSettings.getValue());
+    public void persistThermometerProfile(ThermometerProfile thermometerProfile) {
         thermometerProfileRepository.save(thermometerProfile);
     }
 }

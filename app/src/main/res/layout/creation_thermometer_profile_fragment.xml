@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.blumek.dymek.thermometerProfiles.viewmodels.CreationThermometerProfileFragmentViewModel" />
+            type="com.blumek.dymek.thermometerProfiles.viewmodels.PersistenceThermometerProfileFragmentViewModel" />
 
         <variable
             name="adapter"
@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="@string/add_another_sensor"
-                    android:onClick="@{() -> viewModel.addNewEmptyTemplate()}"
+                    android:onClick="@{() -> viewModel.addNewEmptySensorSettingsTemplate()}"
                     android:layout_gravity="center"/>
 
                 <Button
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="@string/save"
-                    android:onClick="@{() -> viewModel.saveThermometerProfile()}"
+                    android:onClick="@{viewModel::onPersistClick}"
                     android:layout_gravity="center"/>
             </LinearLayout>
 

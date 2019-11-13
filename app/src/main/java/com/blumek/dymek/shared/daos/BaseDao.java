@@ -1,4 +1,4 @@
-package com.blumek.dymek.shared;
+package com.blumek.dymek.shared.daos;
 
 import androidx.room.Delete;
 import androidx.room.Insert;

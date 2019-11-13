@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.repositories;
+package com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMetadataRepositories;
 
 import android.os.AsyncTask;
 

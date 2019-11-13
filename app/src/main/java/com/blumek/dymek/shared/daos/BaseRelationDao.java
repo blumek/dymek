@@ -1,4 +1,4 @@
-package com.blumek.dymek.shared;
+package com.blumek.dymek.shared.daos;
 
 public interface BaseRelationDao<T> {
     void save(T entity);

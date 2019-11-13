@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer;
 
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepository;
-import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepositoryImpl;
+import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
+import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
 
 import java.util.List;
 

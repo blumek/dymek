@@ -1,4 +1,4 @@
-package com.blumek.dymek.shared;
+package com.blumek.dymek.shared.converters;
 
 import androidx.room.TypeConverter;
 

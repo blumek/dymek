@@ -6,7 +6,7 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import com.blumek.dymek.shared.AppDatabase;
-import com.blumek.dymek.shared.BaseRelationDao;
+import com.blumek.dymek.shared.daos.BaseRelationDao;
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 

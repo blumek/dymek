@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.fragments;
+package com.blumek.dymek.thermometerProfiles.fragments.thermometerProfileFragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +16,7 @@ import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 import com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileMetadataAdapter;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
-import com.blumek.dymek.thermometerProfiles.viewmodels.ThermometerProfileFragmentViewModel;
+import com.blumek.dymek.thermometerProfiles.viewModels.thermometerProfileViewModels.ThermometerProfileFragmentViewModel;
 
 import java.util.List;
 

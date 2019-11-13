@@ -4,9 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ThermometerProfile {
+public class ThermometerProfile implements Serializable {
     @Embedded
     private ThermometerProfileMetadata metadata;
     @Relation(parentColumn = "id",

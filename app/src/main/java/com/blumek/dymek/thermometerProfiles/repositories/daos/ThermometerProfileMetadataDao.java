@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.blumek.dymek.shared.BaseDao;
+import com.blumek.dymek.shared.daos.BaseDao;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
 
 import java.util.List;

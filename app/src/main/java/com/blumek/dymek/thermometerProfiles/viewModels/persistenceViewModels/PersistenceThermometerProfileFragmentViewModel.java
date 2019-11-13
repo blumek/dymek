@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.viewmodels;
+package com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels;
 
 import android.app.Application;
 import android.view.View;
@@ -13,8 +13,8 @@ import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
-import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepository;
-import com.blumek.dymek.thermometerProfiles.repositories.ThermometerProfileRepositoryImpl;
+import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
+import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
 import com.google.common.collect.Lists;
 
 import java.util.List;

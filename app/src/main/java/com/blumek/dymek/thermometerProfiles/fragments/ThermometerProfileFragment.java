@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
+import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 import com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileMetadataAdapter;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
 import com.blumek.dymek.thermometerProfiles.viewmodels.ThermometerProfileFragmentViewModel;
@@ -28,6 +28,15 @@ public class ThermometerProfileFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         ThermometerProfileFragmentViewModel viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
         thermometerProfileMetadataAdapter = new ThermometerProfileMetadataAdapter();
+
+        ThermometerProfileFragmentBinding binding =
+                DataBindingUtil.inflate(inflater, R.layout.thermometer_profile_fragment,
+                container, false);
+
+        binding.setViewModel(viewModel);
+        binding.setAdapter(thermometerProfileMetadataAdapter);
+        binding.setLifecycleOwner(this);
+
         viewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfileMetadata>>() {
             @Override
             public void onChanged(List<ThermometerProfileMetadata> thermometerProfileMetadata) {
@@ -35,12 +44,7 @@ public class ThermometerProfileFragment extends Fragment {
             }
         });
 
-        View view = inflater.inflate(R.layout.thermometer_profile_fragment, container, false);
-        RecyclerView thermometerProfileRecyclerView = view.findViewById(R.id.profile_recycler_view);
-        thermometerProfileRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        thermometerProfileRecyclerView.setAdapter(thermometerProfileMetadataAdapter);
-        thermometerProfileRecyclerView.setHasFixedSize(true);
-        return view;
+        return binding.getRoot();
     }
 
 }

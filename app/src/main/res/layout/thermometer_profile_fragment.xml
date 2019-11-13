@@ -1,22 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".thermometerProfiles.fragments.ThermometerProfileFragment">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/profile_recycler_view"
+        <variable
+            name="viewModel"
+            type="com.blumek.dymek.thermometerProfiles.viewmodels.ThermometerProfileFragmentViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileMetadataAdapter" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:context=".thermometerProfiles.fragments.ThermometerProfileFragment">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@android:drawable/ic_input_add"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="32dp"/>
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:adapter="@{adapter}"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_input_add"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="32dp"/>
+    </FrameLayout>
+</layout>

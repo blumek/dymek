@@ -40,7 +40,7 @@ public class ThermometerProfileFragment extends Fragment {
         viewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfileMetadata>>() {
             @Override
             public void onChanged(List<ThermometerProfileMetadata> thermometerProfileMetadata) {
-                thermometerProfileMetadataAdapter.setThermometerProfileMetadata(thermometerProfileMetadata);
+                thermometerProfileMetadataAdapter.setThermometerProfilesMetadata(thermometerProfileMetadata);
             }
         });
 

@@ -1,54 +1,64 @@
 package com.blumek.dymek.thermometerProfiles.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
+import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class ThermometerProfileMetadataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<ThermometerProfileMetadata> thermometerProfileMetadata;
+public class ThermometerProfileMetadataAdapter extends
+        RecyclerView.Adapter<ThermometerProfileMetadataAdapter.ViewHolder> {
+    private List<ThermometerProfileMetadata> thermometerProfilesMetadata;
 
     public ThermometerProfileMetadataAdapter() {
-        thermometerProfileMetadata = Lists.newArrayList();
+        thermometerProfilesMetadata = Lists.newArrayList();
     }
 
-    public void setThermometerProfileMetadata(List<ThermometerProfileMetadata> thermometerProfileMetadata) {
-        this.thermometerProfileMetadata = thermometerProfileMetadata;
+    public void setThermometerProfilesMetadata(List<ThermometerProfileMetadata> thermometerProfilesMetadata) {
+        this.thermometerProfilesMetadata = thermometerProfilesMetadata;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.thermometer_profile_list_item, viewGroup, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        ThermometerProfileListItemBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(viewGroup.getContext()),
+                R.layout.thermometer_profile_list_item, viewGroup, false);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
-        ((ViewHolder)viewHolder).profileName.setText(thermometerProfileMetadata.get(position).getName());
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+        ThermometerProfileMetadata thermometerProfileMetadata = thermometerProfilesMetadata.get(position);
+        viewHolder.bind(thermometerProfileMetadata);
     }
 
     @Override
     public int getItemCount() {
-        return thermometerProfileMetadata.size();
+        return thermometerProfilesMetadata.size();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView profileName;
+    class ViewHolder extends RecyclerView.ViewHolder{
+        private ThermometerProfileListItemBinding binding;
 
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            profileName = itemView.findViewById(R.id.profile_name_edit_text);
+        ViewHolder(ThermometerProfileListItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        void bind(Object obj) {
+            binding.setVariable(BR.thermometerProfilesMetadata, obj);
+            binding.executePendingBindings();
         }
     }
 }

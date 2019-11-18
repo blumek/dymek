@@ -11,14 +11,11 @@ import androidx.navigation.Navigation;
 
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.thermometerProfiles.fragments.thermometerProfileFragments.ThermometerProfileFragmentDirections;
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMetadataRepositories.ThermometerProfileMetadataRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMetadataRepositories.ThermometerProfileMetadataRepositoryImpl;
-import com.google.common.collect.Lists;
 
-import java.util.Date;
 import java.util.List;
 
 public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
@@ -42,13 +39,9 @@ public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
         Navigation.findNavController(view).navigate(directions);
     }
 
-    public void onEditClicked(View view) {
+    public void onEditClicked(View view, ThermometerProfileMetadata thermometerProfileMetadata) {
         ThermometerProfile thermometerProfile = new ThermometerProfile();
-        ThermometerProfileMetadata thermometerProfileMetadata = new ThermometerProfileMetadata("Test 1", new Date());
-        thermometerProfileMetadata.setId(2);
-        List<SensorSettings> sensorsSettings = Lists.newArrayList(SensorSettings.emptySensorSettings());
         thermometerProfile.setMetadata(thermometerProfileMetadata);
-        thermometerProfile.setSensorSettings(sensorsSettings);
         NavDirections directions = ThermometerProfileFragmentDirections
                 .actionThermometerProfileFragmentToUpdateThermometerProfileFragment(thermometerProfile);
         Navigation.findNavController(view).navigate(directions);

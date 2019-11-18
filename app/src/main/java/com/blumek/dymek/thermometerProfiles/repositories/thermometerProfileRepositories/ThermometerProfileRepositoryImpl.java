@@ -22,6 +22,11 @@ public class ThermometerProfileRepositoryImpl implements ThermometerProfileRepos
     }
 
     @Override
+    public LiveData<ThermometerProfile> getThermometerProfileByMetadataId(int metadataId) {
+        return thermometerProfileDao.getThermometerProfileByMetadataId(metadataId);
+    }
+
+    @Override
     public void save(ThermometerProfile thermometerProfile) {
         new AddThermometerProfileAsyncTask(thermometerProfileDao).execute(thermometerProfile);
     }

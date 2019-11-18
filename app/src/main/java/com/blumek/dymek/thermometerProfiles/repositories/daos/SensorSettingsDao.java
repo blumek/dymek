@@ -16,5 +16,5 @@ public interface SensorSettingsDao extends BaseDao<SensorSettings> {
     LiveData<List<SensorSettings>> getAllSensorsSettings();
 
     @Query("SELECT * FROM SensorSettings WHERE thermometerProfileMetadataId=:metadataId")
-    LiveData<SensorSettings> getSensorsSettingsByMetadataId(int metadataId);
+    LiveData<List<SensorSettings>> getSensorsSettingsByMetadataId(int metadataId);
 }

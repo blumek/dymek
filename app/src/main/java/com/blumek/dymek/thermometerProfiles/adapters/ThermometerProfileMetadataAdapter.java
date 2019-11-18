@@ -11,15 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.thermometerProfiles.viewModels.thermometerProfileViewModels.ThermometerProfileFragmentViewModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 public class ThermometerProfileMetadataAdapter extends
         RecyclerView.Adapter<ThermometerProfileMetadataAdapter.ViewHolder> {
+    private ThermometerProfileFragmentViewModel viewModel;
     private List<ThermometerProfileMetadata> thermometerProfilesMetadata;
 
-    public ThermometerProfileMetadataAdapter() {
+    public ThermometerProfileMetadataAdapter(ThermometerProfileFragmentViewModel viewModel) {
+        this.viewModel = viewModel;
         thermometerProfilesMetadata = Lists.newArrayList();
     }
 
@@ -40,7 +43,7 @@ public class ThermometerProfileMetadataAdapter extends
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         ThermometerProfileMetadata thermometerProfileMetadata = thermometerProfilesMetadata.get(position);
-        viewHolder.bind(thermometerProfileMetadata);
+        viewHolder.bind(viewModel, thermometerProfileMetadata);
     }
 
     @Override
@@ -56,8 +59,10 @@ public class ThermometerProfileMetadataAdapter extends
             this.binding = binding;
         }
 
-        void bind(Object obj) {
-            binding.setVariable(BR.thermometerProfilesMetadata, obj);
+        void bind(ThermometerProfileFragmentViewModel viewModel,
+                  ThermometerProfileMetadata thermometerProfileMetadata) {
+            binding.setVariable(BR.viewModel, viewModel);
+            binding.setVariable(BR.thermometerProfilesMetadata, thermometerProfileMetadata);
             binding.executePendingBindings();
         }
     }

@@ -26,6 +26,10 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
     @Query("SELECT * FROM ThermometerProfileMetadata")
     public abstract LiveData<List<ThermometerProfile>> getAllThermometerProfiles();
 
+    @Transaction
+    @Query("SELECT * FROM ThermometerProfileMetadata WHERE id=:metadataId")
+    public abstract LiveData<ThermometerProfile> getThermometerProfileByMetadataId(int metadataId);
+
     @Override
     @Transaction
     public void save(ThermometerProfile entity) {

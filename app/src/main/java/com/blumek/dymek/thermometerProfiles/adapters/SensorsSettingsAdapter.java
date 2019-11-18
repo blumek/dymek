@@ -44,7 +44,7 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
 
     @Override
     public int getItemCount() {
-        return sensorsSettings.size();
+        return sensorsSettings != null ? sensorsSettings.size() : 0;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

@@ -2,8 +2,8 @@ package com.blumek.dymek.thermometerProfiles.fragments.persistenceThermometerPro
 
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.viewModels.factories.PersistenceViewModelFactory;
-import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.CreationThermometerProfileFragmentViewModel;
 import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
+import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.UpdateThermometerProfileFragmentViewModel;
 
 
 public class UpdateThermometerProfileFragment extends PersistenceThermometerProfileFragment {
@@ -15,6 +15,6 @@ public class UpdateThermometerProfileFragment extends PersistenceThermometerProf
                 new PersistenceViewModelFactory(getActivity().getApplication(),
                         thermometerProfile.getMetadata(), thermometerProfile.getSensorSettings());
 
-        return persistenceViewModelFactory.create(CreationThermometerProfileFragmentViewModel.class);
+        return persistenceViewModelFactory.create(UpdateThermometerProfileFragmentViewModel.class);
     }
 }

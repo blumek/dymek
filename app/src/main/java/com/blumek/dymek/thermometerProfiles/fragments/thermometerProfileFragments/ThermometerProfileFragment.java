@@ -27,7 +27,7 @@ public class ThermometerProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         ThermometerProfileFragmentViewModel viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
-        thermometerProfileMetadataAdapter = new ThermometerProfileMetadataAdapter();
+        thermometerProfileMetadataAdapter = new ThermometerProfileMetadataAdapter(viewModel);
 
         ThermometerProfileFragmentBinding binding =
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_profile_fragment,

@@ -22,7 +22,7 @@ public class SensorSettingsRepositoryImpl implements SensorSettingsRepository {
     }
 
     @Override
-    public LiveData<SensorSettings> getSensorsSettingsByMetadataId(int id) {
+    public LiveData<List<SensorSettings>> getSensorsSettingsByMetadataId(int id) {
         return sensorSettingsDao.getSensorsSettingsByMetadataId(id);
     }
 

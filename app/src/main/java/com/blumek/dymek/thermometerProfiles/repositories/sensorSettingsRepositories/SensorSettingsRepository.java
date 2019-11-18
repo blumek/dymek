@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface SensorSettingsRepository extends BaseRepository<SensorSettings> {
     LiveData<List<SensorSettings>> getAllSensorsSettings();
-    LiveData<SensorSettings> getSensorsSettingsByMetadataId(int metadataId);
+    LiveData<List<SensorSettings>> getSensorsSettingsByMetadataId(int metadataId);
 }

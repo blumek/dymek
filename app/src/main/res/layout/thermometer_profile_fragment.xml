@@ -8,7 +8,7 @@
 
         <variable
             name="adapter"
-            type="com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileMetadataAdapter" />
+            type="com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileAdapter" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

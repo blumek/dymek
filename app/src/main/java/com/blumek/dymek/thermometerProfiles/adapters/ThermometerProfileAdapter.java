@@ -10,24 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.viewModels.thermometerProfileViewModels.ThermometerProfileFragmentViewModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class ThermometerProfileMetadataAdapter extends
-        RecyclerView.Adapter<ThermometerProfileMetadataAdapter.ViewHolder> {
+public class ThermometerProfileAdapter extends
+        RecyclerView.Adapter<ThermometerProfileAdapter.ViewHolder> {
     private ThermometerProfileFragmentViewModel viewModel;
-    private List<ThermometerProfileMetadata> thermometerProfilesMetadata;
+    private List<ThermometerProfile> thermometerProfiles;
 
-    public ThermometerProfileMetadataAdapter(ThermometerProfileFragmentViewModel viewModel) {
+    public ThermometerProfileAdapter(ThermometerProfileFragmentViewModel viewModel) {
         this.viewModel = viewModel;
-        thermometerProfilesMetadata = Lists.newArrayList();
+        thermometerProfiles = Lists.newArrayList();
     }
 
-    public void setThermometerProfilesMetadata(List<ThermometerProfileMetadata> thermometerProfilesMetadata) {
-        this.thermometerProfilesMetadata = thermometerProfilesMetadata;
+    public void setThermometerProfiles(List<ThermometerProfile> thermometerProfiles) {
+        this.thermometerProfiles = thermometerProfiles;
         notifyDataSetChanged();
     }
 
@@ -42,13 +42,13 @@ public class ThermometerProfileMetadataAdapter extends
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        ThermometerProfileMetadata thermometerProfileMetadata = thermometerProfilesMetadata.get(position);
-        viewHolder.bind(viewModel, thermometerProfileMetadata);
+        ThermometerProfile thermometerProfile = thermometerProfiles.get(position);
+        viewHolder.bind(viewModel, thermometerProfile);
     }
 
     @Override
     public int getItemCount() {
-        return thermometerProfilesMetadata.size();
+        return thermometerProfiles.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -60,9 +60,9 @@ public class ThermometerProfileMetadataAdapter extends
         }
 
         void bind(ThermometerProfileFragmentViewModel viewModel,
-                  ThermometerProfileMetadata thermometerProfileMetadata) {
+                  ThermometerProfile thermometerProfile) {
             binding.setVariable(BR.viewModel, viewModel);
-            binding.setVariable(BR.thermometerProfilesMetadata, thermometerProfileMetadata);
+            binding.setVariable(BR.thermometerProfiles, thermometerProfile);
             binding.executePendingBindings();
         }
     }

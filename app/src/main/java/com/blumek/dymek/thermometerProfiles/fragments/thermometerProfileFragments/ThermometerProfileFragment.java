@@ -14,33 +14,33 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
-import com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileMetadataAdapter;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.thermometerProfiles.adapters.ThermometerProfileAdapter;
+import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.viewModels.thermometerProfileViewModels.ThermometerProfileFragmentViewModel;
 
 import java.util.List;
 
 public class ThermometerProfileFragment extends Fragment {
-    private ThermometerProfileMetadataAdapter thermometerProfileMetadataAdapter;
+    private ThermometerProfileAdapter thermometerProfileAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         ThermometerProfileFragmentViewModel viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
-        thermometerProfileMetadataAdapter = new ThermometerProfileMetadataAdapter(viewModel);
+        thermometerProfileAdapter = new ThermometerProfileAdapter(viewModel);
 
         ThermometerProfileFragmentBinding binding =
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_profile_fragment,
                 container, false);
 
         binding.setViewModel(viewModel);
-        binding.setAdapter(thermometerProfileMetadataAdapter);
+        binding.setAdapter(thermometerProfileAdapter);
         binding.setLifecycleOwner(this);
 
-        viewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfileMetadata>>() {
+        viewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfile>>() {
             @Override
-            public void onChanged(List<ThermometerProfileMetadata> thermometerProfileMetadata) {
-                thermometerProfileMetadataAdapter.setThermometerProfilesMetadata(thermometerProfileMetadata);
+            public void onChanged(List<ThermometerProfile> thermometerProfiles) {
+                thermometerProfileAdapter.setThermometerProfiles(thermometerProfiles);
             }
         });
 

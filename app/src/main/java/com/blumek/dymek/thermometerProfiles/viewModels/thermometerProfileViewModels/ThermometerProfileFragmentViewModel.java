@@ -12,24 +12,23 @@ import androidx.navigation.Navigation;
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.thermometerProfiles.fragments.thermometerProfileFragments.ThermometerProfileFragmentDirections;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
-import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMetadataRepositories.ThermometerProfileMetadataRepository;
-import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMetadataRepositories.ThermometerProfileMetadataRepositoryImpl;
+import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
+import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
 
 import java.util.List;
 
 public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
-    private LiveData<List<ThermometerProfileMetadata>> thermometerProfiles;
+    private LiveData<List<ThermometerProfile>> thermometerProfiles;
 
     public ThermometerProfileFragmentViewModel(@NonNull Application application) {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
-        ThermometerProfileMetadataRepository thermometerProfileMetadataRepository =
-                new ThermometerProfileMetadataRepositoryImpl(appDatabase.thermometerProfileMetadataDao());
-        thermometerProfiles = thermometerProfileMetadataRepository.getAllThermometerProfiles();
+        ThermometerProfileRepository thermometerProfileRepository =
+                new ThermometerProfileRepositoryImpl(appDatabase.thermometerProfileDao());
+        thermometerProfiles = thermometerProfileRepository.getAllThermometerProfiles();
     }
 
-    public LiveData<List<ThermometerProfileMetadata>> getThermometerProfiles() {
+    public LiveData<List<ThermometerProfile>> getThermometerProfiles() {
         return thermometerProfiles;
     }
 
@@ -39,9 +38,7 @@ public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
         Navigation.findNavController(view).navigate(directions);
     }
 
-    public void onEditClicked(View view, ThermometerProfileMetadata thermometerProfileMetadata) {
-        ThermometerProfile thermometerProfile = new ThermometerProfile();
-        thermometerProfile.setMetadata(thermometerProfileMetadata);
+    public void onEditClicked(View view, ThermometerProfile thermometerProfile) {
         NavDirections directions = ThermometerProfileFragmentDirections
                 .actionThermometerProfileFragmentToUpdateThermometerProfileFragment(thermometerProfile);
         Navigation.findNavController(view).navigate(directions);

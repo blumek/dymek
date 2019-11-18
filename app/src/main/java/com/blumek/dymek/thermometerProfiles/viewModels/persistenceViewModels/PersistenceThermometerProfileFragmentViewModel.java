@@ -26,9 +26,9 @@ public abstract class PersistenceThermometerProfileFragmentViewModel extends And
 
     PersistenceThermometerProfileFragmentViewModel(@NonNull Application application) {
         super(application);
+        AppDatabase appDatabase = AppDatabase.getInstance(application);
         thermometerProfileRepository =
-                new ThermometerProfileRepositoryImpl(AppDatabase.getInstance(application)
-                        .thermometerProfileDao());
+                new ThermometerProfileRepositoryImpl(appDatabase.thermometerProfileDao());
     }
 
     public LiveData<List<SensorSettings>> getSensorsSettings() {

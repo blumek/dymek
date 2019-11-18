@@ -19,6 +19,10 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
     private List<SensorSettings> sensorsSettings;
 
     public SensorsSettingsAdapter() {
+        setUpSensorsSettingsList();
+    }
+
+    private void setUpSensorsSettingsList() {
         sensorsSettings = Lists.newArrayList();
     }
 
@@ -55,8 +59,8 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
             this.binding = binding;
         }
 
-        void bind(Object obj) {
-            binding.setVariable(BR.sensorsSettings, obj);
+        void bind(SensorSettings sensorSettings) {
+            binding.setVariable(BR.sensorsSettings, sensorSettings);
             binding.executePendingBindings();
         }
     }

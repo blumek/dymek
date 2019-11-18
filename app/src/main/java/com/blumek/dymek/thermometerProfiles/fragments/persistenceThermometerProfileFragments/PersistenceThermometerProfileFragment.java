@@ -20,12 +20,13 @@ import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.Per
 import java.util.List;
 
 public abstract class PersistenceThermometerProfileFragment extends Fragment {
+    private PersistenceThermometerProfileFragmentViewModel viewModel;
     private SensorsSettingsAdapter sensorsSettingsAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        PersistenceThermometerProfileFragmentViewModel viewModel = getPersistenceViewModel();
+        viewModel = getPersistenceViewModel();
         sensorsSettingsAdapter = new SensorsSettingsAdapter();
 
         CreationThermometerProfileFragmentBinding binding =
@@ -36,14 +37,18 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
         binding.setAdapter(sensorsSettingsAdapter);
         binding.setLifecycleOwner(this);
 
+        observeSensorsSettings();
+
+        return binding.getRoot();
+    }
+
+    private void observeSensorsSettings() {
         viewModel.getSensorsSettings().observe(this, new Observer<List<SensorSettings>>() {
             @Override
             public void onChanged(List<SensorSettings> sensorSettings) {
                 sensorsSettingsAdapter.setSensorsSettings(sensorSettings);
             }
         });
-
-        return binding.getRoot();
     }
 
     public abstract PersistenceThermometerProfileFragmentViewModel getPersistenceViewModel();

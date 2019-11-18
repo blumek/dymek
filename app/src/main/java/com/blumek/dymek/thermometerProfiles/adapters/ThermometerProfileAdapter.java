@@ -23,6 +23,10 @@ public class ThermometerProfileAdapter extends
 
     public ThermometerProfileAdapter(ThermometerProfileFragmentViewModel viewModel) {
         this.viewModel = viewModel;
+        setUpThermometerProfilesList();
+    }
+
+    private void setUpThermometerProfilesList() {
         thermometerProfiles = Lists.newArrayList();
     }
 
@@ -48,7 +52,7 @@ public class ThermometerProfileAdapter extends
 
     @Override
     public int getItemCount() {
-        return thermometerProfiles.size();
+        return thermometerProfiles != null ? thermometerProfiles.size() : 0;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{

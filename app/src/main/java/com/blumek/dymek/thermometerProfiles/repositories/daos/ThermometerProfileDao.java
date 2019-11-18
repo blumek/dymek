@@ -32,9 +32,9 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
 
     @Override
     @Transaction
-    public void save(ThermometerProfile entity) {
-        int generatedId = (int) thermometerProfileMetadataDao.save(entity.getMetadata());
-        for (SensorSettings sensorSettings : entity.getSensorSettings()) {
+    public void save(ThermometerProfile thermometerProfile) {
+        int generatedId = (int) thermometerProfileMetadataDao.save(thermometerProfile.getMetadata());
+        for (SensorSettings sensorSettings : thermometerProfile.getSensorSettings()) {
             sensorSettings.setThermometerProfileMetadataId(generatedId);
             sensorSettingsDao.save(sensorSettings);
         }
@@ -42,18 +42,18 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
 
     @Override
     @Transaction
-    public void update(ThermometerProfile entity) {
-        thermometerProfileMetadataDao.update(entity.getMetadata());
-        for (SensorSettings sensorSettings : entity.getSensorSettings()) {
+    public void update(ThermometerProfile thermometerProfile) {
+        thermometerProfileMetadataDao.update(thermometerProfile.getMetadata());
+        for (SensorSettings sensorSettings : thermometerProfile.getSensorSettings()) {
             sensorSettingsDao.update(sensorSettings);
         }
     }
 
     @Override
     @Transaction
-    public void delete(ThermometerProfile entity) {
-        thermometerProfileMetadataDao.delete(entity.getMetadata());
-        for (SensorSettings sensorSettings : entity.getSensorSettings()) {
+    public void delete(ThermometerProfile thermometerProfile) {
+        thermometerProfileMetadataDao.delete(thermometerProfile.getMetadata());
+        for (SensorSettings sensorSettings : thermometerProfile.getSensorSettings()) {
             sensorSettingsDao.delete(sensorSettings);
         }
     }

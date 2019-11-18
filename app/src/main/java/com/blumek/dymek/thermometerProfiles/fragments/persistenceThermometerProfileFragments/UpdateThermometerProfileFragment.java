@@ -1,7 +1,7 @@
 package com.blumek.dymek.thermometerProfiles.fragments.persistenceThermometerProfileFragments;
 
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.viewModels.factories.PersistenceViewModelFactory;
+import com.blumek.dymek.thermometerProfiles.viewModels.factories.UpdateThermometerProfileViewModelFactory;
 import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
 import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.UpdateThermometerProfileFragmentViewModel;
 
@@ -9,12 +9,16 @@ import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.Upd
 public class UpdateThermometerProfileFragment extends PersistenceThermometerProfileFragment {
     @Override
     public PersistenceThermometerProfileFragmentViewModel getPersistenceViewModel() {
+        if (getArguments() == null)
+            throw new IllegalStateException();
+
         ThermometerProfile thermometerProfile = UpdateThermometerProfileFragmentArgs.fromBundle(getArguments()).getThermometerProfile();
+        if (thermometerProfile == null)
+            throw new IllegalStateException();
 
-        PersistenceViewModelFactory persistenceViewModelFactory =
-                new PersistenceViewModelFactory(getActivity().getApplication(),
-                        thermometerProfile.getMetadata(), thermometerProfile.getSensorSettings());
+        UpdateThermometerProfileViewModelFactory updateThermometerProfileViewModelFactory =
+                new UpdateThermometerProfileViewModelFactory(getActivity().getApplication(), thermometerProfile);
 
-        return persistenceViewModelFactory.create(UpdateThermometerProfileFragmentViewModel.class);
+        return updateThermometerProfileViewModelFactory.create(UpdateThermometerProfileFragmentViewModel.class);
     }
 }

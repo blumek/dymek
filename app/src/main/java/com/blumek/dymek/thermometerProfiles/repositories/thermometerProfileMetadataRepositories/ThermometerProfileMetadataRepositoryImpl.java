@@ -18,7 +18,7 @@ public class ThermometerProfileMetadataRepositoryImpl implements ThermometerProf
 
     @Override
     public LiveData<List<ThermometerProfileMetadata>> getAllThermometerProfiles() {
-        return thermometerProfileMetadataDao.getAllThermometerProfiles();
+        return thermometerProfileMetadataDao.getAllThermometersProfiles();
     }
 
     @Override

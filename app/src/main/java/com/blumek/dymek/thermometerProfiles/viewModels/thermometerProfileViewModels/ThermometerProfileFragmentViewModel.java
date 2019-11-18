@@ -18,18 +18,18 @@ import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepos
 import java.util.List;
 
 public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
-    private LiveData<List<ThermometerProfile>> thermometerProfiles;
+    private LiveData<List<ThermometerProfile>> thermometersProfiles;
 
     public ThermometerProfileFragmentViewModel(@NonNull Application application) {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
         ThermometerProfileRepository thermometerProfileRepository =
                 new ThermometerProfileRepositoryImpl(appDatabase.thermometerProfileDao());
-        thermometerProfiles = thermometerProfileRepository.getAllThermometerProfiles();
+        thermometersProfiles = thermometerProfileRepository.getAllThermometerProfiles();
     }
 
-    public LiveData<List<ThermometerProfile>> getThermometerProfiles() {
-        return thermometerProfiles;
+    public LiveData<List<ThermometerProfile>> getThermometersProfiles() {
+        return thermometersProfiles;
     }
 
     public void onCreateClicked(View view) {

@@ -22,11 +22,12 @@ import java.util.List;
 
 public class ThermometerProfileFragment extends Fragment {
     private ThermometerProfileAdapter thermometerProfileAdapter;
+    private ThermometerProfileFragmentViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        ThermometerProfileFragmentViewModel viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
         thermometerProfileAdapter = new ThermometerProfileAdapter(viewModel);
 
         ThermometerProfileFragmentBinding binding =
@@ -37,14 +38,18 @@ public class ThermometerProfileFragment extends Fragment {
         binding.setAdapter(thermometerProfileAdapter);
         binding.setLifecycleOwner(this);
 
-        viewModel.getThermometerProfiles().observe(this, new Observer<List<ThermometerProfile>>() {
+        observeThermometersProfiles();
+
+        return binding.getRoot();
+    }
+
+    private void observeThermometersProfiles() {
+        viewModel.getThermometersProfiles().observe(this, new Observer<List<ThermometerProfile>>() {
             @Override
             public void onChanged(List<ThermometerProfile> thermometerProfiles) {
                 thermometerProfileAdapter.setThermometerProfiles(thermometerProfiles);
             }
         });
-
-        return binding.getRoot();
     }
 
 }

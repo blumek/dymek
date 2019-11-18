@@ -13,7 +13,7 @@ import java.util.List;
 public interface ThermometerProfileMetadataDao extends BaseDao<ThermometerProfileMetadata> {
 
     @Query("SELECT * FROM ThermometerProfileMetadata")
-    LiveData<List<ThermometerProfileMetadata>> getAllThermometerProfiles();
+    LiveData<List<ThermometerProfileMetadata>> getAllThermometersProfiles();
 
     @Query("SELECT * FROM ThermometerProfileMetadata WHERE id=:id")
     LiveData<ThermometerProfileMetadata> getThermometerProfileById(int id);

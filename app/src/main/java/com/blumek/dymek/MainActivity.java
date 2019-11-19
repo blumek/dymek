@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 
 import com.blumek.dymek.shared.AppDatabase;
+import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
+import com.blumek.dymek.thermometerProfiles.repositories.sensorSettingsRepositories.SensorSettingsRepository;
+import com.blumek.dymek.thermometerProfiles.repositories.sensorSettingsRepositories.SensorSettingsRepositoryImpl;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
 
@@ -24,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<ThermometerProfile> thermometerProfiles) {
                 System.out.println(thermometerProfiles);
+            }
+        });
+
+        SensorSettingsRepository sensorSettingsRepository = new SensorSettingsRepositoryImpl(AppDatabase.getInstance(this).sensorSettingsDao());
+        sensorSettingsRepository.getAllSensorsSettings().observe(this, new Observer<List<SensorSettings>>() {
+            @Override
+            public void onChanged(List<SensorSettings> sensorSettings) {
+                System.out.println(sensorSettings);
             }
         });
     }

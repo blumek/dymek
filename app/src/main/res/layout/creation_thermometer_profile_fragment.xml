@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="@string/add_another_sensor"
-                    android:onClick="@{() -> viewModel.addNewEmptySensorSettingsTemplate()}"
+                    android:onClick="@{() -> viewModel.onAddSensorSettingsTemplate()}"
                     android:layout_gravity="center"/>
 
                 <Button

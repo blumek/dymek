@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
+import com.blumek.dymek.thermometerProfiles.adapters.DiffUtils.SensorSettingsDiffCallback;
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.google.common.collect.Lists;
 
@@ -26,9 +28,17 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
         sensorsSettings = Lists.newArrayList();
     }
 
-    public void setSensorsSettings(List<SensorSettings> sensorsSettings) {
+    public void updateSensorsSettings(List<SensorSettings> sensorsSettings) {
+        DiffUtil.DiffResult diffResultOfSensorsSettings = getDiffResult(sensorsSettings);
+
         this.sensorsSettings = sensorsSettings;
-        notifyDataSetChanged();
+        diffResultOfSensorsSettings.dispatchUpdatesTo(this);
+    }
+
+    private DiffUtil.DiffResult getDiffResult(List<SensorSettings> sensorsSettings) {
+        SensorSettingsDiffCallback profileDiffCallback =
+                new SensorSettingsDiffCallback(this.sensorsSettings, sensorsSettings);
+        return DiffUtil.calculateDiff(profileDiffCallback);
     }
 
     @NonNull

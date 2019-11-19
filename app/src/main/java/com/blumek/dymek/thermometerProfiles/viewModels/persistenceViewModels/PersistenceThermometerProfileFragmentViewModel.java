@@ -39,7 +39,11 @@ public abstract class PersistenceThermometerProfileFragmentViewModel extends And
         return metadata;
     }
 
-    public void addNewEmptySensorSettingsTemplate() {
+    public void onAddSensorSettingsTemplate() {
+        addNewEmptySensorSettingsTemplate();
+    }
+
+    void addNewEmptySensorSettingsTemplate() {
         List<SensorSettings> currentSensorsSettings = getSensorsSettingsValue();
         currentSensorsSettings.add(SensorSettings.emptySensorSettings());
         sensorsSettings.setValue(currentSensorsSettings);

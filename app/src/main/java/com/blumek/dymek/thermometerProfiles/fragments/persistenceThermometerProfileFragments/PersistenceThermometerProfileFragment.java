@@ -46,7 +46,7 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
         viewModel.getSensorsSettings().observe(this, new Observer<List<SensorSettings>>() {
             @Override
             public void onChanged(List<SensorSettings> sensorSettings) {
-                sensorsSettingsAdapter.setSensorsSettings(sensorSettings);
+                sensorsSettingsAdapter.updateSensorsSettings(sensorSettings);
             }
         });
     }

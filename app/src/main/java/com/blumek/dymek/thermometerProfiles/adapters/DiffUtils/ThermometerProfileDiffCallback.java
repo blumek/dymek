@@ -38,15 +38,17 @@ public class ThermometerProfileDiffCallback extends DiffUtil.Callback {
         ThermometerProfile oldThermometerProfile = oldThermometersProfiles.get(oldItemPosition);
         ThermometerProfile newThermometerProfile = newThermometersProfiles.get(newItemPosition);
 
-        if (!hasMetadata(newThermometerProfile))
+        if (!hasMetadata(oldThermometerProfile) && !hasMetadata(newThermometerProfile))
+            return true;
+        if (!hasMetadata(oldThermometerProfile) || !hasMetadata(newThermometerProfile))
             return false;
 
         return oldThermometerProfile.getMetadata().getId() ==
                 newThermometerProfile.getMetadata().getId();
     }
 
-    private boolean hasMetadata(ThermometerProfile newThermometerProfile) {
-        return newThermometerProfile != null && newThermometerProfile.getMetadata() != null;
+    private boolean hasMetadata(ThermometerProfile thermometerProfile) {
+        return thermometerProfile != null && thermometerProfile.getMetadata() != null;
     }
 
     @Override

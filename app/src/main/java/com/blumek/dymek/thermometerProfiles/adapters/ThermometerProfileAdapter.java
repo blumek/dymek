@@ -33,10 +33,10 @@ public class ThermometerProfileAdapter extends
     }
 
     public void updateThermometerProfiles(List<ThermometerProfile> thermometerProfiles) {
-        DiffUtil.DiffResult diffResult = getDiffResult(thermometerProfiles);
+        DiffUtil.DiffResult diffResultOfThermometersProfiles = getDiffResult(thermometerProfiles);
 
         this.thermometerProfiles = thermometerProfiles;
-        diffResult.dispatchUpdatesTo(this);
+        diffResultOfThermometersProfiles.dispatchUpdatesTo(this);
     }
 
     private DiffUtil.DiffResult getDiffResult(List<ThermometerProfile> thermometerProfiles) {

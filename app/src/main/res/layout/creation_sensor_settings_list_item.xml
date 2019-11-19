@@ -8,6 +8,10 @@
             name="sensorsSettings"
             type="com.blumek.dymek.thermometerProfiles.models.SensorSettings" />
 
+        <variable
+            name="viewModel"
+            type="com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -15,6 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            android:contentDescription="@string/remove"
+            android:layout_gravity="end"
+            android:onClick="@{() -> viewModel.onRemoveSensorSettingsTemplateClick(sensorsSettings)}"/>
 
         <LinearLayout
             android:layout_width="match_parent"

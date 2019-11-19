@@ -8,4 +8,6 @@
     <string name="min_temperature_value">Min temperature value</string>
     <string name="max_temperature_value">Max temperature value</string>
     <string name="save">Save</string>
+    <string name="remove">Remove</string>
+    <string name="edit">edit</string>
 </resources>

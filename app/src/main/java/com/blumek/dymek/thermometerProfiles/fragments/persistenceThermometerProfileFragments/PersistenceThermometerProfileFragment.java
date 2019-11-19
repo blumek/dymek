@@ -27,7 +27,7 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = getPersistenceViewModel();
-        sensorsSettingsAdapter = new SensorsSettingsAdapter();
+        sensorsSettingsAdapter = new SensorsSettingsAdapter(viewModel);
 
         CreationThermometerProfileFragmentBinding binding =
                 DataBindingUtil.inflate(inflater, R.layout.creation_thermometer_profile_fragment,

@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,14 +12,17 @@ import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
 import com.blumek.dymek.thermometerProfiles.adapters.DiffUtils.SensorSettingsDiffCallback;
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
+import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettingsAdapter.ViewHolder> {
+    private PersistenceThermometerProfileFragmentViewModel viewModel;
     private List<SensorSettings> sensorsSettings;
 
-    public SensorsSettingsAdapter() {
+    public SensorsSettingsAdapter(PersistenceThermometerProfileFragmentViewModel viewModel) {
+        this.viewModel = viewModel;
         setUpSensorsSettingsList();
     }
 
@@ -53,7 +55,7 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         SensorSettings sensorSettings = sensorsSettings.get(position);
-        viewHolder.bind(sensorSettings);
+        viewHolder.bind(viewModel, sensorSettings);
     }
 
     @Override
@@ -69,8 +71,10 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
             this.binding = binding;
         }
 
-        void bind(SensorSettings sensorSettings) {
-            binding.setVariable(BR.sensorsSettings, sensorSettings);
+        void bind(PersistenceThermometerProfileFragmentViewModel viewModel,
+                  SensorSettings sensorSettings) {
+            binding.setViewModel(viewModel);
+            binding.setSensorsSettings(sensorSettings);
             binding.executePendingBindings();
         }
     }

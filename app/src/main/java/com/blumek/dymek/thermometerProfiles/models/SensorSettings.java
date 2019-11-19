@@ -3,7 +3,6 @@ package com.blumek.dymek.thermometerProfiles.models;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Objects;
@@ -13,10 +12,8 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(foreignKeys ={
         @ForeignKey(onDelete = CASCADE, onUpdate = CASCADE,
                 entity = ThermometerProfileMetadata.class,
-                parentColumns = "id",childColumns = "thermometerProfileMetadataId")},
-        indices = {
-                @Index("thermometerProfileMetadataId"),
-        })
+                parentColumns = "id",childColumns = "thermometerProfileMetadataId")}
+        )
 public class SensorSettings {
     @PrimaryKey(autoGenerate = true)
     private int id;

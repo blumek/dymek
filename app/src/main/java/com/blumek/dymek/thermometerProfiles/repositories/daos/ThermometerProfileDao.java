@@ -34,11 +34,19 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
     @Override
     @Transaction
     public void save(ThermometerProfile thermometerProfile) {
-        int generatedId = (int) thermometerProfileMetadataDao.save(thermometerProfile.getMetadata());
-        for (SensorSettings sensorSettings : thermometerProfile.getSensorSettings()) {
-            sensorSettings.setThermometerProfileMetadataId(generatedId);
-            sensorSettingsDao.save(sensorSettings);
+        int generatedMetadataId = (int) thermometerProfileMetadataDao.save(thermometerProfile.getMetadata());
+        associateSensorsSettingsToMetadataByMetadataId(thermometerProfile.getSensorSettings(), generatedMetadataId);
+    }
+
+    private void associateSensorsSettingsToMetadataByMetadataId(List<SensorSettings> sensorsSettings, int generatedMetadataId) {
+        for (SensorSettings sensorSettings : sensorsSettings) {
+            associateSensorSettingsToMetadataById(sensorSettings, generatedMetadataId);
         }
+    }
+
+    private void associateSensorSettingsToMetadataById(SensorSettings sensorSettings, int metadataId) {
+        sensorSettings.setThermometerProfileMetadataId(metadataId);
+        sensorSettingsDao.save(sensorSettings);
     }
 
     @Override
@@ -46,10 +54,39 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
     public void update(ThermometerProfile thermometerProfile) {
         ThermometerProfileMetadata thermometerProfileMetadata = thermometerProfile.getMetadata();
         thermometerProfileMetadataDao.update(thermometerProfileMetadata);
-        for (SensorSettings sensorSettings : thermometerProfile.getSensorSettings()) {
+
+        List<SensorSettings> sensorsSettings = thermometerProfile.getSensorSettings();
+        List<SensorSettings> storedSensorsSettings =
+                sensorSettingsDao.getRawSensorsSettingsByMetadataId(thermometerProfileMetadata.getId());
+
+        deleteAbsentSensorsSettings(storedSensorsSettings, sensorsSettings);
+        updateAssociatedSensorsSettings(sensorsSettings, thermometerProfileMetadata.getId());
+    }
+
+    private void deleteAbsentSensorsSettings(List<SensorSettings> storedSensorsSettings, List<SensorSettings> sensorsSettings) {
+        for (SensorSettings storedSensorSettings : storedSensorsSettings) {
+            if (!listContainsId(sensorsSettings, storedSensorSettings.getId()))
+                sensorSettingsDao.delete(storedSensorSettings);
+        }
+    }
+
+    private boolean listContainsId(List<SensorSettings> sensorsSettings, int searchedId) {
+        for (SensorSettings sensorSettings : sensorsSettings) {
+            if (areIdentifiersEqual(sensorSettings.getId(), searchedId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean areIdentifiersEqual(int id, int searchedId) {
+        return id == searchedId;
+    }
+
+    private void updateAssociatedSensorsSettings(List<SensorSettings> sensorsSettings, int metadataId) {
+        for (SensorSettings sensorSettings : sensorsSettings) {
             if (!isAssociated(sensorSettings)) {
-                sensorSettings.setThermometerProfileMetadataId(thermometerProfileMetadata.getId());
-                sensorSettingsDao.save(sensorSettings);
+                associateSensorSettingsToMetadataById(sensorSettings, metadataId);
             }
 
             sensorSettingsDao.update(sensorSettings);

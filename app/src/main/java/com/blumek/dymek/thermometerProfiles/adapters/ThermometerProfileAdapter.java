@@ -5,7 +5,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.databinding.library.baseAdapters.BR;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -75,8 +74,8 @@ public class ThermometerProfileAdapter extends
 
         void bind(ThermometerProfileFragmentViewModel viewModel,
                   ThermometerProfile thermometerProfile) {
-            binding.setVariable(BR.viewModel, viewModel);
-            binding.setVariable(BR.thermometerProfiles, thermometerProfile);
+            binding.setViewModel(viewModel);
+            binding.setThermometerProfiles(thermometerProfile);
             binding.executePendingBindings();
         }
     }

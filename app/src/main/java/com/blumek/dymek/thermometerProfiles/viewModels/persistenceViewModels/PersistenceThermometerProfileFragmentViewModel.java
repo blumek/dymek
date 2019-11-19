@@ -55,6 +55,12 @@ public abstract class PersistenceThermometerProfileFragmentViewModel extends And
         return Lists.newArrayList(sensorsSettings.getValue());
     }
 
+    public void onRemoveSensorSettingsTemplateClick(SensorSettings sensorSettings) {
+        List<SensorSettings> currentSensorsSettings = getSensorsSettingsValue();
+        currentSensorsSettings.remove(sensorSettings);
+        sensorsSettings.setValue(currentSensorsSettings);
+    }
+
     public void onPersistClick(View view) {
         ThermometerProfile thermometerProfile =
                 new ThermometerProfile(metadata.getValue(), sensorsSettings.getValue());

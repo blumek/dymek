@@ -6,6 +6,7 @@ import androidx.room.Relation;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class ThermometerProfile implements Serializable {
     @Embedded
@@ -46,5 +47,19 @@ public class ThermometerProfile implements Serializable {
                 "metadata=" + metadata +
                 ", sensorSettings=" + sensorSettings +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ThermometerProfile that = (ThermometerProfile) o;
+        return Objects.equals(metadata, that.metadata) &&
+                Objects.equals(sensorSettings, that.sensorSettings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(metadata, sensorSettings);
     }
 }

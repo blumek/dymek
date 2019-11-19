@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity
 public class SensorSettings {
     @PrimaryKey(autoGenerate = true)
@@ -76,5 +78,22 @@ public class SensorSettings {
                 ", maxTemperatureValue=" + maxTemperatureValue +
                 ", thermometerProfileMetadataId=" + thermometerProfileMetadataId +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SensorSettings that = (SensorSettings) o;
+        return id == that.id &&
+                Double.compare(that.minTemperatureValue, minTemperatureValue) == 0 &&
+                Double.compare(that.maxTemperatureValue, maxTemperatureValue) == 0 &&
+                thermometerProfileMetadataId == that.thermometerProfileMetadataId &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, minTemperatureValue, maxTemperatureValue, thermometerProfileMetadataId);
     }
 }

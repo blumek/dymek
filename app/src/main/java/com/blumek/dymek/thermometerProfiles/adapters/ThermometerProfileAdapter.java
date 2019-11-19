@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
+import com.blumek.dymek.thermometerProfiles.adapters.DiffUtils.ThermometerProfileDiffCallback;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.viewModels.thermometerProfileViewModels.ThermometerProfileFragmentViewModel;
 import com.google.common.collect.Lists;
@@ -30,9 +32,17 @@ public class ThermometerProfileAdapter extends
         thermometerProfiles = Lists.newArrayList();
     }
 
-    public void setThermometerProfiles(List<ThermometerProfile> thermometerProfiles) {
+    public void updateThermometerProfiles(List<ThermometerProfile> thermometerProfiles) {
+        DiffUtil.DiffResult diffResult = getDiffResult(thermometerProfiles);
+
         this.thermometerProfiles = thermometerProfiles;
-        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
+    }
+
+    private DiffUtil.DiffResult getDiffResult(List<ThermometerProfile> thermometerProfiles) {
+        ThermometerProfileDiffCallback profileDiffCallback =
+                new ThermometerProfileDiffCallback(this.thermometerProfiles, thermometerProfiles);
+        return DiffUtil.calculateDiff(profileDiffCallback);
     }
 
     @NonNull

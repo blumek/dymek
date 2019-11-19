@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 public class ThermometerProfileMetadata {
@@ -67,5 +68,21 @@ public class ThermometerProfileMetadata {
                 ", lastUsage=" + lastUsage +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ThermometerProfileMetadata that = (ThermometerProfileMetadata) o;
+        return id == that.id &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(lastUsage, that.lastUsage) &&
+                Objects.equals(createdAt, that.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastUsage, createdAt);
     }
 }

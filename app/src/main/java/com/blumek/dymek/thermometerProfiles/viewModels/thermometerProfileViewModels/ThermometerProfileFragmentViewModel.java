@@ -18,12 +18,13 @@ import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepos
 import java.util.List;
 
 public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
+    private ThermometerProfileRepository thermometerProfileRepository;
     private LiveData<List<ThermometerProfile>> thermometersProfiles;
 
     public ThermometerProfileFragmentViewModel(@NonNull Application application) {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
-        ThermometerProfileRepository thermometerProfileRepository =
+        thermometerProfileRepository =
                 new ThermometerProfileRepositoryImpl(appDatabase.thermometerProfileDao());
         thermometersProfiles = thermometerProfileRepository.getAllThermometerProfiles();
     }
@@ -42,5 +43,9 @@ public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
         NavDirections directions = ThermometerProfileFragmentDirections
                 .actionThermometerProfileFragmentToUpdateThermometerProfileFragment(thermometerProfile);
         Navigation.findNavController(view).navigate(directions);
+    }
+
+    public void onDeleteClicked(ThermometerProfile thermometerProfile) {
+        thermometerProfileRepository.delete(thermometerProfile);
     }
 }

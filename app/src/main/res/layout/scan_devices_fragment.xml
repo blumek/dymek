@@ -23,5 +23,16 @@
             android:layout_height="match_parent"
             app:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@android:drawable/ic_input_add"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="32dp"
+            android:onClick="@{() -> viewModel.startScanning()}"/>
     </FrameLayout>
 </layout>

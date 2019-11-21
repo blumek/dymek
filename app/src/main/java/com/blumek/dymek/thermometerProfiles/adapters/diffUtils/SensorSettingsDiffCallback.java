@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.adapters.DiffUtils;
+package com.blumek.dymek.thermometerProfiles.adapters.diffUtils;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;

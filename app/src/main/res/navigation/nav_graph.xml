@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/thermometerProfileFragment">
+    app:startDestination="@id/scanDevicesFragment">
 
     <fragment
         android:id="@+id/thermometerProfileFragment"
@@ -40,4 +40,9 @@
             app:argType="com.blumek.dymek.thermometerProfiles.models.ThermometerProfile"
             app:nullable="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/scanDevicesFragment"
+        android:name="com.blumek.dymek.devices.fragments.ScanDevicesFragment"
+        android:label="scan_devices_fragment"
+        tools:layout="@layout/scan_devices_fragment" />
 </navigation>

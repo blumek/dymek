@@ -1,0 +1,27 @@
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.blumek.dymek.devices.viewModels.ScanDevicesViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.blumek.dymek.devices.adapters.ScanDeviceAdapter" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".devices.fragments.ScanDevicesFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scan_devices_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    </FrameLayout>
+</layout>

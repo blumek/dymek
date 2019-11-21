@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
-import com.blumek.dymek.thermometerProfiles.adapters.DiffUtils.SensorSettingsDiffCallback;
+import com.blumek.dymek.thermometerProfiles.adapters.diffUtils.SensorSettingsDiffCallback;
 import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
 import com.google.common.collect.Lists;

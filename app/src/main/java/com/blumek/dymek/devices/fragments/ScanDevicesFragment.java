@@ -76,7 +76,11 @@ public class ScanDevicesFragment extends Fragment {
         super.onResume();
 
         getActivity().registerReceiver(receiver, getBluetoothDiscoveryFilter());
-        viewModel.startScanning();
+
+        if (viewModel.isInitialRun()){
+            viewModel.initialRun();
+            viewModel.startScanning();
+        }
     }
 
     private IntentFilter getBluetoothDiscoveryFilter() {

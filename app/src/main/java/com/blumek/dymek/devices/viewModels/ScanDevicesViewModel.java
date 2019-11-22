@@ -14,10 +14,12 @@ import java.util.List;
 public class ScanDevicesViewModel extends ViewModel {
     private MutableLiveData<List<Device>> devices;
     private DeviceScanner deviceScanner;
+    private boolean isInitialRun;
 
     public ScanDevicesViewModel() {
         devices = new MutableLiveData<>();
         deviceScanner = new BluetoothDeviceScanner();
+        isInitialRun = true;
     }
 
     public void startScanning() {
@@ -47,5 +49,13 @@ public class ScanDevicesViewModel extends ViewModel {
 
     public LiveData<List<Device>> getDevices() {
         return devices;
+    }
+
+    public boolean isInitialRun() {
+        return isInitialRun;
+    }
+
+    public void initialRun() {
+        isInitialRun = false;
     }
 }

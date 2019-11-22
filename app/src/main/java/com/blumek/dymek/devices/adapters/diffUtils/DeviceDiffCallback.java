@@ -35,8 +35,8 @@ public class DeviceDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldDevices.get(oldItemPosition)
-                .equals(newDevices.get(newItemPosition));
+        return oldDevices.get(oldItemPosition).getAddress()
+                .equals(newDevices.get(newItemPosition).getAddress());
     }
 
     @Override

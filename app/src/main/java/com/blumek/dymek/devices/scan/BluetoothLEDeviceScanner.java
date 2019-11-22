@@ -1,18 +1,23 @@
 package com.blumek.dymek.devices.scan;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
 import android.os.Handler;
 
-public class BluetoothDeviceScanner implements DeviceScanner {
+public class BluetoothLEDeviceScanner implements DeviceScanner {
     private static final long SCAN_PERIOD = 10000;
 
-    private final BluetoothAdapter bluetoothAdapter;
+    private final BluetoothLeScanner bluetoothLeScanner;
     private final Handler handler;
     private final Runnable cancelDiscoveryDelayed;
+    private final ScanCallback callback;
     private boolean isScanning;
 
-    public BluetoothDeviceScanner() {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    public BluetoothLEDeviceScanner(ScanCallback scanCallback) {
+        this.callback = scanCallback;
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
         handler = new Handler();
         cancelDiscoveryDelayed = this::cancelScanning;
         isScanning = false;
@@ -26,7 +31,7 @@ public class BluetoothDeviceScanner implements DeviceScanner {
         handler.postDelayed(cancelDiscoveryDelayed, SCAN_PERIOD);
 
         isScanning = true;
-        bluetoothAdapter.startDiscovery();
+        bluetoothLeScanner.startScan(callback);
     }
 
     @Override
@@ -35,7 +40,7 @@ public class BluetoothDeviceScanner implements DeviceScanner {
             return;
 
         isScanning = false;
-        bluetoothAdapter.cancelDiscovery();
+        bluetoothLeScanner.stopScan(callback);
         handler.removeCallbacks(cancelDiscoveryDelayed);
     }
 }

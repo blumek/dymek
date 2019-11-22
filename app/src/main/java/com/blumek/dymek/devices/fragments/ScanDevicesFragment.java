@@ -16,17 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ScanDevicesFragmentBinding;
 import com.blumek.dymek.devices.adapters.ScanDeviceAdapter;
 import com.blumek.dymek.devices.models.BLEDevice;
-import com.blumek.dymek.devices.models.Device;
 import com.blumek.dymek.devices.viewModels.ScanDevicesViewModel;
 
-import java.util.List;
 
 public class ScanDevicesFragment extends Fragment {
     private final String TAG = getClass().getSimpleName();
@@ -70,24 +67,24 @@ public class ScanDevicesFragment extends Fragment {
         viewModel = ViewModelProviders.of(this).get(ScanDevicesViewModel.class);
         scanDeviceAdapter = new ScanDeviceAdapter();
 
-        viewModel.getDevices().observe(this, new Observer<List<Device>>() {
-            @Override
-            public void onChanged(List<Device> devices) {
-                scanDeviceAdapter.updateDevices(devices);
-            }
-        });
+        viewModel.getDevices().observe(this, devices ->
+                scanDeviceAdapter.updateDevices(devices));
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        getActivity().registerReceiver(receiver, getBluetoothDiscoveryFilter());
+        viewModel.startScanning();
+    }
+
+    private IntentFilter getBluetoothDiscoveryFilter() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothDevice.ACTION_FOUND);
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-
-        getActivity().registerReceiver(receiver, filter);
-        viewModel.startScanning();
+        return filter;
     }
 
     @Override

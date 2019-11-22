@@ -69,12 +69,16 @@ public abstract class AppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            persistFakeData();
+            return null;
+        }
+
+        private void persistFakeData() {
             ThermometerProfileMetadata thermometerProfileMetadata = new ThermometerProfileMetadata("Profile Test 1", new Date());
             SensorSettings sensorSettings1 = new SensorSettings("Settings Test 1", 20, 40);
             SensorSettings sensorSettings2 = new SensorSettings("Settings Test 2", 10, 30);
             ThermometerProfile thermometerProfile = new ThermometerProfile(thermometerProfileMetadata, Lists.newArrayList(sensorSettings1, sensorSettings2));
             thermometerProfileRepository.save(thermometerProfile);
-            return null;
         }
     }
 }

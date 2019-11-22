@@ -3,21 +3,16 @@ package com.blumek.dymek;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.blumek.dymek.shared.AppDatabase;
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.repositories.sensorSettingsRepositories.SensorSettingsRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.sensorSettingsRepositories.SensorSettingsRepositoryImpl;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
@@ -31,21 +26,13 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        ThermometerProfileRepository thermometerProfileRepository = new ThermometerProfileRepositoryImpl(AppDatabase.getInstance(this).thermometerProfileDao());
-        thermometerProfileRepository.getAllThermometerProfiles().observe(this, new Observer<List<ThermometerProfile>>() {
-            @Override
-            public void onChanged(List<ThermometerProfile> thermometerProfiles) {
-                System.out.println(thermometerProfiles);
-            }
-        });
+        ThermometerProfileRepository thermometerProfileRepository =
+                new ThermometerProfileRepositoryImpl(AppDatabase.getInstance(this).thermometerProfileDao());
+        thermometerProfileRepository.getAllThermometerProfiles().observe(this, System.out::println);
 
-        SensorSettingsRepository sensorSettingsRepository = new SensorSettingsRepositoryImpl(AppDatabase.getInstance(this).sensorSettingsDao());
-        sensorSettingsRepository.getAllSensorsSettings().observe(this, new Observer<List<SensorSettings>>() {
-            @Override
-            public void onChanged(List<SensorSettings> sensorSettings) {
-                System.out.println(sensorSettings);
-            }
-        });
+        SensorSettingsRepository sensorSettingsRepository =
+                new SensorSettingsRepositoryImpl(AppDatabase.getInstance(this).sensorSettingsDao());
+        sensorSettingsRepository.getAllSensorsSettings().observe(this, System.out::println);
 
     }
 }

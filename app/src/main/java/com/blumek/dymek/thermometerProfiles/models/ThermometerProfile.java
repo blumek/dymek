@@ -2,6 +2,7 @@ package com.blumek.dymek.thermometerProfiles.models;
 
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
+import androidx.room.Ignore;
 import androidx.room.Relation;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class ThermometerProfile implements Serializable {
     public ThermometerProfile() {
     }
 
+    @Ignore
     public ThermometerProfile(ThermometerProfileMetadata metadata, List<SensorSettings> sensorSettings) {
         this.metadata = metadata;
         this.sensorSettings = sensorSettings;

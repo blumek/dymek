@@ -6,20 +6,15 @@ import android.os.Handler;
 public class BluetoothDeviceScanner implements DeviceScanner {
     private static final long SCAN_PERIOD = 10000;
 
-    private BluetoothAdapter bluetoothAdapter;
+    private final BluetoothAdapter bluetoothAdapter;
+    private final Handler handler;
+    private final Runnable cancelDiscoveryDelayed;
     private boolean isScanning;
-    private Handler handler;
-    private Runnable cancelDiscoveryDelayed = new Runnable() {
-        @Override
-        public void run() {
-            isScanning = false;
-            bluetoothAdapter.cancelDiscovery();
-        }
-    };
 
     public BluetoothDeviceScanner() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         handler = new Handler();
+        cancelDiscoveryDelayed = this::cancelScanning;
         isScanning = false;
     }
 
@@ -39,8 +34,8 @@ public class BluetoothDeviceScanner implements DeviceScanner {
         if (!isScanning)
             return;
 
-        handler.removeCallbacks(cancelDiscoveryDelayed);
         isScanning = false;
         bluetoothAdapter.cancelDiscovery();
+        handler.removeCallbacks(cancelDiscoveryDelayed);
     }
 }

@@ -9,15 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.CreationThermometerProfileFragmentBinding;
 import com.blumek.dymek.thermometerProfiles.adapters.SensorsSettingsAdapter;
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
-
-import java.util.List;
 
 public abstract class PersistenceThermometerProfileFragment extends Fragment {
     private PersistenceThermometerProfileFragmentViewModel viewModel;
@@ -43,12 +39,8 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
     }
 
     private void observeSensorsSettings() {
-        viewModel.getSensorsSettings().observe(this, new Observer<List<SensorSettings>>() {
-            @Override
-            public void onChanged(List<SensorSettings> sensorSettings) {
-                sensorsSettingsAdapter.updateSensorsSettings(sensorSettings);
-            }
-        });
+        viewModel.getSensorsSettings().observe(this, sensorSettings ->
+                sensorsSettingsAdapter.updateSensorsSettings(sensorSettings));
     }
 
     public abstract PersistenceThermometerProfileFragmentViewModel getPersistenceViewModel();

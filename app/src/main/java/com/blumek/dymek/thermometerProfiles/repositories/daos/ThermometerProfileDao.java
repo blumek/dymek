@@ -38,7 +38,8 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
         associateSensorsSettingsToMetadataByMetadataId(thermometerProfile.getSensorSettings(), generatedMetadataId);
     }
 
-    private void associateSensorsSettingsToMetadataByMetadataId(List<SensorSettings> sensorsSettings, int generatedMetadataId) {
+    private void associateSensorsSettingsToMetadataByMetadataId(List<SensorSettings> sensorsSettings,
+                                                                int generatedMetadataId) {
         for (SensorSettings sensorSettings : sensorsSettings) {
             associateSensorSettingsToMetadataById(sensorSettings, generatedMetadataId);
         }
@@ -63,7 +64,8 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
         updateAssociatedSensorsSettings(sensorsSettings, thermometerProfileMetadata.getId());
     }
 
-    private void deleteAbsentSensorsSettings(List<SensorSettings> storedSensorsSettings, List<SensorSettings> sensorsSettings) {
+    private void deleteAbsentSensorsSettings(List<SensorSettings> storedSensorsSettings,
+                                             List<SensorSettings> sensorsSettings) {
         for (SensorSettings storedSensorSettings : storedSensorsSettings) {
             if (!listContainsId(sensorsSettings, storedSensorSettings.getId()))
                 sensorSettingsDao.delete(storedSensorSettings);

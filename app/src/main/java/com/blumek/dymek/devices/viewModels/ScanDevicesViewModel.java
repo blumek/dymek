@@ -9,7 +9,6 @@ import com.blumek.dymek.devices.scan.BluetoothDeviceScanner;
 import com.blumek.dymek.devices.scan.DeviceScanner;
 import com.google.common.collect.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ScanDevicesViewModel extends ViewModel {
@@ -33,7 +32,7 @@ public class ScanDevicesViewModel extends ViewModel {
     public void addDevice(Device device) {
         List<Device> currentDevices = getDevicesValue();
         currentDevices.add(device);
-        this.devices.setValue(currentDevices);
+        devices.setValue(currentDevices);
     }
 
     private List<Device> getDevicesValue() {
@@ -43,7 +42,7 @@ public class ScanDevicesViewModel extends ViewModel {
     }
 
     private void clearDevices() {
-        this.devices.setValue(new ArrayList<Device>());
+        devices.setValue(Lists.newArrayList());
     }
 
     public LiveData<List<Device>> getDevices() {

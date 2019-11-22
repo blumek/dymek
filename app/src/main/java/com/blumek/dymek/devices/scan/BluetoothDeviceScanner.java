@@ -4,11 +4,18 @@ import android.bluetooth.BluetoothAdapter;
 import android.os.Handler;
 
 public class BluetoothDeviceScanner implements DeviceScanner {
+    private static final long SCAN_PERIOD = 10000;
+
     private BluetoothAdapter bluetoothAdapter;
     private boolean isScanning;
     private Handler handler;
-
-    private static final long SCAN_PERIOD = 10000;
+    private Runnable cancelDiscoveryDelayed = new Runnable() {
+        @Override
+        public void run() {
+            isScanning = false;
+            bluetoothAdapter.cancelDiscovery();
+        }
+    };
 
     public BluetoothDeviceScanner() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -21,13 +28,7 @@ public class BluetoothDeviceScanner implements DeviceScanner {
         if (isScanning)
             cancelScanning();
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isScanning = false;
-                bluetoothAdapter.cancelDiscovery();
-            }
-        }, SCAN_PERIOD);
+        handler.postDelayed(cancelDiscoveryDelayed, SCAN_PERIOD);
 
         isScanning = true;
         bluetoothAdapter.startDiscovery();
@@ -38,6 +39,7 @@ public class BluetoothDeviceScanner implements DeviceScanner {
         if (!isScanning)
             return;
 
+        handler.removeCallbacks(cancelDiscoveryDelayed);
         isScanning = false;
         bluetoothAdapter.cancelDiscovery();
     }

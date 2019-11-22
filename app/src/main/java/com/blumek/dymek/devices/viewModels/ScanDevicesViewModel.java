@@ -42,7 +42,7 @@ public class ScanDevicesViewModel extends ViewModel {
         return Lists.newArrayList(devices.getValue());
     }
 
-    public void clearDevices() {
+    private void clearDevices() {
         this.devices.setValue(new ArrayList<Device>());
     }
 

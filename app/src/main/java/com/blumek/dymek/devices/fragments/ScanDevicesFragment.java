@@ -33,7 +33,7 @@ public class ScanDevicesFragment extends Fragment {
     private ScanDeviceAdapter scanDeviceAdapter;
     private ScanDevicesViewModel viewModel;
 
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
 
@@ -44,7 +44,8 @@ public class ScanDevicesFragment extends Fragment {
             } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 Log.d(TAG, "FOUND DEVICE");
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                viewModel.addDevice(new BLEDevice(device.getName()));
+                if (device != null)
+                    viewModel.addDevice(new BLEDevice(device.getName(), device.getAddress()));
             }
         }
     };
@@ -86,11 +87,13 @@ public class ScanDevicesFragment extends Fragment {
         filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
 
         getActivity().registerReceiver(receiver, filter);
+        viewModel.startScanning();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        viewModel.stopScanning();
         getActivity().unregisterReceiver(receiver);
     }
 }

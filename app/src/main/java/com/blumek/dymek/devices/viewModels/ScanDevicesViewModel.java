@@ -1,12 +1,14 @@
 package com.blumek.dymek.devices.viewModels;
 
+import android.app.Application;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.blumek.dymek.devices.models.BLEDevice;
 import com.blumek.dymek.devices.models.Device;
@@ -16,18 +18,19 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class ScanDevicesViewModel extends ViewModel {
+public class ScanDevicesViewModel extends AndroidViewModel {
     private MutableLiveData<List<Device>> devices;
     private DeviceScanner deviceScanner;
     private boolean isInitialRun;
 
-    public ScanDevicesViewModel() {
+    public ScanDevicesViewModel(@NonNull Application application) {
+        super(application);
         devices = new MutableLiveData<>();
         ScanCallback scanCallback = new ScanCallback() {
             @Override
             public void onScanResult(int callbackType, ScanResult result) {
                 BluetoothDevice bluetoothDevice = result.getDevice();
-                Device device = new BLEDevice(bluetoothDevice.getName(), bluetoothDevice.getAddress());
+                Device device = new BLEDevice(application, bluetoothDevice);
                 addDevice(device);
             }
         };

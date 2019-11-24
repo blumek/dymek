@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.util.Log;
 
 import com.blumek.dymek.shared.exceptions.BluetoothAdapterNotAvailableException;
 
@@ -22,11 +21,10 @@ public class BLEDevice extends Device {
                 @Override
                 public void onConnectionStateChange(BluetoothGatt gatt, int status,
                                                     int newState) {
-                    if (newState == BluetoothProfile.STATE_CONNECTED) {
-                        Log.i(TAG, "Connected to GATT server.");
-
-                    } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                        Log.i(TAG, "Disconnected from GATT server.");
+                    if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+                        setState(State.Disconnected);
+                    } else if (newState == BluetoothProfile.STATE_CONNECTED) {
+                        setState(State.Connected);
                     }
                 }
             };
@@ -49,11 +47,22 @@ public class BLEDevice extends Device {
 
     @Override
     public void connect() {
+        if (!isDisconnected())
+            return;
+
         bluetoothGatt = bluetoothDevice.connectGatt(context, false, gattCallback);
+        setState(State.Connecting);
+    }
+
+    private boolean isDisconnected() {
+        return getRawState() == State.Disconnected;
     }
 
     @Override
     public void disconnect() {
+        if (isDisconnected())
+            return;
+
         bluetoothGatt.disconnect();
         bluetoothGatt = null;
     }

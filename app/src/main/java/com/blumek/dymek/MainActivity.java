@@ -23,6 +23,5 @@ public class MainActivity extends AppCompatActivity {
         SensorSettingsRepository sensorSettingsRepository =
                 new SensorSettingsRepositoryImpl(AppDatabase.getInstance(this).sensorSettingsDao());
         sensorSettingsRepository.getAllSensorsSettings().observe(this, System.out::println);
-
     }
 }

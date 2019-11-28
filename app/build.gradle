@@ -64,6 +64,9 @@ dependencies {
     def recyclerView_version = "1.0.0"
     implementation "androidx.recyclerview:recyclerview:$recyclerView_version"
 
+    def viewPager2_version = "1.0.0"
+    implementation "androidx.viewpager2:viewpager2:$viewPager2_version"
+
     def cardView_version = "1.0.0"
     implementation "androidx.cardview:cardview:$cardView_version"
     implementation 'com.google.android.material:material:1.0.0'

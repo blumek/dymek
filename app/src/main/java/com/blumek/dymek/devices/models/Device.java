@@ -3,6 +3,8 @@ package com.blumek.dymek.devices.models;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.blumek.dymek.devices.models.commands.Command;
+
 import java.util.Objects;
 
 public abstract class Device {
@@ -18,6 +20,7 @@ public abstract class Device {
 
     public abstract void connect();
     public abstract void disconnect();
+    public abstract void send(Command command);
 
     public String getName() {
         return name;

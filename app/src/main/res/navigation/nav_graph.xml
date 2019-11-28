@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/scanDevicesFragment">
+    app:startDestination="@id/thermometerFragment">
 
     <fragment
         android:id="@+id/thermometerProfileFragment"
@@ -29,12 +29,12 @@
         android:id="@+id/creationThermometerProfileFragment"
         android:name="com.blumek.dymek.thermometerProfiles.fragments.persistenceThermometerProfileFragments.CreationThermometerProfileFragment"
         android:label="creation_thermometer_profile_fragment"
-        tools:layout="@layout/creation_thermometer_profile_fragment" >
-    </fragment>
+        tools:layout="@layout/creation_thermometer_profile_fragment" />
     <fragment
         android:id="@+id/updateThermometerProfileFragment"
         android:name="com.blumek.dymek.thermometerProfiles.fragments.persistenceThermometerProfileFragments.UpdateThermometerProfileFragment"
-        android:label="UpdateThermometerProfileFragment">
+        android:label="UpdateThermometerProfileFragment"
+        tools:layout="@layout/creation_thermometer_profile_fragment" >
         <argument
             android:name="ThermometerProfile"
             app:argType="com.blumek.dymek.thermometerProfiles.models.ThermometerProfile"
@@ -45,4 +45,9 @@
         android:name="com.blumek.dymek.devices.fragments.ScanDevicesFragment"
         android:label="scan_devices_fragment"
         tools:layout="@layout/scan_devices_fragment" />
+    <fragment
+        android:id="@+id/thermometerFragment"
+        android:name="com.blumek.dymek.thermometer.fragments.ThermometerFragment"
+        android:label="thermometer_fragment"
+        tools:layout="@layout/thermometer_fragment" />
 </navigation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.blumek.dymek.thermometer.adapters.SensorAdapter" />
+    </data>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:adapter="@{adapter}"/>
+</layout>

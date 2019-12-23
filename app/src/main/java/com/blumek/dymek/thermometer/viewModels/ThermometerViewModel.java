@@ -5,40 +5,24 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.blumek.dymek.thermometer.models.Sensor;
+import com.blumek.dymek.thermometer.models.Thermometer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class ThermometerViewModel extends ViewModel {
-    private MutableLiveData<List<MutableLiveData<Sensor>>> sensors;
+    private MutableLiveData<Thermometer> thermometer;
 
     public ThermometerViewModel() {
-        Sensor[] vSensors = new Sensor[] {
-                new Sensor("TEST 1", 10),
-                new Sensor("TEST 2", 20),
-                new Sensor("TEST 3", 30),
-                new Sensor("TEST 4", 40),
-                new Sensor("TEST 5", 50),
-        };
+        this.thermometer = new MutableLiveData<>();
 
-        List<MutableLiveData<Sensor>> sensorsArray = new ArrayList<>();
-        for (Sensor sensor : vSensors) {
-            sensorsArray.add(new MutableLiveData<>(sensor));
-        }
-        sensors = new MutableLiveData<>(sensorsArray);
+        int sensorsCount = 90;
+        Thermometer thermometer = new Thermometer(sensorsCount);
+        this.thermometer.setValue(thermometer);
 
         new Thread(() -> {
-            for (int i=0;;i++) {
-                List<MutableLiveData<Sensor>> currentS = sensors.getValue();
-
-                if (i % 2 == 0)
-                    currentS.add(new MutableLiveData<>(new Sensor("JD " + i, i + i * 10)));
-
-                for (MutableLiveData<Sensor> liveData : currentS) {
-                    Sensor sensor = liveData.getValue();
-                    sensor.setTemperature(sensor.getTemperature() + 10);
-                    liveData.postValue(sensor);
-                    System.out.println(liveData.getValue().getTemperature());
+            while(true) {
+                for (int i=0; i<sensorsCount; i++) {
+                    thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), new Random().nextInt(100)));
                 }
                 try {
                     Thread.sleep(1000);
@@ -49,7 +33,7 @@ public class ThermometerViewModel extends ViewModel {
         }).start();
     }
 
-    public LiveData<List<MutableLiveData<Sensor>>> getSensors() {
-        return sensors;
+    public LiveData<Thermometer> getThermometer() {
+        return thermometer;
     }
 }

@@ -28,7 +28,7 @@ public class ThermometerFragment extends Fragment {
 
         ThermometerViewModel viewModel = ViewModelProviders.of(this).get(ThermometerViewModel.class);
         SensorAdapter sensorAdapter = new SensorAdapter(this);
-        viewModel.getSensors().observe(this, sensorAdapter::updateSensors);
+        viewModel.getThermometer().observe(this, thermometer -> sensorAdapter.setSensors(thermometer.getSensors()));
 
         binding.setAdapter(sensorAdapter);
 

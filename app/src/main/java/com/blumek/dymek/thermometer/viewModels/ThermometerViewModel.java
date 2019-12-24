@@ -15,12 +15,22 @@ public class ThermometerViewModel extends ViewModel {
     public ThermometerViewModel() {
         this.thermometer = new MutableLiveData<>();
 
-        int sensorsCount = 90;
-        Thermometer thermometer = new Thermometer(sensorsCount);
-        this.thermometer.setValue(thermometer);
+
 
         new Thread(() -> {
+            int j = 0;
+            int sensorsCount = 10;
+            Thermometer thermometer = new Thermometer(sensorsCount);
+            this.thermometer.postValue(thermometer);
+
             while(true) {
+                if (j == 3) {
+                    sensorsCount = 5;
+                    thermometer = new Thermometer(sensorsCount);
+                    this.thermometer.postValue(thermometer);
+                }
+                j++;
+
                 for (int i=0; i<sensorsCount; i++) {
                     thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), new Random().nextInt(100)));
                 }

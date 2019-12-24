@@ -31,7 +31,6 @@ public class Thermometer {
             currentSensor.setTemperature(sensor.getTemperature());
         }
 
-        System.out.println(currentSensor + " - " + sensor);
         sensors[index].postValue(currentSensor);
     }
 

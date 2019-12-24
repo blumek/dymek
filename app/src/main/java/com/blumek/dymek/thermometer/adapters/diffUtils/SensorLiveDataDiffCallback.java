@@ -1,7 +1,7 @@
 package com.blumek.dymek.thermometer.adapters.diffUtils;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.blumek.dymek.thermometer.models.Sensor;
@@ -9,11 +9,11 @@ import com.blumek.dymek.thermometer.models.Sensor;
 import java.util.List;
 
 public class SensorLiveDataDiffCallback extends DiffUtil.Callback {
-    private List<MutableLiveData<Sensor>> oldSensors;
-    private List<MutableLiveData<Sensor>> newSensors;
+    private List<LiveData<Sensor>> oldSensors;
+    private List<LiveData<Sensor>> newSensors;
 
-    public SensorLiveDataDiffCallback(List<MutableLiveData<Sensor>> oldSensors,
-                                      List<MutableLiveData<Sensor>> newSensors) {
+    public SensorLiveDataDiffCallback(List<LiveData<Sensor>> oldSensors,
+                                      List<LiveData<Sensor>> newSensors) {
         this.oldSensors = oldSensors;
         this.newSensors = newSensors;
     }

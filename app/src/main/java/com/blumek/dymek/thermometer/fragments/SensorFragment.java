@@ -10,19 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.SensorFragmentBinding;
 import com.blumek.dymek.thermometer.models.Sensor;
 import com.blumek.dymek.thermometer.viewModels.SensorViewModel;
-import com.blumek.dymek.thermometer.viewModels.factories.SensorViewModelFactory;
+
 
 public class SensorFragment extends Fragment {
-    private SensorViewModel viewModel;
+    private LiveData<Sensor> sensor;
 
-    public SensorFragment(LiveData<Sensor> sensor) {
-        SensorViewModelFactory factory = new SensorViewModelFactory(sensor);
-        viewModel = factory.create(SensorViewModel.class);
+    public static SensorFragment withSensor(LiveData<Sensor> sensor) {
+        SensorFragment sensorFragment = new SensorFragment();
+        sensorFragment.setSensor(sensor);
+        return sensorFragment;
     }
 
     @Override
@@ -31,15 +33,17 @@ public class SensorFragment extends Fragment {
         SensorFragmentBinding binding = DataBindingUtil
                 .inflate(inflater, R.layout.sensor_fragment, container, false);
 
+        SensorViewModel viewModel = ViewModelProviders.of(this).get(SensorViewModel.class);
+        if (sensor != null)
+            viewModel.setSensor(sensor);
+
         binding.setLifecycleOwner(this);
-        viewModel.getSensor().observe(this, binding::setSensor);
+        binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void setSensor(LiveData<Sensor> sensor) {
+        this.sensor = sensor;
     }
-
 }

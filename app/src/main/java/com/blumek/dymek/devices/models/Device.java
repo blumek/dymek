@@ -4,17 +4,25 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.devices.models.commands.Command;
+import com.blumek.dymek.thermometer.models.Thermometer;
 
 import java.util.Objects;
 
 public abstract class Device {
-    private String name;
-    private String address;
-    private MutableLiveData<State> state;
+    String name;
+    String address;
+    Thermometer thermometer;
+    MutableLiveData<State> state;
 
     Device(String name, String address) {
         this.name = name;
         this.address = address;
+    }
+
+    Device(String name, String address, int sensorsCount) {
+        this.name = name;
+        this.address = address;
+        this.thermometer = new Thermometer(sensorsCount);
         this.state = new MutableLiveData<>(State.Disconnected);
     }
 
@@ -54,6 +62,10 @@ public abstract class Device {
 
     public LiveData<State> getState() {
         return state;
+    }
+
+    public Thermometer getThermometer() {
+        return thermometer;
     }
 
     public enum State {

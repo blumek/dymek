@@ -36,8 +36,7 @@ public class SensorLiveDataDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldSensors.get(oldItemPosition).getValue().getName()
-                .equals(newSensors.get(newItemPosition).getValue().getName());
+        return areContentsTheSame(oldItemPosition, newItemPosition);
     }
 
     @Override

@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="sensor"
-            type="com.blumek.dymek.thermometer.models.Sensor" />
+            name="viewModel"
+            type="com.blumek.dymek.thermometer.viewModels.SensorViewModel" />
     </data>
 
     <RelativeLayout
@@ -17,7 +17,7 @@
             android:id="@+id/sensor_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{sensor.name, default=`Sensor name`}"
+            android:text="@{viewModel.sensor.name, default=`Sensor name`}"
             tools:text="Sensor name"
             android:textSize="30sp"
             android:layout_centerInParent="true"/>
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{sensor.temperature + ``, default=`36.6`}"
+            android:text="@{viewModel.sensor.temperature + ``, default=`36.6`}"
             tools:text="36.6"
             android:textSize="30sp"
             android:layout_below="@id/sensor_name_text_view"

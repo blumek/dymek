@@ -42,7 +42,7 @@ public class SensorAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new SensorFragment(sensors.get(position));
+        return SensorFragment.withSensor(sensors.get(position));
     }
 
     @Override

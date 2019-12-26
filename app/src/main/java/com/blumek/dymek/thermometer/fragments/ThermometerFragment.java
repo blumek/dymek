@@ -26,18 +26,15 @@ public class ThermometerFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_fragment,
                 container, false);
 
-        ThermometerViewModel viewModel = ViewModelProviders.of(this).get(ThermometerViewModel.class);
+        ThermometerViewModel viewModel = ViewModelProviders.of(this)
+                .get(ThermometerViewModel.class);
         SensorAdapter sensorAdapter = new SensorAdapter(this);
-        viewModel.getThermometer().observe(this, thermometer -> sensorAdapter.setSensors(thermometer.getSensors()));
+        viewModel.getThermometer().observe(this, thermometer ->
+                sensorAdapter.setSensors(thermometer.getSensors()));
 
         binding.setAdapter(sensorAdapter);
 
         return binding.getRoot();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
 }

@@ -8,11 +8,14 @@ import com.blumek.dymek.thermometer.models.Sensor;
 public class SensorViewModel extends ViewModel {
     private LiveData<Sensor> sensor;
 
-    public SensorViewModel(LiveData<Sensor> sensorLiveData) {
-        this.sensor = sensorLiveData;
+    public SensorViewModel() {
     }
 
     public LiveData<Sensor> getSensor() {
         return sensor;
+    }
+
+    public void setSensor(LiveData<Sensor> sensor) {
+        this.sensor = sensor;
     }
 }

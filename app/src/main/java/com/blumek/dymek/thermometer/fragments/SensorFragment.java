@@ -9,41 +9,51 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.SensorFragmentBinding;
-import com.blumek.dymek.thermometer.models.Sensor;
-import com.blumek.dymek.thermometer.viewModels.SensorViewModel;
+import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
 
 
 public class SensorFragment extends Fragment {
-    private LiveData<Sensor> sensor;
+    private static final String INDEX_OF_SENSOR_KEY = "INDEX_OF_SENSOR";
+    private static final int NO_SENSOR_INDEX_PASSED = -1;
 
-    public static SensorFragment withSensor(LiveData<Sensor> sensor) {
+    private SensorFragmentBinding binding;
+
+    public SensorFragment() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(INDEX_OF_SENSOR_KEY, NO_SENSOR_INDEX_PASSED);
+        setArguments(bundle);
+    }
+
+    public static SensorFragment withSensor(int indexOfSensor) {
         SensorFragment sensorFragment = new SensorFragment();
-        sensorFragment.setSensor(sensor);
+        Bundle bundle = new Bundle();
+        bundle.putInt(INDEX_OF_SENSOR_KEY, indexOfSensor);
+        sensorFragment.setArguments(bundle);
         return sensorFragment;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        SensorFragmentBinding binding = DataBindingUtil
+        binding = DataBindingUtil
                 .inflate(inflater, R.layout.sensor_fragment, container, false);
 
-        SensorViewModel viewModel = ViewModelProviders.of(this).get(SensorViewModel.class);
-        if (sensor != null)
-            viewModel.setSensor(sensor);
-
+        int indexOfSensor = getArguments().getInt(INDEX_OF_SENSOR_KEY);
+        binding.setIndexOfSensor(indexOfSensor);
         binding.setLifecycleOwner(this);
-        binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }
 
-    public void setSensor(LiveData<Sensor> sensor) {
-        this.sensor = sensor;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ThermometerViewModel viewModel = ViewModelProviders.of(getActivity())
+                .get(ThermometerViewModel.class);
+        binding.setViewModel(viewModel);
     }
 }

@@ -1,6 +1,5 @@
 package com.blumek.dymek.devices.models;
 
-import com.blumek.dymek.devices.models.commands.Command;
 import com.blumek.dymek.thermometer.models.Sensor;
 
 import java.util.Random;
@@ -36,7 +35,7 @@ public class FakeDevice extends Device {
     }
 
     @Override
-    public void send(Command command) {
+    public void send(String command) {
 
     }
 }

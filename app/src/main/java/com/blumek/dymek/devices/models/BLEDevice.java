@@ -13,8 +13,6 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
-import com.blumek.dymek.devices.models.commands.AuthorizeCommand;
-import com.blumek.dymek.devices.models.commands.Command;
 import com.blumek.dymek.shared.exceptions.BluetoothAdapterNotAvailableException;
 
 import java.util.ArrayList;
@@ -70,7 +68,7 @@ public class BLEDevice extends Device {
                 @Override
                 public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
                     if (new String(characteristic.getValue()).equals("[DymekHi]"))
-                        send(new AuthorizeCommand());
+                        send("[DymekAppHi]");
                     Log.d(TAG, new String(characteristic.getValue()));
                 }
 
@@ -138,10 +136,10 @@ public class BLEDevice extends Device {
         bluetoothGatt = null;
     }
 
-    public void send(Command command) {
+    public void send(String command) {
         if(writeCharacteristic == null)
             return;
-        byte[] data = command.value().getBytes();
+        byte[] data = command.getBytes();
         byte[] data0;
         synchronized (writeBuffer) {
             if(data.length <= payloadSize) {

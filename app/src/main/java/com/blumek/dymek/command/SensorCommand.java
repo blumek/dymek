@@ -1,9 +1,9 @@
 package com.blumek.dymek.command;
 
-public abstract class SensorCommand implements Command{
-    private int sensorId;
+abstract class SensorCommand implements Command{
+    int sensorId;
 
-    public SensorCommand(int sensorId) {
+    SensorCommand(int sensorId) {
         this.sensorId = sensorId;
     }
 }

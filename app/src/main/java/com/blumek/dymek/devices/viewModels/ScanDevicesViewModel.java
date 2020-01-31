@@ -30,7 +30,8 @@ public class ScanDevicesViewModel extends AndroidViewModel {
             @Override
             public void onScanResult(int callbackType, ScanResult result) {
                 BluetoothDevice bluetoothDevice = result.getDevice();
-                Device device = new BLEDevice(application, bluetoothDevice);
+                // TODO Device model only for representing the Device data
+                Device device = new BLEDevice(application, bluetoothDevice, 0);
                 addDevice(device);
             }
         };

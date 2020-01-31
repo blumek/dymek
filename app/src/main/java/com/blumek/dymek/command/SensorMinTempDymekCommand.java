@@ -3,7 +3,7 @@ package com.blumek.dymek.command;
 import java.util.Locale;
 
 public class SensorMinTempDymekCommand extends SensorTempCommand{
-    private static final String SENSOR_MIN_TEMP = "[TMIN%d-%.2f]";
+    private static final String SENSOR_MIN_TEMP_COMMAND = "[TMIN%d-%.2f]";
 
     public SensorMinTempDymekCommand(int sensorId, double temperature) {
         super(sensorId, temperature);
@@ -11,6 +11,6 @@ public class SensorMinTempDymekCommand extends SensorTempCommand{
 
     @Override
     public String transferValue() {
-        return String.format(Locale.ENGLISH, SENSOR_MIN_TEMP, sensorId, temperature);
+        return String.format(Locale.ENGLISH, SENSOR_MIN_TEMP_COMMAND, sensorId, temperature);
     }
 }

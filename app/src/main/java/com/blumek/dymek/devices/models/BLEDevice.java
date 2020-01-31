@@ -125,7 +125,7 @@ public class BLEDevice extends Device {
     }
 
     private boolean isDisconnected() {
-        return getRawState() == State.Disconnected;
+        return getState().getValue() == State.Disconnected;
     }
 
     @Override

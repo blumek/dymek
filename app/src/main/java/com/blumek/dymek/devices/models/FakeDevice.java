@@ -10,9 +10,6 @@ public class FakeDevice extends Device {
         super(name, address, sensorsCount);
         new Thread(() -> {
             while(true) {
-                if (getRawState() != State.Connected)
-                    continue;
-
                 for (int i=0; i<sensorsCount; i++) {
                     thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), new Random().nextInt(100)));
                 }

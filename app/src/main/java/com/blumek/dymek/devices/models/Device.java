@@ -56,10 +56,6 @@ public abstract class Device {
         this.state.postValue(state);
     }
 
-    State getRawState() {
-        return this.state.getValue();
-    }
-
     public LiveData<State> getState() {
         return state;
     }

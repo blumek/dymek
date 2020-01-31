@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/sensor_name_text_view"
             android:layout_centerHorizontal="true"
-            android:text="@{viewModel.thermometer.getSensor(indexOfSensor).temperature + ``, default=`36.6`}"
+            android:text="@{String.format(`%.2f`, viewModel.thermometer.getSensor(indexOfSensor).temperature), default=`36.6`}"
             android:textSize="30sp"
             tools:text="36.6" />
 

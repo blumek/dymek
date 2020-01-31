@@ -6,20 +6,41 @@ import com.blumek.dymek.thermometer.models.Sensor;
 import java.util.Random;
 
 public class FakeDevice extends Device {
+    private Random random;
+
     public FakeDevice(String name, String address, int sensorsCount) {
         super(name, address, sensorsCount);
+        random = new Random();
+        createStartingTemperatures();
+
         new Thread(() -> {
             while(true) {
-                for (int i=0; i<sensorsCount; i++) {
-                    thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), new Random().nextInt(100)));
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                simulateTemperatures();
+                pauseFor(700 + random.nextInt(300));
             }
         }).start();
+    }
+
+    private void createStartingTemperatures() {
+        int sensorsCount = thermometer.getSensors().length;
+        for (int i=0; i<sensorsCount; i++) {
+            thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), 25 + random.nextInt(25)));
+        }
+    }
+
+    private void simulateTemperatures() {
+        int sensorsCount = thermometer.getSensors().length;
+        for (int i=0; i<sensorsCount; i++) {
+            thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), thermometer.getSensor(i).getValue().getTemperature() + (random.nextDouble() - 0.5)));
+        }
+    }
+
+    private void pauseFor(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

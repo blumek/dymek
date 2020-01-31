@@ -3,6 +3,7 @@ package com.blumek.dymek.devices.models;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.blumek.dymek.command.Command;
 import com.blumek.dymek.thermometer.models.Thermometer;
 
 import java.util.Objects;
@@ -27,7 +28,7 @@ public abstract class Device {
 
     public abstract void connect();
     public abstract void disconnect();
-    public abstract void send(String command);
+    public abstract void send(Command command);
 
     public String getName() {
         return name;

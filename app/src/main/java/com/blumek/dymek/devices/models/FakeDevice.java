@@ -24,14 +24,18 @@ public class FakeDevice extends Device {
     private void createStartingTemperatures() {
         int sensorsCount = thermometer.getSensors().length;
         for (int i=0; i<sensorsCount; i++) {
-            thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), 25 + random.nextInt(25)));
+            thermometer.updateSensor(i, new Sensor("Sensor " + (i+1),
+                    25 + random.nextInt(25)));
         }
     }
 
     private void simulateTemperatures() {
         int sensorsCount = thermometer.getSensors().length;
         for (int i=0; i<sensorsCount; i++) {
-            thermometer.updateSensor(i, new Sensor("Sensor " + (i+1), thermometer.getSensor(i).getValue().getTemperature() + (random.nextDouble() - 0.5)));
+            double oldTemp = thermometer.getSensor(i).getValue() != null ?
+                    thermometer.getSensor(i).getValue().getTemperature() : 0;
+            thermometer.updateSensor(i, new Sensor("Sensor " + (i+1),
+                    oldTemp+ (random.nextDouble() - 0.5)));
         }
     }
 

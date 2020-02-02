@@ -5,20 +5,25 @@ import com.blumek.dymek.thermometer.models.Sensor;
 
 import java.util.Random;
 
-public class FakeDevice extends Device {
+public class SimulationDevice extends Device {
     private Random random;
 
-    public FakeDevice(String name, String address, int sensorsCount) {
+    public SimulationDevice(String name, String address, int sensorsCount) {
         super(name, address, sensorsCount);
         random = new Random();
         createStartingTemperatures();
 
         new Thread(() -> {
             while(true) {
-                simulateTemperatures();
+                if (isConnectedToDevice())
+                    simulateTemperatures();
                 pauseFor(700 + random.nextInt(300));
             }
         }).start();
+    }
+
+    private boolean isConnectedToDevice() {
+        return state.getValue() == State.Connected;
     }
 
     private void createStartingTemperatures() {

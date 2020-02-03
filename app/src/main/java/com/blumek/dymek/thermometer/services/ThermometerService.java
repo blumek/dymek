@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
@@ -17,16 +18,24 @@ import static com.blumek.dymek.BaseApplication.CHANNEL_THERMOMETER;
 
 public class ThermometerService extends Service {
     private static final int SERVICE_ID = 1;
+    private IBinder binder;
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return binder;
+    }
+
+    public class ServiceBinder extends Binder {
+        public ThermometerService getService() {
+            return ThermometerService.this;
+        }
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        binder = new ServiceBinder();
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,

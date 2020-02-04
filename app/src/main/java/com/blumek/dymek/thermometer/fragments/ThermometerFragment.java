@@ -3,6 +3,7 @@ package com.blumek.dymek.thermometer.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,11 @@ import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
 
 
 public class ThermometerFragment extends Fragment {
+    private final String TAG = getClass().getSimpleName();
+
     private ThermometerViewModel viewModel;
+    private ThermometerService thermometerService;
+    private SensorAdapter sensorAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -33,13 +38,31 @@ public class ThermometerFragment extends Fragment {
 
         viewModel = ViewModelProviders.of(this)
                 .get(ThermometerViewModel.class);
-        SensorAdapter sensorAdapter = new SensorAdapter(this);
-        viewModel.getThermometer().observe(this, thermometer ->
-                sensorAdapter.setSensors(thermometer.getSensors()));
+        sensorAdapter = new SensorAdapter(this);
+        observeThermometer();
+        observeBinder();
 
         binding.setAdapter(sensorAdapter);
 
         return binding.getRoot();
+    }
+
+    private void observeThermometer() {
+        viewModel.getThermometer().observe(this, thermometer ->
+                sensorAdapter.setSensors(thermometer.getSensors()));
+    }
+
+    private void observeBinder() {
+        viewModel.getBinder().observe(this, binder -> {
+            Log.d(TAG, "onChanged: new binder available.");
+            if (binder != null) {
+                Log.d(TAG, "onChanged: bound to service.");
+                thermometerService = binder.getService();
+                thermometerService.setDevice(viewModel.getDevice());
+            } else {
+                Log.d(TAG, "onChanged: unbound from service");
+            }
+        });
     }
 
     @Override

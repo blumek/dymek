@@ -5,12 +5,15 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.LifecycleService;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.MainActivity;
 import com.blumek.dymek.R;
@@ -25,6 +28,7 @@ public class ThermometerService extends LifecycleService {
     private static final int SERVICE_ID = 1;
     private IBinder binder;
     private Device device;
+    private MutableLiveData<Thermometer> thermometer;
 
     @Nullable
     @Override
@@ -42,10 +46,18 @@ public class ThermometerService extends LifecycleService {
     @Override
     public void onCreate() {
         super.onCreate();
+        thermometer = new MutableLiveData<>();
         binder = new ServiceBinder();
 
         device = new SimulationDevice(null, null, 3);
         device.connect();
+        thermometer.setValue(device.getThermometer());
+
+        new Handler().postDelayed(() -> {
+            device = new SimulationDevice(null, null, 2);
+            device.connect();
+            thermometer.setValue(device.getThermometer());
+        }, 3000);
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
@@ -90,7 +102,7 @@ public class ThermometerService extends LifecycleService {
         }
     }
 
-    public Thermometer getThermometer() {
-        return device != null ? device.getThermometer() : null;
+    public LiveData<Thermometer> getThermometer() {
+        return thermometer;
     }
 }

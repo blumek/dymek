@@ -24,6 +24,7 @@ import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
 public class ThermometerFragment extends Fragment {
     private ThermometerViewModel viewModel;
     private SensorAdapter sensorAdapter;
+    private ThermometerService thermometerService;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -35,11 +36,25 @@ public class ThermometerFragment extends Fragment {
         viewModel = ViewModelProviders.of(getActivity())
                 .get(ThermometerViewModel.class);
         sensorAdapter = new SensorAdapter(this);
+        observeBinder();
         observeThermometer();
 
         binding.setAdapter(sensorAdapter);
 
         return binding.getRoot();
+    }
+
+    private void observeBinder() {
+        viewModel.getBinder().observe(this, binder -> {
+            if (binder != null) {
+                thermometerService = binder.getService();
+                thermometerService.getThermometer().removeObservers(this);
+                thermometerService.getThermometer().observe(this, thermometer -> {
+                    viewModel.setThermometer(thermometer);
+                });
+
+            }
+        });
     }
 
     private void observeThermometer() {

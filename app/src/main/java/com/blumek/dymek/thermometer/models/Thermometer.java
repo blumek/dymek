@@ -47,7 +47,7 @@ public class Thermometer {
     }
 
     public LiveData<Sensor> getSensor(int index) {
-        if (index < 0)
+        if (index < 0 || index >= sensors.length)
             return null;
 
         return sensors[index];

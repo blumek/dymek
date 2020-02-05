@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@{viewModel.getThermometer().getSensor(indexOfSensor).name, default=`Sensor name`}"
+            android:text="@{viewModel.getSensor(indexOfSensor).name, default=`Sensor name`}"
             android:textSize="30sp"
             tools:text="Sensor name" />
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/sensor_name_text_view"
             android:layout_centerHorizontal="true"
-            android:text="@{String.format(`%.2f`, viewModel.getThermometer().getSensor(indexOfSensor).temperature), default=`36.6`}"
+            android:text="@{String.format(`%.2f`, viewModel.getSensor(indexOfSensor).temperature), default=`36.6`}"
             android:textSize="30sp"
             tools:text="36.6" />
 

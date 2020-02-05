@@ -28,7 +28,6 @@ public class SensorAdapter extends FragmentStateAdapter {
         Collections.addAll(convertedSensors, sensors);
 
         DiffUtil.DiffResult diffResultOfSensors = getDiffResult(convertedSensors);
-
         this.sensors = convertedSensors;
         diffResultOfSensors.dispatchUpdatesTo(this);
     }

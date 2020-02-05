@@ -23,10 +23,7 @@ import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
 
 
 public class ThermometerFragment extends Fragment {
-    private final String TAG = getClass().getSimpleName();
-
     private ThermometerViewModel viewModel;
-    private ThermometerService thermometerService;
     private SensorAdapter sensorAdapter;
 
     @Override
@@ -40,7 +37,6 @@ public class ThermometerFragment extends Fragment {
                 .get(ThermometerViewModel.class);
         sensorAdapter = new SensorAdapter(this);
         observeThermometer();
-        observeBinder();
 
         binding.setAdapter(sensorAdapter);
 
@@ -50,19 +46,6 @@ public class ThermometerFragment extends Fragment {
     private void observeThermometer() {
         viewModel.getThermometer().observe(this, thermometer ->
                 sensorAdapter.setSensors(thermometer.getSensors()));
-    }
-
-    private void observeBinder() {
-        viewModel.getBinder().observe(this, binder -> {
-            Log.d(TAG, "onChanged: new binder available.");
-            if (binder != null) {
-                Log.d(TAG, "onChanged: bound to service.");
-                thermometerService = binder.getService();
-                thermometerService.setDevice(viewModel.getDevice());
-            } else {
-                Log.d(TAG, "onChanged: unbound from service");
-            }
-        });
     }
 
     @Override

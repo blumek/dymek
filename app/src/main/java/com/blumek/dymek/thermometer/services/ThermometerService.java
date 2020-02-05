@@ -16,6 +16,7 @@ import androidx.lifecycle.LifecycleService;
 import com.blumek.dymek.MainActivity;
 import com.blumek.dymek.R;
 import com.blumek.dymek.devices.models.Device;
+import com.blumek.dymek.thermometer.models.Thermometer;
 
 import static com.blumek.dymek.BaseApplication.CHANNEL_THERMOMETER;
 
@@ -97,5 +98,9 @@ public class ThermometerService extends LifecycleService {
             this.device.disconnect();
             this.device = null;
         }
+    }
+
+    public Thermometer getThermometer() {
+        return device != null ? device.getThermometer() : null;
     }
 }

@@ -55,5 +55,8 @@ public class SensorFragment extends Fragment {
         ThermometerViewModel viewModel = ViewModelProviders.of(getActivity())
                 .get(ThermometerViewModel.class);
         binding.setViewModel(viewModel);
+        System.out.println("TRYING TO GET THERMOMETER");
+        System.out.println(viewModel.getThermometer().getValue());
+
     }
 }

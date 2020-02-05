@@ -1,14 +1,13 @@
 package com.blumek.dymek.thermometer.services;
 
-import androidx.annotation.NonNull;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.LifecycleService;
@@ -16,6 +15,7 @@ import androidx.lifecycle.LifecycleService;
 import com.blumek.dymek.MainActivity;
 import com.blumek.dymek.R;
 import com.blumek.dymek.devices.models.Device;
+import com.blumek.dymek.devices.models.SimulationDevice;
 import com.blumek.dymek.thermometer.models.Thermometer;
 
 import static com.blumek.dymek.BaseApplication.CHANNEL_THERMOMETER;
@@ -44,6 +44,9 @@ public class ThermometerService extends LifecycleService {
         super.onCreate();
         binder = new ServiceBinder();
 
+        device = new SimulationDevice(null, null, 3);
+        device.connect();
+
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
@@ -64,15 +67,6 @@ public class ThermometerService extends LifecycleService {
         return Service.START_STICKY;
     }
 
-    public void setDevice(Device device) {
-        if (!isNewDevice(device))
-            return;
-
-        disconnectDevice();
-        this.device = device;
-        connectDevice();
-    }
-
     private void disconnectDevice() {
         if (this.device != null)
             this.device.disconnect();
@@ -81,10 +75,6 @@ public class ThermometerService extends LifecycleService {
     private void connectDevice() {
         if (this.device != null)
             this.device.connect();
-    }
-
-    private boolean isNewDevice(Device device) {
-        return device != null && !device.equals(this.device);
     }
 
     @Override

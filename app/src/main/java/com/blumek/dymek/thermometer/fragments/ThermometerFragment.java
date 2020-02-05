@@ -3,7 +3,6 @@ package com.blumek.dymek.thermometer.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,7 @@ public class ThermometerFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_fragment,
                 container, false);
 
-        viewModel = ViewModelProviders.of(this)
+        viewModel = ViewModelProviders.of(getActivity())
                 .get(ThermometerViewModel.class);
         sensorAdapter = new SensorAdapter(this);
         observeThermometer();

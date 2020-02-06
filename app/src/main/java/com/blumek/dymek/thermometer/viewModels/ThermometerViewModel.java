@@ -2,7 +2,6 @@ package com.blumek.dymek.thermometer.viewModels;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;
-import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -63,6 +62,6 @@ public class ThermometerViewModel extends ViewModel {
 
     public LiveData<Sensor> getSensor(int index) {
         Thermometer thermometer = this.thermometer.getValue();
-        return thermometer != null ? thermometer.getSensor(index) : null;
+        return thermometer != null ? thermometer.getSensor(index) : new MutableLiveData<>();
     }
 }

@@ -1,5 +1,7 @@
 package com.blumek.dymek.thermometer.models;
 
+import androidx.annotation.NonNull;
+
 public class Sensor {
     private String name;
     private double temperature;
@@ -25,9 +27,14 @@ public class Sensor {
         this.temperature = temperature;
     }
 
-    public Sensor() {
+    public static Sensor empty() {
+        return new Sensor();
     }
 
+    private Sensor() {
+    }
+
+    @NonNull
     @Override
     public String toString() {
         return "Sensor{" +

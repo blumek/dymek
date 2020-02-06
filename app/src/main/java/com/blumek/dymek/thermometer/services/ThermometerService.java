@@ -50,13 +50,13 @@ public class ThermometerService extends LifecycleService {
         binder = new ServiceBinder();
 
         device = new SimulationDevice(null, null, 3);
-        device.connect();
-        thermometer.setValue(device.getThermometer());
+        connectDevice();
+        setDevice();
 
         new Handler().postDelayed(() -> {
             device = new SimulationDevice(null, null, 2);
-            device.connect();
-            thermometer.setValue(device.getThermometer());
+            connectDevice();
+            setDevice();
         }, 3000);
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
@@ -71,6 +71,10 @@ public class ThermometerService extends LifecycleService {
                 .build();
 
         startForeground(SERVICE_ID, notification);
+    }
+
+    private void setDevice() {
+        thermometer.setValue(device.getThermometer());
     }
 
     @Override

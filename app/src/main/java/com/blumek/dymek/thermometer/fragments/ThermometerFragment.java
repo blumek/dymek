@@ -33,26 +33,27 @@ public class ThermometerFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_fragment,
                 container, false);
 
-        viewModel = ViewModelProviders.of(getActivity())
-                .get(ThermometerViewModel.class);
         sensorAdapter = new SensorAdapter(this);
-        observeBinder();
-        observeThermometer();
-
         binding.setAdapter(sensorAdapter);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = ViewModelProviders.of(getActivity())
+                .get(ThermometerViewModel.class);
+        observeBinder();
+        observeThermometer();
     }
 
     private void observeBinder() {
         viewModel.getBinder().observe(this, binder -> {
             if (binder != null) {
                 thermometerService = binder.getService();
-                thermometerService.getThermometer().removeObservers(this);
-                thermometerService.getThermometer().observe(this, thermometer -> {
-                    viewModel.setThermometer(thermometer);
-                });
-
+                thermometerService.getThermometer().observe(this, thermometer ->
+                        viewModel.setThermometer(thermometer));
             }
         });
     }
@@ -68,27 +69,30 @@ public class ThermometerFragment extends Fragment {
         startService();
     }
 
+    private void startService(){
+        Intent serviceBindIntent = new Intent(getActivity(), ThermometerService.class);
+        ContextCompat.startForegroundService(getActivity(), serviceBindIntent);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
         bindService();
     }
 
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getActivity().unbindService(viewModel.getServiceConnection());
-    }
-
-    private void startService(){
-        Intent serviceBindIntent = new Intent(getActivity(), ThermometerService.class);
-        ContextCompat.startForegroundService(getActivity(), serviceBindIntent);
-    }
-
     private void bindService(){
         Intent serviceBindIntent = new Intent(getActivity(), ThermometerService.class);
         getActivity().bindService(serviceBindIntent, viewModel.getServiceConnection(),
                 Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unbindService();
+    }
+
+    private void unbindService() {
+        getActivity().unbindService(viewModel.getServiceConnection());
     }
 }

@@ -8,10 +8,9 @@ public class Thermometer {
     private MutableLiveData<Sensor>[] sensors;
 
     public Thermometer(int sensorsCount) {
-        //noinspection unchecked
         sensors = new MutableLiveData[sensorsCount];
         for (int i = 0; i < sensorsCount; i++) {
-            sensors[i] = new MutableLiveData<>(new Sensor());
+            sensors[i] = new MutableLiveData<>(Sensor.empty());
         }
     }
 
@@ -22,7 +21,7 @@ public class Thermometer {
         if (sensor == null)
             return;
 
-        Sensor currentSensor = sensors[index].getValue() != null ? sensors[index].getValue() : new Sensor();
+        Sensor currentSensor = sensors[index].getValue() != null ? sensors[index].getValue() : Sensor.empty();
         if (isNewName(currentSensor.getName(), sensor.getName())) {
             currentSensor.setName(sensor.getName());
         }
@@ -31,6 +30,7 @@ public class Thermometer {
             currentSensor.setTemperature(sensor.getTemperature());
         }
 
+        // TODO setValue for main thread work
         sensors[index].postValue(currentSensor);
     }
 

@@ -1,5 +1,6 @@
 package com.blumek.dymek.devices.models;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -45,6 +46,17 @@ public abstract class Device {
     @Override
     public int hashCode() {
         return Objects.hash(name, address);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Device{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", thermometer=" + thermometer +
+                ", state=" + state.getValue() +
+                '}';
     }
 
     void setState(State state) {

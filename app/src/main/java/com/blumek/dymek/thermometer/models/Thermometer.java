@@ -1,5 +1,6 @@
 package com.blumek.dymek.thermometer.models;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -51,5 +52,33 @@ public class Thermometer {
             return null;
 
         return sensors[index];
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Thermometer{" +
+                "sensors=" + getSensorsValue() +
+                '}';
+    }
+
+    private StringBuilder getSensorsValue() {
+        StringBuilder sensors = new StringBuilder();
+        appendSensors(sensors);
+        surroundLikeArray(sensors);
+        return sensors;
+    }
+
+    private void appendSensors(StringBuilder sensors) {
+        for (LiveData<Sensor> sensorLiveData : this.sensors) {
+            sensors.append(sensorLiveData != null ? sensorLiveData.getValue() : null)
+                    .append(", ");
+        }
+        sensors.delete(sensors.length()-2, sensors.length());
+    }
+
+    private void surroundLikeArray(StringBuilder sensors) {
+        sensors.insert(0, '[');
+        sensors.append(']');
     }
 }

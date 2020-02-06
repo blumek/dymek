@@ -5,8 +5,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
-import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,13 +18,13 @@ import androidx.lifecycle.MutableLiveData;
 import com.blumek.dymek.MainActivity;
 import com.blumek.dymek.R;
 import com.blumek.dymek.devices.models.Device;
-import com.blumek.dymek.devices.models.SimulationDevice;
 import com.blumek.dymek.thermometer.models.Thermometer;
 
 import static com.blumek.dymek.BaseApplication.CHANNEL_THERMOMETER;
 
 
 public class ThermometerService extends LifecycleService {
+    private final String TAG = getClass().getSimpleName();
     private static final int SERVICE_ID = 1;
     private IBinder binder;
     private Device device;
@@ -49,23 +49,13 @@ public class ThermometerService extends LifecycleService {
         thermometer = new MutableLiveData<>();
         binder = new ServiceBinder();
 
-        device = new SimulationDevice(null, null, 3);
-        connectDevice();
-        setDevice();
-
-        new Handler().postDelayed(() -> {
-            device = new SimulationDevice(null, null, 2);
-            connectDevice();
-            setDevice();
-        }, 3000);
-
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_THERMOMETER)
                 .setContentTitle("Thermometer service")
-                .setContentText("Thermometer is running.")
+                .setContentText("Thermometer is running")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)
                 .build();
@@ -73,19 +63,18 @@ public class ThermometerService extends LifecycleService {
         startForeground(SERVICE_ID, notification);
     }
 
-    private void setDevice() {
-        thermometer.setValue(device.getThermometer());
+    private void setThermometer() {
+        if (device != null) {
+            Log.d(TAG, "Thermometer has been set, " + device.getThermometer());
+            thermometer.setValue(device.getThermometer());
+        }
     }
 
     @Override
     public int onStartCommand(@NonNull Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        Log.d(TAG, "Service has been started");
         return Service.START_STICKY;
-    }
-
-    private void disconnectDevice() {
-        if (this.device != null)
-            this.device.disconnect();
     }
 
     private void connectDevice() {
@@ -101,6 +90,7 @@ public class ThermometerService extends LifecycleService {
 
     private void clearDevice() {
         if (device != null) {
+            Log.d(TAG, "Device has been removed");
             this.device.disconnect();
             this.device = null;
         }
@@ -108,5 +98,20 @@ public class ThermometerService extends LifecycleService {
 
     public LiveData<Thermometer> getThermometer() {
         return thermometer;
+    }
+
+    public void setDevice(Device device) {
+        if (isNewDevice(device)) {
+            clearDevice();
+            Log.d(TAG, "New device has been set, " + device);
+            this.device = device;
+            setThermometer();
+            connectDevice();
+        }
+
+    }
+
+    private boolean isNewDevice(Device device) {
+        return device != null && !device.equals(this.device);
     }
 }

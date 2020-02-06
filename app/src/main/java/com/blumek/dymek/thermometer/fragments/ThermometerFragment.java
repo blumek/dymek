@@ -3,6 +3,7 @@ package com.blumek.dymek.thermometer.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
 
 
 public class ThermometerFragment extends Fragment {
+    private final String TAG = getClass().getSimpleName();
+
     private ThermometerViewModel viewModel;
     private SensorAdapter sensorAdapter;
     private ThermometerService thermometerService;
@@ -52,10 +55,20 @@ public class ThermometerFragment extends Fragment {
         viewModel.getBinder().observe(this, binder -> {
             if (binder != null) {
                 thermometerService = binder.getService();
-                thermometerService.getThermometer().observe(this, thermometer ->
-                        viewModel.setThermometer(thermometer));
+                observeDevice();
+                observeServiceThermometer();
             }
         });
+    }
+
+    private void observeDevice() {
+        viewModel.getDevice().observe(this, device ->
+                thermometerService.setDevice(device));
+    }
+
+    private void observeServiceThermometer() {
+        thermometerService.getThermometer().observe(this, thermometer ->
+                viewModel.setThermometer(thermometer));
     }
 
     private void observeThermometer() {
@@ -70,6 +83,7 @@ public class ThermometerFragment extends Fragment {
     }
 
     private void startService(){
+        Log.d(TAG, "Starting thermometer service");
         Intent serviceBindIntent = new Intent(getActivity(), ThermometerService.class);
         ContextCompat.startForegroundService(getActivity(), serviceBindIntent);
     }
@@ -81,6 +95,7 @@ public class ThermometerFragment extends Fragment {
     }
 
     private void bindService(){
+        Log.d(TAG, "Binding to thermometer service");
         Intent serviceBindIntent = new Intent(getActivity(), ThermometerService.class);
         getActivity().bindService(serviceBindIntent, viewModel.getServiceConnection(),
                 Context.BIND_AUTO_CREATE);
@@ -93,6 +108,7 @@ public class ThermometerFragment extends Fragment {
     }
 
     private void unbindService() {
+        Log.d(TAG, "Unbinding from thermometer service");
         getActivity().unbindService(viewModel.getServiceConnection());
     }
 }

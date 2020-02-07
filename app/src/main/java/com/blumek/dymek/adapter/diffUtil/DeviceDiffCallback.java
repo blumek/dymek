@@ -1,4 +1,4 @@
-package com.blumek.dymek.devices.adapters.diffUtils;
+package com.blumek.dymek.adapter.diffUtil;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;

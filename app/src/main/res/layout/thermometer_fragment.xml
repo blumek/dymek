@@ -4,7 +4,7 @@
     <data>
         <variable
             name="adapter"
-            type="com.blumek.dymek.thermometer.adapters.SensorAdapter" />
+            type="com.blumek.dymek.adapter.SensorAdapter" />
     </data>
 
     <androidx.viewpager2.widget.ViewPager2

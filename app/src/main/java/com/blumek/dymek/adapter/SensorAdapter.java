@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometer.adapters;
+package com.blumek.dymek.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.blumek.dymek.fragment.SensorFragment;
-import com.blumek.dymek.thermometer.adapters.diffUtils.SensorLiveDataDiffCallback;
+import com.blumek.dymek.adapter.diffUtil.SensorLiveDataDiffCallback;
 import com.blumek.dymek.thermometer.models.Sensor;
 
 import java.util.ArrayList;

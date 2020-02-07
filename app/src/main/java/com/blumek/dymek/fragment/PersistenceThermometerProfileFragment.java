@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.CreationThermometerProfileFragmentBinding;
-import com.blumek.dymek.thermometerProfiles.adapters.SensorsSettingsAdapter;
+import com.blumek.dymek.adapter.SensorsSettingsAdapter;
 import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
 
 public abstract class PersistenceThermometerProfileFragment extends Fragment {

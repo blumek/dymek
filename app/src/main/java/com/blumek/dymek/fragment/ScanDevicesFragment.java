@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ScanDevicesFragmentBinding;
-import com.blumek.dymek.devices.adapters.ScanDeviceAdapter;
+import com.blumek.dymek.adapter.ScanDeviceAdapter;
 import com.blumek.dymek.devices.viewModels.ScanDevicesViewModel;
 
 

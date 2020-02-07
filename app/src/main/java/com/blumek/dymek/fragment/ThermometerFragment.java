@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerFragmentBinding;
-import com.blumek.dymek.thermometer.adapters.SensorAdapter;
+import com.blumek.dymek.adapter.SensorAdapter;
 import com.blumek.dymek.thermometer.services.ThermometerService;
 import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
 
@@ -79,7 +79,7 @@ public class ThermometerFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //startService();
+        startService();
     }
 
     private void startService(){
@@ -91,7 +91,7 @@ public class ThermometerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //bindService();
+        bindService();
     }
 
     private void bindService(){
@@ -104,7 +104,7 @@ public class ThermometerFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        //unbindService();
+        unbindService();
     }
 
     private void unbindService() {

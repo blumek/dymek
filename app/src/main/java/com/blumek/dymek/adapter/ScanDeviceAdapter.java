@@ -1,4 +1,4 @@
-package com.blumek.dymek.devices.adapters;
+package com.blumek.dymek.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ScanDeviceListItemBinding;
-import com.blumek.dymek.devices.adapters.diffUtils.DeviceDiffCallback;
+import com.blumek.dymek.adapter.diffUtil.DeviceDiffCallback;
 import com.blumek.dymek.devices.models.Device;
 import com.google.common.collect.Lists;
 

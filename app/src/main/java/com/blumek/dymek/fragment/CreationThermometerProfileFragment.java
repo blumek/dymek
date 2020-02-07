@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.fragments.persistenceThermometerProfileFragments;
+package com.blumek.dymek.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 

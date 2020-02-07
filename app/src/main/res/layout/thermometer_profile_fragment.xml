@@ -15,7 +15,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".thermometerProfiles.fragments.thermometerProfileFragments.ThermometerProfileFragment">
+        tools:context=".fragment.ThermometerProfileFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profile_recycler_view"

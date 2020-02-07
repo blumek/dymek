@@ -1,4 +1,4 @@
-package com.blumek.dymek.devices.fragments;
+package com.blumek.dymek.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

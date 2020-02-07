@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.fragments.persistenceThermometerProfileFragments;
+package com.blumek.dymek.fragment;
 
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.viewModels.factories.UpdateThermometerProfileViewModelFactory;

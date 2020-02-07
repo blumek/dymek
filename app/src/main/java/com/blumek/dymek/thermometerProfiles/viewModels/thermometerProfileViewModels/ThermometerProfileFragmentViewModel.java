@@ -9,8 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import com.blumek.dymek.fragment.ThermometerProfileFragmentDirections;
 import com.blumek.dymek.shared.AppDatabase;
-import com.blumek.dymek.thermometerProfiles.fragments.thermometerProfileFragments.ThermometerProfileFragmentDirections;
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;

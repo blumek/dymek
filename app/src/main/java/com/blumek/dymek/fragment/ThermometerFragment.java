@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometer.fragments;
+package com.blumek.dymek.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -79,7 +79,7 @@ public class ThermometerFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startService();
+        //startService();
     }
 
     private void startService(){
@@ -91,7 +91,7 @@ public class ThermometerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        bindService();
+        //bindService();
     }
 
     private void bindService(){
@@ -104,7 +104,7 @@ public class ThermometerFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        unbindService();
+        //unbindService();
     }
 
     private void unbindService() {

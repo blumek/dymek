@@ -1,4 +1,4 @@
-package com.blumek.dymek.devices.viewModels;
+package com.blumek.dymek.viewModel;
 
 import android.app.Application;
 import android.bluetooth.BluetoothDevice;

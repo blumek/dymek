@@ -4,7 +4,7 @@
 
         <variable
             name="viewModel"
-            type="com.blumek.dymek.devices.viewModels.ScanDevicesViewModel" />
+            type="com.blumek.dymek.viewModel.ScanDevicesViewModel" />
 
         <variable
             name="adapter"

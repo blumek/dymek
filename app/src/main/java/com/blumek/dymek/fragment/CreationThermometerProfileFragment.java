@@ -2,8 +2,8 @@ package com.blumek.dymek.fragment;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.CreationThermometerProfileFragmentViewModel;
-import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.CreationThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
 
 public class CreationThermometerProfileFragment extends PersistenceThermometerProfileFragment {
     @Override

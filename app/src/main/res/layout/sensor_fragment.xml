@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.blumek.dymek.thermometer.viewModels.ThermometerViewModel" />
+            type="com.blumek.dymek.viewModel.ThermometerViewModel" />
     </data>
 
     <RelativeLayout

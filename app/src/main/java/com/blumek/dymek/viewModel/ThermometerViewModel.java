@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometer.viewModels;
+package com.blumek.dymek.viewModel;
 
 import android.content.ComponentName;
 import android.content.ServiceConnection;

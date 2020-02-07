@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels;
+package com.blumek.dymek.viewModel;
 
 import android.app.Application;
 import android.view.View;

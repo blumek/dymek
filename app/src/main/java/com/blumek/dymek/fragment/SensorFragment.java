@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.SensorFragmentBinding;
-import com.blumek.dymek.thermometer.viewModels.ThermometerViewModel;
+import com.blumek.dymek.viewModel.ThermometerViewModel;
 
 
 public class SensorFragment extends Fragment {

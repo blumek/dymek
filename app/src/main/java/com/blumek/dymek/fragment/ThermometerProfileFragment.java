@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 import com.blumek.dymek.adapter.ThermometerProfileAdapter;
-import com.blumek.dymek.thermometerProfiles.viewModels.thermometerProfileViewModels.ThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel;
 
 
 public class ThermometerProfileFragment extends Fragment {

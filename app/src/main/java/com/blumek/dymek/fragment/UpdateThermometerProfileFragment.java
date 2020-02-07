@@ -1,9 +1,9 @@
 package com.blumek.dymek.fragment;
 
 import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.viewModels.factories.UpdateThermometerProfileViewModelFactory;
-import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.PersistenceThermometerProfileFragmentViewModel;
-import com.blumek.dymek.thermometerProfiles.viewModels.persistenceViewModels.UpdateThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.factory.UpdateThermometerProfileViewModelFactory;
+import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.UpdateThermometerProfileFragmentViewModel;
 
 
 public class UpdateThermometerProfileFragment extends PersistenceThermometerProfileFragment {

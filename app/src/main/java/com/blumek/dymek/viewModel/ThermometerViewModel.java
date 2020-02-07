@@ -13,7 +13,7 @@ import com.blumek.dymek.devices.models.Device;
 import com.blumek.dymek.devices.models.SimulationDevice;
 import com.blumek.dymek.thermometer.models.Sensor;
 import com.blumek.dymek.thermometer.models.Thermometer;
-import com.blumek.dymek.thermometer.services.ThermometerService;
+import com.blumek.dymek.service.ThermometerService;
 
 
 public class ThermometerViewModel extends ViewModel {

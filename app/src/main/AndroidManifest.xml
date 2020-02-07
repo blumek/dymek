@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".thermometer.services.ThermometerService"
+        <service android:name=".service.ThermometerService"
             android:exported="false"
             android:label="@string/thermometer_service_label"
             android:description="@string/thermometer_service_description"

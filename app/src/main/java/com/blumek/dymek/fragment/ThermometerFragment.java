@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerFragmentBinding;
 import com.blumek.dymek.adapter.SensorAdapter;
-import com.blumek.dymek.thermometer.services.ThermometerService;
+import com.blumek.dymek.service.ThermometerService;
 import com.blumek.dymek.viewModel.ThermometerViewModel;
 
 

@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometer.services;
+package com.blumek.dymek.service;
 
 import android.app.Notification;
 import android.app.PendingIntent;

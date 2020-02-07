@@ -3,7 +3,7 @@ package com.blumek.dymek.adapter.diffUtil;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
+import com.blumek.dymek.model.thermometerProfile.SensorSettings;
 
 import java.util.List;
 

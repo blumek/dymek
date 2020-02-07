@@ -4,7 +4,7 @@
     <data>
         <variable
             name="thermometerProfiles"
-            type="com.blumek.dymek.thermometerProfiles.models.ThermometerProfile" />
+            type="com.blumek.dymek.model.thermometerProfile.ThermometerProfile" />
         <variable
             name="viewModel"
             type="com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel" />

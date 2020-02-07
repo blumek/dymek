@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
+import com.blumek.dymek.model.thermometerProfile.SensorSettings;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.SensorSettingsDao;
 
 import java.util.List;

@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
 
 import java.util.List;

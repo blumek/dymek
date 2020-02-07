@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.model.thermometerProfile.SensorSettings;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
 
 import java.util.List;
 

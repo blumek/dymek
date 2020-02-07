@@ -8,7 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.blumek.dymek.fragment.SensorFragment;
 import com.blumek.dymek.adapter.diffUtil.SensorLiveDataDiffCallback;
-import com.blumek.dymek.thermometer.models.Sensor;
+import com.blumek.dymek.model.sensor.Sensor;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -9,7 +9,7 @@
         android:id="@+id/thermometerProfileFragment"
         android:name="com.blumek.dymek.fragment.ThermometerProfileFragment"
         android:label="thermometer_profile_fragment"
-        tools:layout="@layout/thermometer_profile_fragment" >
+        tools:layout="@layout/thermometer_profile_fragment">
         <action
             android:id="@+id/action_thermometerProfileFragment_to_creationThermometerProfileFragment"
             app:destination="@id/creationThermometerProfileFragment"
@@ -37,7 +37,7 @@
         tools:layout="@layout/creation_thermometer_profile_fragment" >
         <argument
             android:name="ThermometerProfile"
-            app:argType="com.blumek.dymek.thermometerProfiles.models.ThermometerProfile"
+            app:argType="com.blumek.dymek.model.thermometerProfile.ThermometerProfile"
             app:nullable="true"/>
     </fragment>
     <fragment

@@ -9,10 +9,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.blumek.dymek.devices.models.Device;
-import com.blumek.dymek.devices.models.SimulationDevice;
-import com.blumek.dymek.thermometer.models.Sensor;
-import com.blumek.dymek.thermometer.models.Thermometer;
+import com.blumek.dymek.model.device.Device;
+import com.blumek.dymek.model.device.SimulationDevice;
+import com.blumek.dymek.model.sensor.Sensor;
+import com.blumek.dymek.model.thermometer.Thermometer;
 import com.blumek.dymek.service.ThermometerService;
 
 

@@ -17,8 +17,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.MainActivity;
 import com.blumek.dymek.R;
-import com.blumek.dymek.devices.models.Device;
-import com.blumek.dymek.thermometer.models.Thermometer;
+import com.blumek.dymek.model.device.Device;
+import com.blumek.dymek.model.thermometer.Thermometer;
 
 import static com.blumek.dymek.BaseApplication.CHANNEL_THERMOMETER;
 

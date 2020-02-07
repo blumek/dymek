@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ScanDeviceListItemBinding;
 import com.blumek.dymek.adapter.diffUtil.DeviceDiffCallback;
-import com.blumek.dymek.devices.models.Device;
+import com.blumek.dymek.model.device.Device;
 import com.google.common.collect.Lists;
 
 import java.util.List;

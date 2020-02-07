@@ -10,9 +10,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
 import com.blumek.dymek.shared.AppDatabase;
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.model.thermometerProfile.SensorSettings;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
 import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
 import com.google.common.collect.Lists;

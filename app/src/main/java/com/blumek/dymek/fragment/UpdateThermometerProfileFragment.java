@@ -1,6 +1,6 @@
 package com.blumek.dymek.fragment;
 
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.viewModel.factory.UpdateThermometerProfileViewModelFactory;
 import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
 import com.blumek.dymek.viewModel.UpdateThermometerProfileFragmentViewModel;

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blumek.dymek.R;
 import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
 import com.blumek.dymek.adapter.diffUtil.ThermometerProfileDiffCallback;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel;
 import com.google.common.collect.Lists;
 

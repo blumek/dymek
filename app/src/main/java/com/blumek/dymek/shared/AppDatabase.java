@@ -11,9 +11,9 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.blumek.dymek.shared.converters.DateConverters;
-import com.blumek.dymek.thermometerProfiles.models.SensorSettings;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.model.thermometerProfile.SensorSettings;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.SensorSettingsDao;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
 import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileMetadataDao;

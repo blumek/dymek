@@ -4,7 +4,7 @@
     <data>
         <variable
             name="device"
-            type="com.blumek.dymek.devices.models.Device" />
+            type="com.blumek.dymek.model.device.Device" />
     </data>
 
     <androidx.cardview.widget.CardView

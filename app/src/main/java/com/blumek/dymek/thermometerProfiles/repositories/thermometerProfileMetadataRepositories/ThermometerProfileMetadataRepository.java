@@ -3,7 +3,7 @@ package com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMeta
 import androidx.lifecycle.LiveData;
 
 import com.blumek.dymek.shared.BaseRepository;
-import com.blumek.dymek.thermometerProfiles.models.ThermometerProfileMetadata;
+import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package com.blumek.dymek.devices.models;
+package com.blumek.dymek.model.device;
 
 import com.blumek.dymek.command.Command;
-import com.blumek.dymek.thermometer.models.Sensor;
+import com.blumek.dymek.model.sensor.Sensor;
 
 import java.util.Random;
 

@@ -1,11 +1,11 @@
-package com.blumek.dymek.devices.models;
+package com.blumek.dymek.model.device;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.command.Command;
-import com.blumek.dymek.thermometer.models.Thermometer;
+import com.blumek.dymek.model.thermometer.Thermometer;
 
 import java.util.Objects;
 

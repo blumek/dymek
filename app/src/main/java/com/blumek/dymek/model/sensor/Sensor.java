@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometer.models;
+package com.blumek.dymek.model.sensor;
 
 import androidx.annotation.NonNull;
 
@@ -18,7 +18,7 @@ public class Sensor {
         return temperature;
     }
 
-    void setTemperature(double temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 

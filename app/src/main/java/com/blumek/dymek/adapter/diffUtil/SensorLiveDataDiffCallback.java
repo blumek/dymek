@@ -4,7 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.blumek.dymek.thermometer.models.Sensor;
+import com.blumek.dymek.model.sensor.Sensor;
 
 import java.util.List;
 

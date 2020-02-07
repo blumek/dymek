@@ -1,8 +1,10 @@
-package com.blumek.dymek.thermometer.models;
+package com.blumek.dymek.model.thermometer;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.blumek.dymek.model.sensor.Sensor;
 
 
 public class Thermometer {

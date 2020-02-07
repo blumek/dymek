@@ -3,7 +3,7 @@ package com.blumek.dymek.adapter.diffUtil;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.blumek.dymek.devices.models.Device;
+import com.blumek.dymek.model.device.Device;
 
 import java.util.List;
 

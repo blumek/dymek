@@ -1,4 +1,4 @@
-package com.blumek.dymek.thermometerProfiles.models;
+package com.blumek.dymek.model.thermometerProfile;
 
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;

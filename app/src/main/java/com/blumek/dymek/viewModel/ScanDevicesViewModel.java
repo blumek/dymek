@@ -12,8 +12,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.model.device.BLEDevice;
 import com.blumek.dymek.model.device.Device;
-import com.blumek.dymek.devices.scan.BluetoothLEDeviceScanner;
-import com.blumek.dymek.devices.scan.DeviceScanner;
+import com.blumek.dymek.scanner.BluetoothLEDeviceScanner;
+import com.blumek.dymek.scanner.DeviceScanner;
 import com.google.common.collect.Lists;
 
 import java.util.List;

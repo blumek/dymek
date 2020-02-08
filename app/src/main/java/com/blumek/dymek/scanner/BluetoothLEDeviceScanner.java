@@ -1,4 +1,4 @@
-package com.blumek.dymek.devices.scan;
+package com.blumek.dymek.scanner;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.le.BluetoothLeScanner;

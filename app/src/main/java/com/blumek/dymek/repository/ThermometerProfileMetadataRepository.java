@@ -1,9 +1,9 @@
-package com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileMetadataRepositories;
+package com.blumek.dymek.repository;
 
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.shared.BaseRepository;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.shared.BaseRepository;
 
 import java.util.List;
 

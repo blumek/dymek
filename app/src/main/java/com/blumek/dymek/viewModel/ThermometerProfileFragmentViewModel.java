@@ -10,10 +10,10 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.blumek.dymek.fragment.ThermometerProfileFragmentDirections;
-import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepository;
-import com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories.ThermometerProfileRepositoryImpl;
+import com.blumek.dymek.repository.ThermometerProfileRepository;
+import com.blumek.dymek.repository.ThermometerProfileRepositoryImpl;
+import com.blumek.dymek.shared.AppDatabase;
 
 import java.util.List;
 

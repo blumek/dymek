@@ -1,11 +1,11 @@
-package com.blumek.dymek.thermometerProfiles.repositories.sensorSettingsRepositories;
+package com.blumek.dymek.repository;
 
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
 import com.blumek.dymek.model.thermometerProfile.SensorSettings;
-import com.blumek.dymek.thermometerProfiles.repositories.daos.SensorSettingsDao;
+import com.blumek.dymek.repository.dao.SensorSettingsDao;
 
 import java.util.List;
 

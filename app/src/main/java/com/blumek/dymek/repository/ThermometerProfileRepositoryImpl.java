@@ -1,11 +1,11 @@
-package com.blumek.dymek.thermometerProfiles.repositories.thermometerProfileRepositories;
+package com.blumek.dymek.repository;
 
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.thermometerProfiles.repositories.daos.ThermometerProfileDao;
+import com.blumek.dymek.repository.dao.ThermometerProfileDao;
 
 import java.util.List;
 

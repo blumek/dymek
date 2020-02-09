@@ -13,11 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.databinding.ThermometerFragmentBinding;
 import com.blumek.dymek.adapter.SensorAdapter;
+import com.blumek.dymek.databinding.ThermometerFragmentBinding;
 import com.blumek.dymek.service.ThermometerService;
 import com.blumek.dymek.viewModel.ThermometerViewModel;
 
@@ -37,22 +37,18 @@ public class ThermometerFragment extends Fragment {
                 container, false);
 
         sensorAdapter = new SensorAdapter(this);
+        observeBinder();
+        observeThermometer();
+
+        binding.setLifecycleOwner(this);
         binding.setAdapter(sensorAdapter);
+        binding.setViewModel(viewModel);
 
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        viewModel = ViewModelProviders.of(getActivity())
-                .get(ThermometerViewModel.class);
-        observeBinder();
-        observeThermometer();
-    }
-
     private void observeBinder() {
-        viewModel.getBinder().observe(this, binder -> {
+        viewModel.getBinder().observe(getViewLifecycleOwner(), binder -> {
             if (binder != null) {
                 thermometerService = binder.getService();
                 observeDevice();
@@ -62,23 +58,24 @@ public class ThermometerFragment extends Fragment {
     }
 
     private void observeDevice() {
-        viewModel.getDevice().observe(this, device ->
+        viewModel.getDevice().observe(getViewLifecycleOwner(), device ->
                 thermometerService.setDevice(device));
     }
 
     private void observeServiceThermometer() {
-        thermometerService.getThermometer().observe(this, thermometer ->
+        thermometerService.getThermometer().observe(getViewLifecycleOwner(), thermometer ->
                 viewModel.setThermometer(thermometer));
     }
 
     private void observeThermometer() {
-        viewModel.getThermometer().observe(this, thermometer ->
+        viewModel.getThermometer().observe(getViewLifecycleOwner(), thermometer ->
                 sensorAdapter.setSensors(thermometer.getSensors()));
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(getActivity()).get(ThermometerViewModel.class);
         startService();
     }
 

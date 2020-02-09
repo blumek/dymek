@@ -11,8 +11,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.databinding.CreationThermometerProfileFragmentBinding;
 import com.blumek.dymek.adapter.SensorsSettingsAdapter;
+import com.blumek.dymek.databinding.CreationThermometerProfileFragmentBinding;
 import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
 
 public abstract class PersistenceThermometerProfileFragment extends Fragment {
@@ -22,12 +22,11 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewModel = getPersistenceViewModel();
-        sensorsSettingsAdapter = new SensorsSettingsAdapter(viewModel);
-
         CreationThermometerProfileFragmentBinding binding =
                 DataBindingUtil.inflate(inflater, R.layout.creation_thermometer_profile_fragment,
                         container, false);
+
+        sensorsSettingsAdapter = new SensorsSettingsAdapter(viewModel);
 
         binding.setViewModel(viewModel);
         binding.setAdapter(sensorsSettingsAdapter);
@@ -39,9 +38,15 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
     }
 
     private void observeSensorsSettings() {
-        viewModel.getSensorsSettings().observe(this, sensorSettings ->
+        viewModel.getSensorsSettings().observe(getViewLifecycleOwner(), sensorSettings ->
                 sensorsSettingsAdapter.updateSensorsSettings(sensorSettings));
     }
 
     public abstract PersistenceThermometerProfileFragmentViewModel getPersistenceViewModel();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = getPersistenceViewModel();
+    }
 }

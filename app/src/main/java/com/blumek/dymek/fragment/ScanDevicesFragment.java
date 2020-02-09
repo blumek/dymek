@@ -1,4 +1,5 @@
 package com.blumek.dymek.fragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.databinding.ScanDevicesFragmentBinding;
 import com.blumek.dymek.adapter.ScanDeviceAdapter;
+import com.blumek.dymek.databinding.ScanDevicesFragmentBinding;
 import com.blumek.dymek.viewModel.ScanDevicesViewModel;
 
 
@@ -27,6 +28,8 @@ public class ScanDevicesFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.scan_devices_fragment,
                 container, false);
 
+        observeDevices();
+
         binding.setViewModel(viewModel);
         binding.setAdapter(scanDeviceAdapter);
         binding.setLifecycleOwner(this);
@@ -34,14 +37,16 @@ public class ScanDevicesFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void observeDevices() {
+        viewModel.getDevices().observe(getViewLifecycleOwner(), devices ->
+                scanDeviceAdapter.updateDevices(devices));
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = ViewModelProviders.of(this).get(ScanDevicesViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ScanDevicesViewModel.class);
         scanDeviceAdapter = new ScanDeviceAdapter();
-
-        viewModel.getDevices().observe(this, devices ->
-                scanDeviceAdapter.updateDevices(devices));
     }
 
     @Override

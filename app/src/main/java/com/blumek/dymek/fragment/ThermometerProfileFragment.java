@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 import com.blumek.dymek.adapter.ThermometerProfileAdapter;
+import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 import com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel;
 
 
@@ -24,25 +24,30 @@ public class ThermometerProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        viewModel = ViewModelProviders.of(this).get(ThermometerProfileFragmentViewModel.class);
-        thermometerProfileAdapter = new ThermometerProfileAdapter(viewModel);
-
         ThermometerProfileFragmentBinding binding =
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_profile_fragment,
                 container, false);
+
+        thermometerProfileAdapter = new ThermometerProfileAdapter(viewModel);
+
+        observeThermometersProfiles();
 
         binding.setViewModel(viewModel);
         binding.setAdapter(thermometerProfileAdapter);
         binding.setLifecycleOwner(this);
 
-        observeThermometersProfiles();
-
         return binding.getRoot();
     }
 
     private void observeThermometersProfiles() {
-        viewModel.getThermometersProfiles().observe(this, thermometerProfiles ->
+        viewModel.getThermometersProfiles().observe(getViewLifecycleOwner(), thermometerProfiles ->
                 thermometerProfileAdapter.updateThermometerProfiles(thermometerProfiles));
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this)
+                .get(ThermometerProfileFragmentViewModel.class);
+    }
 }

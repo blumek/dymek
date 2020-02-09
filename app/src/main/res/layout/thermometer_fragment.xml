@@ -5,11 +5,21 @@
         <variable
             name="adapter"
             type="com.blumek.dymek.adapter.SensorAdapter" />
+        <variable
+            name="viewModel"
+            type="com.blumek.dymek.viewModel.ThermometerViewModel" />
+        <import type="android.view.View" />
     </data>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pager"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:adapter="@{adapter}"/>
+        android:layout_height="match_parent">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:adapter="@{adapter}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

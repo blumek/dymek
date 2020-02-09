@@ -19,12 +19,12 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public abstract class PersistenceThermometerProfileFragmentViewModel extends AndroidViewModel {
+public abstract class PersistenceThermometerProfileViewModel extends AndroidViewModel {
     ThermometerProfileRepository thermometerProfileRepository;
     MutableLiveData<ThermometerProfileMetadata> metadata;
     MutableLiveData<List<SensorSettings>> sensorsSettings;
 
-    PersistenceThermometerProfileFragmentViewModel(@NonNull Application application) {
+    PersistenceThermometerProfileViewModel(@NonNull Application application) {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
         thermometerProfileRepository =

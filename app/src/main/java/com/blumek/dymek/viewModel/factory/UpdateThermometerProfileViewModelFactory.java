@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.blumek.dymek.model.thermometerProfile.SensorSettings;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
-import com.blumek.dymek.viewModel.UpdateThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.UpdateThermometerProfileViewModel;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -29,6 +29,6 @@ public class UpdateThermometerProfileViewModelFactory implements ViewModelProvid
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         // TODO DON'T CREATE NEW VIEWMODEL EVERYTIME
-        return (T) new UpdateThermometerProfileFragmentViewModel(application.get(), thermometerProfileMetadata, sensorSettingsList);
+        return (T) new UpdateThermometerProfileViewModel(application.get(), thermometerProfileMetadata, sensorSettingsList);
     }
 }

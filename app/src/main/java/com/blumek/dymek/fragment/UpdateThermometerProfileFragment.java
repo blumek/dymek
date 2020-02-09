@@ -3,13 +3,13 @@ package com.blumek.dymek.fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.PersistenceThermometerProfileViewModel;
 import com.blumek.dymek.viewModel.factory.UpdateThermometerProfileViewModelFactory;
 
 
 public class UpdateThermometerProfileFragment extends PersistenceThermometerProfileFragment {
     @Override
-    public PersistenceThermometerProfileFragmentViewModel getPersistenceViewModel() {
+    public PersistenceThermometerProfileViewModel getPersistenceViewModel() {
         if (getArguments() == null)
             throw new IllegalStateException();
 
@@ -23,6 +23,6 @@ public class UpdateThermometerProfileFragment extends PersistenceThermometerProf
                         thermometerProfile);
 
         return new ViewModelProvider(this, updateThermometerProfileViewModelFactory)
-                .get(PersistenceThermometerProfileFragmentViewModel.class);
+                .get(PersistenceThermometerProfileViewModel.class);
     }
 }

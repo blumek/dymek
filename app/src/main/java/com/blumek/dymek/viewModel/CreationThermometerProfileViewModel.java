@@ -12,9 +12,9 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class CreationThermometerProfileFragmentViewModel extends PersistenceThermometerProfileFragmentViewModel {
+public class CreationThermometerProfileViewModel extends PersistenceThermometerProfileViewModel {
 
-    public CreationThermometerProfileFragmentViewModel(@NonNull Application application) {
+    public CreationThermometerProfileViewModel(@NonNull Application application) {
         super(application);
 
         setEmptyMetadata();

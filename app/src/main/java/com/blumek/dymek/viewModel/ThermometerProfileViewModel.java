@@ -17,11 +17,11 @@ import com.blumek.dymek.shared.AppDatabase;
 
 import java.util.List;
 
-public class ThermometerProfileFragmentViewModel extends AndroidViewModel {
+public class ThermometerProfileViewModel extends AndroidViewModel {
     private ThermometerProfileRepository thermometerProfileRepository;
     private LiveData<List<ThermometerProfile>> thermometersProfiles;
 
-    public ThermometerProfileFragmentViewModel(@NonNull Application application) {
+    public ThermometerProfileViewModel(@NonNull Application application) {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
         thermometerProfileRepository =

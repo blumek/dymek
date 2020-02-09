@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel" />
+            type="com.blumek.dymek.viewModel.PersistenceThermometerProfileViewModel" />
 
         <variable
             name="adapter"

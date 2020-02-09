@@ -9,20 +9,20 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
 import com.blumek.dymek.adapter.diffUtil.ThermometerProfileDiffCallback;
+import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.ThermometerProfileViewModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 public class ThermometerProfileAdapter extends
         RecyclerView.Adapter<ThermometerProfileAdapter.ViewHolder> {
-    private ThermometerProfileFragmentViewModel viewModel;
+    private ThermometerProfileViewModel viewModel;
     private List<ThermometerProfile> thermometerProfiles;
 
-    public ThermometerProfileAdapter(ThermometerProfileFragmentViewModel viewModel) {
+    public ThermometerProfileAdapter(ThermometerProfileViewModel viewModel) {
         this.viewModel = viewModel;
         setUpThermometerProfilesList();
     }
@@ -72,7 +72,7 @@ public class ThermometerProfileAdapter extends
             this.binding = binding;
         }
 
-        void bind(ThermometerProfileFragmentViewModel viewModel,
+        void bind(ThermometerProfileViewModel viewModel,
                   ThermometerProfile thermometerProfile) {
             binding.setViewModel(viewModel);
             binding.setThermometerProfiles(thermometerProfile);

@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment;
 import com.blumek.dymek.R;
 import com.blumek.dymek.adapter.SensorsSettingsAdapter;
 import com.blumek.dymek.databinding.CreationThermometerProfileFragmentBinding;
-import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.PersistenceThermometerProfileViewModel;
 
 public abstract class PersistenceThermometerProfileFragment extends Fragment {
-    private PersistenceThermometerProfileFragmentViewModel viewModel;
+    private PersistenceThermometerProfileViewModel viewModel;
     private SensorsSettingsAdapter sensorsSettingsAdapter;
 
     @Override
@@ -42,7 +42,7 @@ public abstract class PersistenceThermometerProfileFragment extends Fragment {
                 sensorsSettingsAdapter.updateSensorsSettings(sensorSettings));
     }
 
-    public abstract PersistenceThermometerProfileFragmentViewModel getPersistenceViewModel();
+    public abstract PersistenceThermometerProfileViewModel getPersistenceViewModel();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

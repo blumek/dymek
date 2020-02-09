@@ -4,7 +4,7 @@
 
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel" />
+            type="com.blumek.dymek.viewModel.ThermometerProfileViewModel" />
 
         <variable
             name="adapter"

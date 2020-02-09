@@ -14,12 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.blumek.dymek.R;
 import com.blumek.dymek.adapter.ThermometerProfileAdapter;
 import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
-import com.blumek.dymek.viewModel.ThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.ThermometerProfileViewModel;
 
 
 public class ThermometerProfileFragment extends Fragment {
     private ThermometerProfileAdapter thermometerProfileAdapter;
-    private ThermometerProfileFragmentViewModel viewModel;
+    private ThermometerProfileViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,6 +48,6 @@ public class ThermometerProfileFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this)
-                .get(ThermometerProfileFragmentViewModel.class);
+                .get(ThermometerProfileViewModel.class);
     }
 }

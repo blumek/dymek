@@ -9,19 +9,19 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
 import com.blumek.dymek.adapter.diffUtil.SensorSettingsDiffCallback;
+import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
 import com.blumek.dymek.model.thermometerProfile.SensorSettings;
-import com.blumek.dymek.viewModel.PersistenceThermometerProfileFragmentViewModel;
+import com.blumek.dymek.viewModel.PersistenceThermometerProfileViewModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettingsAdapter.ViewHolder> {
-    private PersistenceThermometerProfileFragmentViewModel viewModel;
+    private PersistenceThermometerProfileViewModel viewModel;
     private List<SensorSettings> sensorsSettings;
 
-    public SensorsSettingsAdapter(PersistenceThermometerProfileFragmentViewModel viewModel) {
+    public SensorsSettingsAdapter(PersistenceThermometerProfileViewModel viewModel) {
         this.viewModel = viewModel;
         setUpSensorsSettingsList();
     }
@@ -71,7 +71,7 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
             this.binding = binding;
         }
 
-        void bind(PersistenceThermometerProfileFragmentViewModel viewModel,
+        void bind(PersistenceThermometerProfileViewModel viewModel,
                   SensorSettings sensorSettings) {
             binding.setViewModel(viewModel);
             binding.setSensorsSettings(sensorSettings);

@@ -11,10 +11,10 @@ import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
 
 import java.util.List;
 
-public class UpdateThermometerProfileFragmentViewModel extends PersistenceThermometerProfileFragmentViewModel {
-    public UpdateThermometerProfileFragmentViewModel(@NonNull Application application,
-                                              ThermometerProfileMetadata thermometerProfileMetadata,
-                                              List<SensorSettings> sensorSettings) {
+public class UpdateThermometerProfileViewModel extends PersistenceThermometerProfileViewModel {
+    public UpdateThermometerProfileViewModel(@NonNull Application application,
+                                             ThermometerProfileMetadata thermometerProfileMetadata,
+                                             List<SensorSettings> sensorSettings) {
         super(application);
         setMetadata(thermometerProfileMetadata);
         setSensorsSettingsList(sensorSettings);

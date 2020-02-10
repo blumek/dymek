@@ -14,4 +14,10 @@ public class ChooseDeviceTypeViewModel extends ViewModel {
                 .actionChooseDeviceTypeFragmentToBLEScanDevicesFragment();
         Navigation.findNavController(view).navigate(direction);
     }
+
+    public void onSimulationDeviceClick(View view) {
+        NavDirections direction = ChooseDeviceTypeFragmentDirections
+                .actionChooseDeviceTypeFragmentToSimulationScanDevicesFragment();
+        Navigation.findNavController(view).navigate(direction);
+    }
 }

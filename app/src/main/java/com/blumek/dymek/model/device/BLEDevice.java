@@ -99,8 +99,8 @@ public class BLEDevice extends Device {
                 }
             };
 
-    public BLEDevice(Application application, String name, String address, int sensorCount) {
-        super(name, address, sensorCount);
+    public BLEDevice(Application application, String name, String address) {
+        super(name, address);
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null)
             throw new BluetoothAdapterNotAvailableException();
@@ -109,8 +109,8 @@ public class BLEDevice extends Device {
         this.bluetoothDevice = bluetoothAdapter.getRemoteDevice(address);
     }
 
-    public BLEDevice(Application application, BluetoothDevice bluetoothDevice, int sensorCount) {
-        super(bluetoothDevice.getName(), bluetoothDevice.getAddress(), sensorCount);
+    public BLEDevice(Application application, BluetoothDevice bluetoothDevice) {
+        super(bluetoothDevice.getName(), bluetoothDevice.getAddress());
         this.context = application;
         this.bluetoothDevice = bluetoothDevice;
     }

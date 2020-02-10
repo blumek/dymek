@@ -41,11 +41,6 @@
             app:nullable="true"/>
     </fragment>
     <fragment
-        android:id="@+id/scanDevicesFragment"
-        android:name="com.blumek.dymek.fragment.ScanDevicesFragment"
-        android:label="scan_devices_fragment"
-        tools:layout="@layout/scan_devices_fragment" />
-    <fragment
         android:id="@+id/thermometerFragment"
         android:name="com.blumek.dymek.fragment.ThermometerFragment"
         android:label="thermometer_fragment"
@@ -62,10 +57,18 @@
         <action
             android:id="@+id/action_chooseDeviceTypeFragment_to_BLEScanDevicesFragment"
             app:destination="@id/BLEScanDevicesFragment" />
+        <action
+            android:id="@+id/action_chooseDeviceTypeFragment_to_simulationScanDevicesFragment"
+            app:destination="@id/simulationScanDevicesFragment" />
     </fragment>
     <fragment
         android:id="@+id/BLEScanDevicesFragment"
         android:name="com.blumek.dymek.fragment.BLEScanDevicesFragment"
         android:label="BLEScanDevicesFragment"
+        tools:layout="@layout/scan_devices_fragment"/>
+    <fragment
+        android:id="@+id/simulationScanDevicesFragment"
+        android:name="com.blumek.dymek.fragment.SimulationScanDevicesFragment"
+        android:label="SimulationScanDevicesFragment"
         tools:layout="@layout/scan_devices_fragment"/>
 </navigation>

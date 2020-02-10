@@ -8,8 +8,8 @@ import java.util.Random;
 public class SimulationDevice extends Device {
     private Random random;
 
-    public SimulationDevice(String name, String address, int sensorsCount) {
-        super(name, address, sensorsCount);
+    public SimulationDevice(String name, String address) {
+        super(name, address);
         random = new Random();
         createStartingTemperatures();
 

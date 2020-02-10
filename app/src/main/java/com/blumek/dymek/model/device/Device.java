@@ -10,15 +10,17 @@ import com.blumek.dymek.model.thermometer.Thermometer;
 import java.util.Objects;
 
 public abstract class Device {
+    private static final int SENSORS_COUNT_FOR_TEST = 3;
+
     private String name;
     private String address;
     Thermometer thermometer;
     MutableLiveData<State> state;
 
-    Device(String name, String address, int sensorsCount) {
+    Device(String name, String address) {
         this.name = name;
         this.address = address;
-        this.thermometer = new Thermometer(sensorsCount);
+        this.thermometer = new Thermometer(SENSORS_COUNT_FOR_TEST);
         this.state = new MutableLiveData<>(State.Disconnected);
     }
 

@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.model.device.Device;
-import com.blumek.dymek.scanner.BluetoothLEDeviceScanner;
 import com.blumek.dymek.scanner.DeviceScanner;
 import com.google.common.collect.Lists;
 
@@ -26,7 +25,7 @@ public abstract class ScanDevicesViewModel extends AndroidViewModel {
         isInitialRun = true;
     }
 
-    abstract BluetoothLEDeviceScanner getDeviceScanner();
+    abstract DeviceScanner getDeviceScanner();
 
     public void startScanning() {
         clearDevices();

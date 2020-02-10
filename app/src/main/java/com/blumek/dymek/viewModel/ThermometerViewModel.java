@@ -35,7 +35,7 @@ public class ThermometerViewModel extends ViewModel {
         device = new MutableLiveData<>();
 
         // TODO remove static set device
-        setDevice( new SimulationDevice("Dymek", "00:00:00:00:00", 3));
+        setDevice( new SimulationDevice("Dymek", "00:00:00:00:00"));
         serviceConnection = new ServiceConnection() {
 
             @Override

@@ -31,7 +31,7 @@ public class ScanDevicesViewModel extends AndroidViewModel {
             public void onScanResult(int callbackType, ScanResult result) {
                 BluetoothDevice bluetoothDevice = result.getDevice();
                 // TODO Device model only for representing the Device data
-                Device device = new BLEDevice(application, bluetoothDevice, 0);
+                Device device = new BLEDevice(application, bluetoothDevice, 2);
                 addDevice(device);
             }
         };

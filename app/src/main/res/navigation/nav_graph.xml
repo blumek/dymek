@@ -49,5 +49,14 @@
         android:id="@+id/thermometerFragment"
         android:name="com.blumek.dymek.fragment.ThermometerFragment"
         android:label="thermometer_fragment"
-        tools:layout="@layout/thermometer_fragment" />
+        tools:layout="@layout/thermometer_fragment" >
+        <action
+            android:id="@+id/action_thermometerFragment_to_chooseDeviceTypeFragment"
+            app:destination="@id/chooseDeviceTypeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseDeviceTypeFragment"
+        android:name="com.blumek.dymek.fragment.ChooseDeviceTypeFragment"
+        android:label="fragment_choose_device_type"
+        tools:layout="@layout/fragment_choose_device_type" />
 </navigation>

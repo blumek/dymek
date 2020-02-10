@@ -4,11 +4,15 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
+import com.blumek.dymek.fragment.ThermometerFragmentDirections;
 import com.blumek.dymek.model.device.Device;
 import com.blumek.dymek.model.device.SimulationDevice;
 import com.blumek.dymek.model.sensor.Sensor;
@@ -79,5 +83,10 @@ public class ThermometerViewModel extends ViewModel {
     public void setDevice(Device device) {
         Log.d(TAG, "New device has been set, " + device);
         this.device.setValue(device);
+    }
+
+    public void onChooseDeviceClick(View view) {
+        NavDirections direction = ThermometerFragmentDirections.actionThermometerFragmentToChooseDeviceTypeFragment();
+        Navigation.findNavController(view).navigate(direction);
     }
 }

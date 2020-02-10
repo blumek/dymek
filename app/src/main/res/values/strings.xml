@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Dymek_v2.01</string>
+    <string name="app_name">Dymek</string>
     <string name="sensors_settings">Sensors settings</string>
     <string name="name">Name</string>
     <string name="add_another_sensor">Add another sensor</string>
@@ -13,4 +13,7 @@
     <string name="thermometer_profiles">Thermometer Profiles</string>
     <string name="thermometer_service_label">Thermometer service</string>
     <string name="thermometer_service_description">Dymek\'s service for delivering thermometer information</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

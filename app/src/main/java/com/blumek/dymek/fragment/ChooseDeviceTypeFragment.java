@@ -6,27 +6,38 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
+import com.blumek.dymek.databinding.FragmentChooseDeviceTypeBinding;
+import com.blumek.dymek.viewModel.ChooseDeviceTypeViewModel;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ChooseDeviceTypeFragment extends Fragment {
-
+    private ChooseDeviceTypeViewModel viewModel;
 
     public ChooseDeviceTypeFragment() {
-        // Required empty public constructor
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_choose_device_type, container, false);
+        FragmentChooseDeviceTypeBinding binding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_choose_device_type,
+                        container, false);
+
+        binding.setViewModel(viewModel);
+
+        return binding.getRoot();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(ChooseDeviceTypeViewModel.class);
+    }
 }

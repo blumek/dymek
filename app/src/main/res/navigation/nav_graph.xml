@@ -58,5 +58,14 @@
         android:id="@+id/chooseDeviceTypeFragment"
         android:name="com.blumek.dymek.fragment.ChooseDeviceTypeFragment"
         android:label="fragment_choose_device_type"
-        tools:layout="@layout/fragment_choose_device_type" />
+        tools:layout="@layout/fragment_choose_device_type" >
+        <action
+            android:id="@+id/action_chooseDeviceTypeFragment_to_BLEScanDevicesFragment"
+            app:destination="@id/BLEScanDevicesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/BLEScanDevicesFragment"
+        android:name="com.blumek.dymek.fragment.BLEScanDevicesFragment"
+        android:label="BLEScanDevicesFragment"
+        tools:layout="@layout/scan_devices_fragment"/>
 </navigation>

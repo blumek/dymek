@@ -1,16 +1,12 @@
 package com.blumek.dymek.viewModel;
 
 import android.app.Application;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanResult;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blumek.dymek.model.device.BLEDevice;
 import com.blumek.dymek.model.device.Device;
 import com.blumek.dymek.scanner.BluetoothLEDeviceScanner;
 import com.blumek.dymek.scanner.DeviceScanner;
@@ -18,26 +14,19 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class ScanDevicesViewModel extends AndroidViewModel {
+public abstract class ScanDevicesViewModel extends AndroidViewModel {
     private MutableLiveData<List<Device>> devices;
     private DeviceScanner deviceScanner;
     private boolean isInitialRun;
 
-    public ScanDevicesViewModel(@NonNull Application application) {
+    ScanDevicesViewModel(@NonNull Application application) {
         super(application);
         devices = new MutableLiveData<>();
-        ScanCallback scanCallback = new ScanCallback() {
-            @Override
-            public void onScanResult(int callbackType, ScanResult result) {
-                BluetoothDevice bluetoothDevice = result.getDevice();
-                // TODO Device model only for representing the Device data
-                Device device = new BLEDevice(application, bluetoothDevice, 2);
-                addDevice(device);
-            }
-        };
-        deviceScanner = new BluetoothLEDeviceScanner(scanCallback);
+        deviceScanner = getDeviceScanner();
         isInitialRun = true;
     }
+
+    abstract BluetoothLEDeviceScanner getDeviceScanner();
 
     public void startScanning() {
         clearDevices();
@@ -48,7 +37,7 @@ public class ScanDevicesViewModel extends AndroidViewModel {
         deviceScanner.cancelScanning();
     }
 
-    private void addDevice(Device device) {
+    void addDevice(Device device) {
         List<Device> currentDevices = getDevicesValue();
         int deviceIndex = getIndexOfDeviceWithAddress(currentDevices, device.getAddress());
         if (isDeviceAbsent(deviceIndex))

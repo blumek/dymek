@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
 import com.blumek.dymek.adapter.ScanDeviceAdapter;
@@ -17,7 +16,7 @@ import com.blumek.dymek.databinding.ScanDevicesFragmentBinding;
 import com.blumek.dymek.viewModel.ScanDevicesViewModel;
 
 
-public class ScanDevicesFragment extends Fragment {
+public abstract class ScanDevicesFragment extends Fragment {
     private ScanDeviceAdapter scanDeviceAdapter;
     private ScanDevicesViewModel viewModel;
 
@@ -45,9 +44,11 @@ public class ScanDevicesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(ScanDevicesViewModel.class);
+        viewModel = getViewModel();
         scanDeviceAdapter = new ScanDeviceAdapter();
     }
+
+    abstract ScanDevicesViewModel getViewModel();
 
     @Override
     public void onResume() {

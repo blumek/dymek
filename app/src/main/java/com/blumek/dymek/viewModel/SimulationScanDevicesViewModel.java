@@ -15,6 +15,6 @@ public class SimulationScanDevicesViewModel extends ScanDevicesViewModel {
 
     @Override
     DeviceScanner getDeviceScanner() {
-        return new SimulationDeviceScanner();
+        return new SimulationDeviceScanner(devicesUpdater);
     }
 }

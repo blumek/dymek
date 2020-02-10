@@ -1,11 +1,17 @@
 package com.blumek.dymek.scanner;
 
+import android.app.Application;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
 import android.os.Handler;
 
-public class BluetoothLEDeviceScanner implements DeviceScanner {
+import com.blumek.dymek.model.device.BLEDevice;
+import com.blumek.dymek.model.device.Device;
+
+public class BluetoothLEDeviceScanner extends DeviceScanner {
     private static final long SCAN_PERIOD = 10000;
 
     private final BluetoothLeScanner bluetoothLeScanner;
@@ -14,8 +20,17 @@ public class BluetoothLEDeviceScanner implements DeviceScanner {
     private final ScanCallback callback;
     private boolean isScanning;
 
-    public BluetoothLEDeviceScanner(ScanCallback scanCallback) {
-        this.callback = scanCallback;
+    public BluetoothLEDeviceScanner(Application application, DevicesUpdater devicesUpdater) {
+        super(devicesUpdater);
+        this.callback  = new ScanCallback() {
+            @Override
+            public void onScanResult(int callbackType, ScanResult result) {
+                BluetoothDevice bluetoothDevice = result.getDevice();
+                Device device = new BLEDevice(application, bluetoothDevice);
+                devicesUpdater.addDevice(device);
+            }
+        };
+        // TODO ASK FOR ENABLE BLUETOOTH
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
         handler = new Handler();

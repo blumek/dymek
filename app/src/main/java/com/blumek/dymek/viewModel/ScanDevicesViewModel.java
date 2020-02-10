@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.model.device.Device;
 import com.blumek.dymek.scanner.DeviceScanner;
+import com.blumek.dymek.scanner.DevicesUpdater;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -17,10 +18,12 @@ public abstract class ScanDevicesViewModel extends AndroidViewModel {
     private MutableLiveData<List<Device>> devices;
     private DeviceScanner deviceScanner;
     private boolean isInitialRun;
+    DevicesUpdater devicesUpdater;
 
     ScanDevicesViewModel(@NonNull Application application) {
         super(application);
         devices = new MutableLiveData<>();
+        devicesUpdater = new DevicesUpdater(devices);
         deviceScanner = getDeviceScanner();
         isInitialRun = true;
     }
@@ -34,35 +37,6 @@ public abstract class ScanDevicesViewModel extends AndroidViewModel {
 
     public void stopScanning() {
         deviceScanner.cancelScanning();
-    }
-
-    void addDevice(Device device) {
-        List<Device> currentDevices = getDevicesValue();
-        int deviceIndex = getIndexOfDeviceWithAddress(currentDevices, device.getAddress());
-        if (isDeviceAbsent(deviceIndex))
-            currentDevices.add(device);
-        else
-            currentDevices.set(deviceIndex, device);
-
-        devices.setValue(currentDevices);
-    }
-
-    private int getIndexOfDeviceWithAddress(List<Device> devices, String address) {
-        for (int i=0; i<devices.size(); i++) {
-            if (address.equals(devices.get(i).getAddress()))
-                return i;
-        }
-        return -1;
-    }
-
-    private boolean isDeviceAbsent(int deviceIndex) {
-        return deviceIndex == -1;
-    }
-
-    private List<Device> getDevicesValue() {
-        if (devices.getValue() == null)
-            return Lists.newArrayList();
-        return Lists.newArrayList(devices.getValue());
     }
 
     private void clearDevices() {

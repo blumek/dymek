@@ -1,6 +1,12 @@
 package com.blumek.dymek.scanner;
 
-public interface DeviceScanner {
-    void startScanning();
-    void cancelScanning();
+public abstract class DeviceScanner {
+    DevicesUpdater devicesUpdater;
+
+    DeviceScanner(DevicesUpdater devicesUpdater) {
+        this.devicesUpdater = devicesUpdater;
+    }
+
+    public abstract void startScanning();
+    public abstract void cancelScanning();
 }

@@ -30,6 +30,7 @@ public class ChooseDeviceTypeFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_choose_device_type,
                         container, false);
 
+        binding.setLifecycleOwner(this);
         binding.setViewModel(viewModel);
 
         return binding.getRoot();

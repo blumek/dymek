@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/thermometerFragment">
+    app:startDestination="@id/chooseProfileFragment">
 
     <fragment
         android:id="@+id/thermometerProfileFragment"
@@ -65,10 +65,23 @@
         android:id="@+id/BLEScanDevicesFragment"
         android:name="com.blumek.dymek.fragment.BLEScanDevicesFragment"
         android:label="BLEScanDevicesFragment"
-        tools:layout="@layout/scan_devices_fragment"/>
+        tools:layout="@layout/scan_devices_fragment">
+        <action
+            android:id="@+id/action_BLEScanDevicesFragment_to_chooseProfileFragment"
+            app:destination="@id/chooseProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/simulationScanDevicesFragment"
         android:name="com.blumek.dymek.fragment.SimulationScanDevicesFragment"
         android:label="SimulationScanDevicesFragment"
-        tools:layout="@layout/scan_devices_fragment"/>
+        tools:layout="@layout/scan_devices_fragment">
+        <action
+            android:id="@+id/action_simulationScanDevicesFragment_to_chooseProfileFragment"
+            app:destination="@id/chooseProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseProfileFragment"
+        android:name="com.blumek.dymek.fragment.ChooseProfileFragment"
+        android:label="choose_profile_fragment"
+        tools:layout="@layout/choose_profile_fragment" />
 </navigation>

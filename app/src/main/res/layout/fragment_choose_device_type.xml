@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{viewModel::onBLEDeviceClick}"
-                android:enabled="true" />
+                android:enabled="@{viewModel.isBLESupported}" />
 
             <Button
                 android:layout_marginTop="20dp"

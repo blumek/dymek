@@ -1,5 +1,6 @@
 package com.blumek.dymek.fragment;
 
+
 import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.viewModel.BLEScanDevicesViewModel;

@@ -12,12 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.adapter.ThermometerProfileAdapter;
+import com.blumek.dymek.adapter.ThermometerProfileChooseAdapter;
 import com.blumek.dymek.databinding.ChooseProfileFragmentBinding;
 import com.blumek.dymek.viewModel.ChooseProfileViewModel;
 
 public class ChooseProfileFragment extends Fragment {
-    private ThermometerProfileAdapter thermometerProfileAdapter;
+    private ThermometerProfileChooseAdapter thermometerProfileChooseAdapter;
     private ChooseProfileViewModel viewModel;
 
     public static ChooseProfileFragment newInstance() {
@@ -31,12 +31,12 @@ public class ChooseProfileFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.choose_profile_fragment,
                         container, false);
 
-        //thermometerProfileAdapter = new ThermometerProfileAdapter();
+        thermometerProfileChooseAdapter = new ThermometerProfileChooseAdapter(viewModel);
 
         observeThermometersProfiles();
 
         binding.setViewModel(viewModel);
-        binding.setAdapter(thermometerProfileAdapter);
+        binding.setAdapter(thermometerProfileChooseAdapter);
         binding.setLifecycleOwner(this);
 
         return binding.getRoot();
@@ -44,7 +44,7 @@ public class ChooseProfileFragment extends Fragment {
 
     private void observeThermometersProfiles() {
         viewModel.getThermometersProfiles().observe(getViewLifecycleOwner(), thermometerProfiles ->
-                thermometerProfileAdapter.updateThermometerProfiles(thermometerProfiles));
+                thermometerProfileChooseAdapter.updateThermometerProfiles(thermometerProfiles));
     }
 
     @Override

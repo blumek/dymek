@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.adapter.ThermometerProfileAdapter;
+import com.blumek.dymek.adapter.ThermometerProfileCreationAdapter;
 import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 import com.blumek.dymek.viewModel.ThermometerProfileCreationViewModel;
 
 
 public class ThermometerProfileFragment extends Fragment {
-    private ThermometerProfileAdapter thermometerProfileAdapter;
+    private ThermometerProfileCreationAdapter thermometerProfileCreationAdapter;
     private ThermometerProfileCreationViewModel viewModel;
 
     @Override
@@ -28,12 +28,12 @@ public class ThermometerProfileFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_profile_fragment,
                 container, false);
 
-        thermometerProfileAdapter = new ThermometerProfileAdapter(viewModel);
+        thermometerProfileCreationAdapter = new ThermometerProfileCreationAdapter(viewModel);
 
         observeThermometersProfiles();
 
         binding.setViewModel(viewModel);
-        binding.setAdapter(thermometerProfileAdapter);
+        binding.setAdapter(thermometerProfileCreationAdapter);
         binding.setLifecycleOwner(this);
 
         return binding.getRoot();
@@ -41,7 +41,7 @@ public class ThermometerProfileFragment extends Fragment {
 
     private void observeThermometersProfiles() {
         viewModel.getThermometersProfiles().observe(getViewLifecycleOwner(), thermometerProfiles ->
-                thermometerProfileAdapter.updateThermometerProfiles(thermometerProfiles));
+                thermometerProfileCreationAdapter.updateThermometerProfiles(thermometerProfiles));
     }
 
     @Override

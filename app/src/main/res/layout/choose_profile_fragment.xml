@@ -9,7 +9,7 @@
             type="com.blumek.dymek.viewModel.ChooseProfileViewModel" />
         <variable
             name="adapter"
-            type="com.blumek.dymek.adapter.ThermometerProfileAdapter" />
+            type="com.blumek.dymek.adapter.ThermometerProfileChooseAdapter" />
     </data>
 
     <FrameLayout

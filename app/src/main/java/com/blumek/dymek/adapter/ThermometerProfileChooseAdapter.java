@@ -12,17 +12,17 @@ import com.blumek.dymek.R;
 import com.blumek.dymek.adapter.diffUtil.ThermometerProfileDiffCallback;
 import com.blumek.dymek.databinding.ThermometerProfileListItemBinding;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.viewModel.ThermometerProfileCreationViewModel;
+import com.blumek.dymek.viewModel.ChooseProfileViewModel;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
-public class ThermometerProfileAdapter extends
-        RecyclerView.Adapter<ThermometerProfileAdapter.ViewHolder> {
-    private ThermometerProfileCreationViewModel viewModel;
+public class ThermometerProfileChooseAdapter extends
+        RecyclerView.Adapter<ThermometerProfileChooseAdapter.ViewHolder> {
+    private ChooseProfileViewModel viewModel;
     private List<ThermometerProfile> thermometerProfiles;
 
-    public ThermometerProfileAdapter(ThermometerProfileCreationViewModel viewModel) {
+    public ThermometerProfileChooseAdapter(ChooseProfileViewModel viewModel) {
         this.viewModel = viewModel;
         setUpThermometerProfilesList();
     }
@@ -72,7 +72,7 @@ public class ThermometerProfileAdapter extends
             this.binding = binding;
         }
 
-        void bind(ThermometerProfileCreationViewModel viewModel,
+        void bind(ChooseProfileViewModel viewModel,
                   ThermometerProfile thermometerProfile) {
             binding.setViewModel(viewModel);
             binding.setThermometerProfiles(thermometerProfile);

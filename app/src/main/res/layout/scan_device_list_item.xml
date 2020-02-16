@@ -5,6 +5,9 @@
         <variable
             name="device"
             type="com.blumek.dymek.model.device.Device" />
+        <variable
+            name="viewModel"
+            type="com.blumek.dymek.viewModel.ScanDevicesViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -16,7 +19,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
-        android:onClick="@{() -> device.connect()}">
+        android:onClick="@{(view) -> viewModel.onDeviceClick(view, device)}">
 
         <TextView
             android:layout_marginStart="20dp"

@@ -1,11 +1,14 @@
 package com.blumek.dymek.viewModel;
 
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.blumek.dymek.model.device.Device;
 import com.blumek.dymek.scanner.DeviceScanner;
@@ -54,4 +57,14 @@ public abstract class ScanDevicesViewModel extends AndroidViewModel {
     public void initialRun() {
         isInitialRun = false;
     }
+
+    public void onDeviceClick(View view, Device device) {
+        navigateToProfileSelection(view, device);
+    }
+
+    private void navigateToProfileSelection(View view, Device device) {
+        Navigation.findNavController(view).navigate(getDirection(device));
+    }
+
+    public abstract NavDirections getDirection(Device device);
 }

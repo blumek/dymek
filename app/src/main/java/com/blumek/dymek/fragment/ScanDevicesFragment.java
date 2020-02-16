@@ -45,7 +45,7 @@ public abstract class ScanDevicesFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = getViewModel();
-        scanDeviceAdapter = new ScanDeviceAdapter();
+        scanDeviceAdapter = new ScanDeviceAdapter(viewModel);
     }
 
     abstract ScanDevicesViewModel getViewModel();

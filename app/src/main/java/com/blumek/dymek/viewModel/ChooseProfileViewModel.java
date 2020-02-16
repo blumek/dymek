@@ -14,6 +14,5 @@ public class ChooseProfileViewModel extends ThermometerProfileViewModel {
     }
 
     public void onProfileClick(ThermometerProfile thermometerProfile) {
-        System.out.println(thermometerProfile);
     }
 }

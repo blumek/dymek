@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.application.viewModel.UpdateThermometerProfileViewModel;
-import com.blumek.dymek.model.thermometerProfile.SensorSettings;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

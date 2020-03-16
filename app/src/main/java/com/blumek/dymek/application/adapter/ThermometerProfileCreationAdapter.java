@@ -12,7 +12,7 @@ import com.blumek.dymek.R;
 import com.blumek.dymek.application.adapter.diffUtil.ThermometerProfileDiffCallback;
 import com.blumek.dymek.application.viewModel.ThermometerProfileCreationViewModel;
 import com.blumek.dymek.databinding.ThermometerProfileCreationListItemBinding;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.google.common.collect.Lists;
 
 import java.util.List;

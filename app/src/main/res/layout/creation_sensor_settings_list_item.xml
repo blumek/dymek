@@ -6,7 +6,7 @@
 
         <variable
             name="sensorsSettings"
-            type="com.blumek.dymek.model.thermometerProfile.SensorSettings" />
+            type="com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings" />
 
         <variable
             name="viewModel"

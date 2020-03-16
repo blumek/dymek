@@ -8,7 +8,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.blumek.dymek.application.fragment.ThermometerProfileFragmentDirections;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.useCase.DeleteThermometerProfile;
 
 

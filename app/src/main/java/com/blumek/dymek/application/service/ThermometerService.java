@@ -20,7 +20,7 @@ import com.blumek.dymek.application.activity.MainActivity;
 import com.blumek.dymek.model.device.Device;
 import com.blumek.dymek.model.thermometer.Thermometer;
 
-import static com.blumek.dymek.BaseApplication.CHANNEL_THERMOMETER;
+import static com.blumek.dymek.application.BaseApplication.CHANNEL_THERMOMETER;
 
 
 public class ThermometerService extends LifecycleService {

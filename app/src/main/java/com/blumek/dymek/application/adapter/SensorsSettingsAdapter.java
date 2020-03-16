@@ -12,7 +12,7 @@ import com.blumek.dymek.R;
 import com.blumek.dymek.application.adapter.diffUtil.SensorSettingsDiffCallback;
 import com.blumek.dymek.application.viewModel.PersistenceThermometerProfileViewModel;
 import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
-import com.blumek.dymek.model.thermometerProfile.SensorSettings;
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
 import com.google.common.collect.Lists;
 
 import java.util.List;

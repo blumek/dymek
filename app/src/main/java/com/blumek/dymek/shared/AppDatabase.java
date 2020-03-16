@@ -10,14 +10,14 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.blumek.dymek.model.thermometerProfile.SensorSettings;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
-import com.blumek.dymek.repository.ThermometerProfileRepository;
-import com.blumek.dymek.repository.ThermometerProfileRepositoryImpl;
-import com.blumek.dymek.repository.dao.SensorSettingsDao;
-import com.blumek.dymek.repository.dao.ThermometerProfileDao;
-import com.blumek.dymek.repository.dao.ThermometerProfileMetadataDao;
+import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
+import com.blumek.dymek.adapter.repository.dao.SensorSettingsDao;
+import com.blumek.dymek.adapter.repository.dao.ThermometerProfileDao;
+import com.blumek.dymek.adapter.repository.dao.ThermometerProfileMetadataDao;
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.converters.DateConverters;
 import com.google.common.collect.Lists;
 
@@ -64,7 +64,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
         private PopulateDbAsyncTask(AppDatabase database) {
             thermometerProfileRepository =
-                    new ThermometerProfileRepositoryImpl(database.thermometerProfileDao());
+                    new AndroidThermometerProfileRepository(database.thermometerProfileDao());
         }
 
         @Override

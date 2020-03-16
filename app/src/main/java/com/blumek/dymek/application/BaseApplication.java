@@ -1,4 +1,4 @@
-package com.blumek.dymek;
+package com.blumek.dymek.application;
 
 import android.app.Application;
 import android.app.NotificationChannel;

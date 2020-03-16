@@ -2,8 +2,8 @@ package com.blumek.dymek.useCase;
 
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.repository.ThermometerProfileRepository;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 
 import java.util.List;
 

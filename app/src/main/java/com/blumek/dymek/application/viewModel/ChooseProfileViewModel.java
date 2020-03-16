@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 
 
 public class ChooseProfileViewModel extends ThermometerProfileViewModel {

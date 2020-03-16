@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.repository.ThermometerProfileRepository;
-import com.blumek.dymek.repository.ThermometerProfileRepositoryImpl;
+import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.useCase.FindThermometerProfile;
 
@@ -23,7 +23,7 @@ public class ThermometerProfileViewModel extends AndroidViewModel {
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
         thermometerProfileRepository =
-                new ThermometerProfileRepositoryImpl(appDatabase.thermometerProfileDao());
+                new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
 
         findThermometerProfile = new FindThermometerProfile(thermometerProfileRepository);
         thermometersProfiles = findThermometerProfile.findAll();

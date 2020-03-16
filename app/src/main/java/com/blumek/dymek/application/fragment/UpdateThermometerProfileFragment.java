@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.application.viewModel.PersistenceThermometerProfileViewModel;
 import com.blumek.dymek.application.viewModel.factory.UpdateThermometerProfileViewModelFactory;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 
 
 public class UpdateThermometerProfileFragment extends PersistenceThermometerProfileFragment {

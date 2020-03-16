@@ -1,29 +1,25 @@
-package com.blumek.dymek.repository;
+package com.blumek.dymek.adapter.repository;
 
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.repository.dao.ThermometerProfileDao;
+import com.blumek.dymek.adapter.repository.dao.ThermometerProfileDao;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 
 import java.util.List;
 
-public class ThermometerProfileRepositoryImpl implements ThermometerProfileRepository {
+public class AndroidThermometerProfileRepository implements ThermometerProfileRepository {
     private ThermometerProfileDao thermometerProfileDao;
 
-    public ThermometerProfileRepositoryImpl(ThermometerProfileDao thermometerProfileDao) {
+    public AndroidThermometerProfileRepository(ThermometerProfileDao thermometerProfileDao) {
         this.thermometerProfileDao = thermometerProfileDao;
     }
 
     @Override
     public LiveData<List<ThermometerProfile>> getAllThermometerProfiles() {
         return thermometerProfileDao.getAllThermometerProfiles();
-    }
-
-    @Override
-    public LiveData<ThermometerProfile> getThermometerProfileByMetadataId(int metadataId) {
-        return thermometerProfileDao.getThermometerProfileByMetadataId(metadataId);
     }
 
     @Override

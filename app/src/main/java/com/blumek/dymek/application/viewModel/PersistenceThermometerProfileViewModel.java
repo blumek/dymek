@@ -9,11 +9,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
-import com.blumek.dymek.model.thermometerProfile.SensorSettings;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
-import com.blumek.dymek.repository.ThermometerProfileRepository;
-import com.blumek.dymek.repository.ThermometerProfileRepositoryImpl;
+import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.AppDatabase;
 import com.google.common.collect.Lists;
 
@@ -28,7 +28,7 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
         super(application);
         AppDatabase appDatabase = AppDatabase.getInstance(application);
         thermometerProfileRepository =
-                new ThermometerProfileRepositoryImpl(appDatabase.thermometerProfileDao());
+                new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
     }
 
     public LiveData<List<SensorSettings>> getSensorsSettings() {

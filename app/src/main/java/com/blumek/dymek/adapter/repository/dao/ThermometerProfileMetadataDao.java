@@ -1,10 +1,10 @@
-package com.blumek.dymek.repository.dao;
+package com.blumek.dymek.adapter.repository.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.shared.daos.BaseDao;
 
 import java.util.List;

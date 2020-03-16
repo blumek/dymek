@@ -1,13 +1,13 @@
-package com.blumek.dymek.repository.dao;
+package com.blumek.dymek.adapter.repository.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.blumek.dymek.model.thermometerProfile.SensorSettings;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.shared.daos.BaseRelationDao;
 
@@ -18,7 +18,7 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
     private ThermometerProfileMetadataDao thermometerProfileMetadataDao;
     private SensorSettingsDao sensorSettingsDao;
 
-    ThermometerProfileDao(AppDatabase appDatabase) {
+    public ThermometerProfileDao(AppDatabase appDatabase) {
         this.thermometerProfileMetadataDao = appDatabase.thermometerProfileMetadataDao();
         this.sensorSettingsDao = appDatabase.sensorSettingsDao();
     }

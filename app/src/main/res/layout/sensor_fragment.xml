@@ -10,13 +10,13 @@
 
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ThermometerViewModel" />
+            type="com.blumek.dymek.application.viewModel.ThermometerViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.SensorFragment">
+        tools:context=".application.fragment.SensorFragment">
 
         <TextView
             android:id="@+id/sensor_name_text_view"

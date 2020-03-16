@@ -7,7 +7,7 @@
             type="com.blumek.dymek.model.thermometerProfile.ThermometerProfile" />
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ThermometerProfileCreationViewModel" />
+            type="com.blumek.dymek.application.viewModel.ThermometerProfileCreationViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

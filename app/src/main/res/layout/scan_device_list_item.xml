@@ -7,7 +7,7 @@
             type="com.blumek.dymek.model.device.Device" />
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ScanDevicesViewModel" />
+            type="com.blumek.dymek.application.viewModel.ScanDevicesViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -6,16 +6,16 @@
     <data>
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ChooseProfileViewModel" />
+            type="com.blumek.dymek.application.viewModel.ChooseProfileViewModel" />
         <variable
             name="adapter"
-            type="com.blumek.dymek.adapter.ThermometerProfileChooseAdapter" />
+            type="com.blumek.dymek.application.adapter.ThermometerProfileChooseAdapter" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.ChooseProfileFragment">
+        tools:context=".application.fragment.ChooseProfileFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profile_recycler_view"

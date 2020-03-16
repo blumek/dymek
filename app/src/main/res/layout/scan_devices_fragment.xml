@@ -4,18 +4,18 @@
 
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ScanDevicesViewModel" />
+            type="com.blumek.dymek.application.viewModel.ScanDevicesViewModel" />
 
         <variable
             name="adapter"
-            type="com.blumek.dymek.adapter.ScanDeviceAdapter" />
+            type="com.blumek.dymek.application.adapter.ScanDeviceAdapter" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.ScanDevicesFragment">
+        tools:context=".application.fragment.ScanDevicesFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/scan_devices_recycler_view"

@@ -6,11 +6,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.PersistenceThermometerProfileViewModel" />
+            type="com.blumek.dymek.application.viewModel.PersistenceThermometerProfileViewModel" />
 
         <variable
             name="adapter"
-            type="com.blumek.dymek.adapter.SensorsSettingsAdapter" />
+            type="com.blumek.dymek.application.adapter.SensorsSettingsAdapter" />
     </data>
 
     <LinearLayout
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="16dp"
-        tools:context=".fragment.CreationThermometerProfileFragment">
+        tools:context=".application.fragment.CreationThermometerProfileFragment">
 
         <TextView
             android:labelFor="@id/profile_name_edit_text"

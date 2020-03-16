@@ -5,13 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.blumek.dymek.viewModel.ChooseDeviceTypeViewModel" />
+            type="com.blumek.dymek.application.viewModel.ChooseDeviceTypeViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.ChooseDeviceTypeFragment">
+        tools:context=".application.fragment.ChooseDeviceTypeFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

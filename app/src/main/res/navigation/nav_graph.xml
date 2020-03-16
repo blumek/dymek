@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/thermometerProfileFragment">
+    app:startDestination="@id/thermometerFragment">
 
     <fragment
         android:id="@+id/thermometerProfileFragment"
-        android:name="com.blumek.dymek.fragment.ThermometerProfileFragment"
+        android:name="com.blumek.dymek.application.fragment.ThermometerProfileFragment"
         android:label="thermometer_profile_fragment"
         tools:layout="@layout/thermometer_profile_fragment">
         <action
@@ -27,12 +27,12 @@
     </fragment>
     <fragment
         android:id="@+id/creationThermometerProfileFragment"
-        android:name="com.blumek.dymek.fragment.CreationThermometerProfileFragment"
+        android:name="com.blumek.dymek.application.fragment.CreationThermometerProfileFragment"
         android:label="creation_thermometer_profile_fragment"
         tools:layout="@layout/creation_thermometer_profile_fragment" />
     <fragment
         android:id="@+id/updateThermometerProfileFragment"
-        android:name="com.blumek.dymek.fragment.UpdateThermometerProfileFragment"
+        android:name="com.blumek.dymek.application.fragment.UpdateThermometerProfileFragment"
         android:label="UpdateThermometerProfileFragment"
         tools:layout="@layout/creation_thermometer_profile_fragment" >
         <argument
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/thermometerFragment"
-        android:name="com.blumek.dymek.fragment.ThermometerFragment"
+        android:name="com.blumek.dymek.application.fragment.ThermometerFragment"
         android:label="thermometer_fragment"
         tools:layout="@layout/thermometer_fragment" >
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseDeviceTypeFragment"
-        android:name="com.blumek.dymek.fragment.ChooseDeviceTypeFragment"
+        android:name="com.blumek.dymek.application.fragment.ChooseDeviceTypeFragment"
         android:label="fragment_choose_device_type"
         tools:layout="@layout/fragment_choose_device_type" >
         <action
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/BLEScanDevicesFragment"
-        android:name="com.blumek.dymek.fragment.BLEScanDevicesFragment"
+        android:name="com.blumek.dymek.application.fragment.BLEScanDevicesFragment"
         android:label="BLEScanDevicesFragment"
         tools:layout="@layout/scan_devices_fragment">
         <action
@@ -72,7 +72,7 @@
     </fragment>
     <fragment
         android:id="@+id/simulationScanDevicesFragment"
-        android:name="com.blumek.dymek.fragment.SimulationScanDevicesFragment"
+        android:name="com.blumek.dymek.application.fragment.SimulationScanDevicesFragment"
         android:label="SimulationScanDevicesFragment"
         tools:layout="@layout/scan_devices_fragment">
         <action
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/chooseProfileFragment"
-        android:name="com.blumek.dymek.fragment.ChooseProfileFragment"
+        android:name="com.blumek.dymek.application.fragment.ChooseProfileFragment"
         android:label="choose_profile_fragment"
         tools:layout="@layout/choose_profile_fragment" />
 </navigation>

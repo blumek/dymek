@@ -8,14 +8,20 @@ import androidx.lifecycle.MutableLiveData;
 import com.blumek.dymek.model.thermometerProfile.SensorSettings;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.useCase.UpdateThermometerProfile;
 
 import java.util.List;
 
 public class UpdateThermometerProfileViewModel extends PersistenceThermometerProfileViewModel {
+    private final UpdateThermometerProfile updateThermometerProfile;
+
     public UpdateThermometerProfileViewModel(@NonNull Application application,
                                              ThermometerProfileMetadata thermometerProfileMetadata,
                                              List<SensorSettings> sensorSettings) {
         super(application);
+
+        updateThermometerProfile = new UpdateThermometerProfile(thermometerProfileRepository);
+
         setMetadata(thermometerProfileMetadata);
         setSensorsSettingsList(sensorSettings);
     }
@@ -29,6 +35,6 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
     }
 
     public void persistThermometerProfile(ThermometerProfile thermometerProfile) {
-        thermometerProfileRepository.update(thermometerProfile);
+        updateThermometerProfile.update(thermometerProfile);
     }
 }

@@ -9,11 +9,16 @@ import androidx.navigation.Navigation;
 
 import com.blumek.dymek.fragment.ThermometerProfileFragmentDirections;
 import com.blumek.dymek.model.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.useCase.DeleteThermometerProfile;
 
 
 public class ThermometerProfileCreationViewModel extends ThermometerProfileViewModel {
+    private final DeleteThermometerProfile deleteThermometerProfile;
+
     public ThermometerProfileCreationViewModel(@NonNull Application application) {
         super(application);
+
+        deleteThermometerProfile = new DeleteThermometerProfile(thermometerProfileRepository);
     }
 
     public void onCreateClicked(View view) {
@@ -29,6 +34,6 @@ public class ThermometerProfileCreationViewModel extends ThermometerProfileViewM
     }
 
     public void onDeleteClicked(ThermometerProfile thermometerProfile) {
-        thermometerProfileRepository.delete(thermometerProfile);
+        deleteThermometerProfile.delete(thermometerProfile);
     }
 }

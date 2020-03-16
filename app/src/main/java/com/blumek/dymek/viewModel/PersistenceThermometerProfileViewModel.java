@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 public abstract class PersistenceThermometerProfileViewModel extends AndroidViewModel {
-    ThermometerProfileRepository thermometerProfileRepository;
+    final ThermometerProfileRepository thermometerProfileRepository;
     MutableLiveData<ThermometerProfileMetadata> metadata;
     MutableLiveData<List<SensorSettings>> sensorsSettings;
 

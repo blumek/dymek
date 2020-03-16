@@ -27,8 +27,8 @@ public class UpdateThermometerProfileViewModelFactory implements ViewModelProvid
 
     @NonNull
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        // TODO DON'T CREATE NEW VIEWMODEL EVERYTIME
         return (T) new UpdateThermometerProfileViewModel(application.get(), thermometerProfileMetadata, sensorSettingsList);
     }
 }

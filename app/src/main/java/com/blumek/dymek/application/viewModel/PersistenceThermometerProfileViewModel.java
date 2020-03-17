@@ -11,6 +11,7 @@ import androidx.navigation.Navigation;
 
 import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
 import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfile;
 import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.domain.port.ThermometerProfileRepository;
@@ -23,6 +24,7 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
     final ThermometerProfileRepository thermometerProfileRepository;
     MutableLiveData<RoomThermometerProfileMetadata> metadata;
     MutableLiveData<List<RoomSensorSettings>> sensorsSettings;
+    // TODO CHANGE ROOM TO NORMAL
 
     PersistenceThermometerProfileViewModel(@NonNull Application application) {
         super(application);
@@ -62,9 +64,9 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
     }
 
     public void onPersistClick(View view) {
-//        RoomThermometerProfile roomThermometerProfile =
-//                new RoomThermometerProfile(metadata.getValue(), sensorsSettings.getValue());
-//        persistThermometerProfile(roomThermometerProfile);
+        RoomThermometerProfile roomThermometerProfile =
+                new RoomThermometerProfile(metadata.getValue(), sensorsSettings.getValue());
+        persistThermometerProfile(roomThermometerProfile.toThermometerProfile());
 
         Navigation.findNavController(view).navigateUp();
     }

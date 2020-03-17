@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfile;
 import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.useCase.UpdateThermometerProfile;
@@ -16,14 +17,15 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
     private final UpdateThermometerProfile updateThermometerProfile;
 
     public UpdateThermometerProfileViewModel(@NonNull Application application,
-                                             RoomThermometerProfileMetadata roomThermometerProfileMetadata,
-                                             List<RoomSensorSettings> roomSensorSettings) {
+                                             ThermometerProfile thermometerProfile) {
         super(application);
 
         updateThermometerProfile = new UpdateThermometerProfile(thermometerProfileRepository);
 
-        setMetadata(roomThermometerProfileMetadata);
-        setSensorsSettingsList(roomSensorSettings);
+        RoomThermometerProfile roomThermometerProfile = RoomThermometerProfile
+                .toRoomThermometerProfile(thermometerProfile);
+        setMetadata(roomThermometerProfile.getMetadata());
+        setSensorsSettingsList(roomThermometerProfile.getRoomSensorSettings());
     }
 
     private void setMetadata(RoomThermometerProfileMetadata roomThermometerProfileMetadata) {

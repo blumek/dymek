@@ -3,7 +3,7 @@
 
     <data>
         <variable
-            name="thermometerProfiles"
+            name="thermometerProfile"
             type="com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile" />
         <variable
             name="viewModel"
@@ -19,7 +19,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
-        android:onClick="@{() -> viewModel.onProfileClick(thermometerProfiles)}">
+        android:onClick="@{() -> viewModel.onProfileClick(thermometerProfile)}">
 
         <TextView
             android:layout_marginStart="20dp"
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="@{thermometerProfiles.metadata.name}"
+            android:text="@{thermometerProfile.name}"
             tools:text="Profile name"/>
 
 

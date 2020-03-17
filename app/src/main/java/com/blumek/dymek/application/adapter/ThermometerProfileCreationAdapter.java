@@ -75,7 +75,7 @@ public class ThermometerProfileCreationAdapter extends
         void bind(ThermometerProfileCreationViewModel viewModel,
                   ThermometerProfile thermometerProfile) {
             binding.setViewModel(viewModel);
-            binding.setThermometerProfiles(thermometerProfile);
+            binding.setThermometerProfile(thermometerProfile);
             binding.executePendingBindings();
         }
     }

@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.useCase.UpdateThermometerProfile;
 
 import java.util.List;
@@ -16,21 +16,21 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
     private final UpdateThermometerProfile updateThermometerProfile;
 
     public UpdateThermometerProfileViewModel(@NonNull Application application,
-                                             ThermometerProfileMetadata thermometerProfileMetadata,
-                                             List<SensorSettings> sensorSettings) {
+                                             RoomThermometerProfileMetadata roomThermometerProfileMetadata,
+                                             List<RoomSensorSettings> roomSensorSettings) {
         super(application);
 
         updateThermometerProfile = new UpdateThermometerProfile(thermometerProfileRepository);
 
-        setMetadata(thermometerProfileMetadata);
-        setSensorsSettingsList(sensorSettings);
+        setMetadata(roomThermometerProfileMetadata);
+        setSensorsSettingsList(roomSensorSettings);
     }
 
-    private void setMetadata(ThermometerProfileMetadata thermometerProfileMetadata) {
-        metadata = new MutableLiveData<>(thermometerProfileMetadata);
+    private void setMetadata(RoomThermometerProfileMetadata roomThermometerProfileMetadata) {
+        metadata = new MutableLiveData<>(roomThermometerProfileMetadata);
     }
 
-    private void setSensorsSettingsList(List<SensorSettings> sensorsSettings) {
+    private void setSensorsSettingsList(List<RoomSensorSettings> sensorsSettings) {
         this.sensorsSettings = new MutableLiveData<>(sensorsSettings);
     }
 

@@ -3,7 +3,7 @@
 
     <data>
         <variable
-            name="thermometerProfiles"
+            name="thermometerProfile"
             type="com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile" />
         <variable
             name="viewModel"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:text="@{thermometerProfiles.metadata.name}"
+            android:text="@{thermometerProfile.name}"
             tools:text="Profile name"/>
 
         <LinearLayout
@@ -42,7 +42,7 @@
                 android:src="@android:drawable/ic_menu_edit"
                 android:contentDescription="@string/edit"
                 android:layout_gravity="center"
-                android:onClick="@{(view) -> viewModel.onEditClicked(view, thermometerProfiles)}"/>
+                android:onClick="@{(view) -> viewModel.onEditClicked(view, thermometerProfile)}"/>
 
             <ImageButton
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 android:src="@android:drawable/ic_menu_delete"
                 android:contentDescription="@string/remove"
                 android:layout_gravity="center"
-                android:onClick="@{() -> viewModel.onDeleteClicked(thermometerProfiles)}"/>
+                android:onClick="@{() -> viewModel.onDeleteClicked(thermometerProfile)}"/>
 
         </LinearLayout>
 

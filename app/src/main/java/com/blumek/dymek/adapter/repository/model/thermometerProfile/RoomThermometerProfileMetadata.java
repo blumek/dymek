@@ -1,4 +1,4 @@
-package com.blumek.dymek.domain.entity.thermometerProfile;
+package com.blumek.dymek.adapter.repository.model.thermometerProfile;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -8,23 +8,23 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-public class ThermometerProfileMetadata {
+public class RoomThermometerProfileMetadata {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private Date lastUsage;
     private Date createdAt;
 
-    public ThermometerProfileMetadata(String name, Date createdAt) {
+    public RoomThermometerProfileMetadata(String name, Date createdAt) {
         this.name = name;
         this.createdAt = createdAt;
     }
 
-    private ThermometerProfileMetadata() {
+    private RoomThermometerProfileMetadata() {
     }
 
-    public static ThermometerProfileMetadata emptyThermometerProfileMetadata() {
-        return new ThermometerProfileMetadata();
+    public static RoomThermometerProfileMetadata emptyThermometerProfileMetadata() {
+        return new RoomThermometerProfileMetadata();
     }
 
     public int getId() {
@@ -74,7 +74,7 @@ public class ThermometerProfileMetadata {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ThermometerProfileMetadata that = (ThermometerProfileMetadata) o;
+        RoomThermometerProfileMetadata that = (RoomThermometerProfileMetadata) o;
         return id == that.id &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(lastUsage, that.lastUsage) &&

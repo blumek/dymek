@@ -5,9 +5,9 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
-import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.useCase.CreateThermometerProfile;
 import com.google.common.collect.Lists;
 
@@ -27,11 +27,11 @@ public class CreationThermometerProfileViewModel extends PersistenceThermometerP
     }
 
     private void setEmptyMetadata() {
-        metadata = new MutableLiveData<>(ThermometerProfileMetadata.emptyThermometerProfileMetadata());
+        metadata = new MutableLiveData<>(RoomThermometerProfileMetadata.emptyThermometerProfileMetadata());
     }
 
     private void setEmptySensorsSettingsList() {
-        List<SensorSettings> emptySensorsSettings = Lists.newArrayList();
+        List<RoomSensorSettings> emptySensorsSettings = Lists.newArrayList();
         sensorsSettings = new MutableLiveData<>(emptySensorsSettings);
     }
 

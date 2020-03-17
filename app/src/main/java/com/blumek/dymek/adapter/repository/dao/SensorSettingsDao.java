@@ -3,14 +3,14 @@ package com.blumek.dymek.adapter.repository.dao;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
 import com.blumek.dymek.shared.daos.BaseDao;
 
 import java.util.List;
 
 @Dao
-public interface SensorSettingsDao extends BaseDao<SensorSettings> {
+public interface SensorSettingsDao extends BaseDao<RoomSensorSettings> {
 
-    @Query("SELECT * FROM SensorSettings WHERE thermometerProfileMetadataId=:metadataId")
-    List<SensorSettings> getRawSensorsSettingsByMetadataId(int metadataId);
+    @Query("SELECT * FROM RoomSensorSettings WHERE thermometerProfileMetadataId=:metadataId")
+    List<RoomSensorSettings> getRawSensorsSettingsByMetadataId(int metadataId);
 }

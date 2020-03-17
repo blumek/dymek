@@ -5,76 +5,76 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
-import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfile;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.shared.daos.BaseRelationDao;
 
 import java.util.List;
 
 @Dao
-public abstract class ThermometerProfileDao implements BaseRelationDao<ThermometerProfile> {
+public abstract class ThermometerProfileDao implements BaseRelationDao<RoomThermometerProfile> {
     private ThermometerProfileMetadataDao thermometerProfileMetadataDao;
     private SensorSettingsDao sensorSettingsDao;
 
-    public ThermometerProfileDao(AppDatabase appDatabase) {
+    ThermometerProfileDao(AppDatabase appDatabase) {
         this.thermometerProfileMetadataDao = appDatabase.thermometerProfileMetadataDao();
         this.sensorSettingsDao = appDatabase.sensorSettingsDao();
     }
 
     @Transaction
-    @Query("SELECT * FROM ThermometerProfileMetadata")
-    public abstract LiveData<List<ThermometerProfile>> getAllThermometerProfiles();
+    @Query("SELECT * FROM RoomThermometerProfileMetadata")
+    public abstract LiveData<List<RoomThermometerProfile>> getAllThermometerProfiles();
 
     @Transaction
-    @Query("SELECT * FROM ThermometerProfileMetadata WHERE id=:metadataId")
-    public abstract LiveData<ThermometerProfile> getThermometerProfileByMetadataId(int metadataId);
+    @Query("SELECT * FROM RoomThermometerProfileMetadata WHERE id=:metadataId")
+    public abstract LiveData<RoomThermometerProfile> getThermometerProfileByMetadataId(int metadataId);
 
     @Override
     @Transaction
-    public void save(ThermometerProfile thermometerProfile) {
-        int generatedMetadataId = (int) thermometerProfileMetadataDao.save(thermometerProfile.getMetadata());
-        associateSensorsSettingsToMetadataByMetadataId(thermometerProfile.getSensorSettings(), generatedMetadataId);
+    public void save(RoomThermometerProfile roomThermometerProfile) {
+        int generatedMetadataId = (int) thermometerProfileMetadataDao.save(roomThermometerProfile.getMetadata());
+        associateSensorsSettingsToMetadataByMetadataId(roomThermometerProfile.getRoomSensorSettings(), generatedMetadataId);
     }
 
-    private void associateSensorsSettingsToMetadataByMetadataId(List<SensorSettings> sensorsSettings,
+    private void associateSensorsSettingsToMetadataByMetadataId(List<RoomSensorSettings> sensorsSettings,
                                                                 int generatedMetadataId) {
-        for (SensorSettings sensorSettings : sensorsSettings) {
-            associateSensorSettingsToMetadataById(sensorSettings, generatedMetadataId);
+        for (RoomSensorSettings roomSensorSettings : sensorsSettings) {
+            associateSensorSettingsToMetadataById(roomSensorSettings, generatedMetadataId);
         }
     }
 
-    private void associateSensorSettingsToMetadataById(SensorSettings sensorSettings, int metadataId) {
-        sensorSettings.setThermometerProfileMetadataId(metadataId);
-        sensorSettingsDao.save(sensorSettings);
+    private void associateSensorSettingsToMetadataById(RoomSensorSettings roomSensorSettings, int metadataId) {
+        roomSensorSettings.setThermometerProfileMetadataId(metadataId);
+        sensorSettingsDao.save(roomSensorSettings);
     }
 
     @Override
     @Transaction
-    public void update(ThermometerProfile thermometerProfile) {
-        ThermometerProfileMetadata thermometerProfileMetadata = thermometerProfile.getMetadata();
-        thermometerProfileMetadataDao.update(thermometerProfileMetadata);
+    public void update(RoomThermometerProfile roomThermometerProfile) {
+        RoomThermometerProfileMetadata roomThermometerProfileMetadata = roomThermometerProfile.getMetadata();
+        thermometerProfileMetadataDao.update(roomThermometerProfileMetadata);
 
-        List<SensorSettings> sensorsSettings = thermometerProfile.getSensorSettings();
-        List<SensorSettings> storedSensorsSettings =
-                sensorSettingsDao.getRawSensorsSettingsByMetadataId(thermometerProfileMetadata.getId());
+        List<RoomSensorSettings> sensorsSettings = roomThermometerProfile.getRoomSensorSettings();
+        List<RoomSensorSettings> storedSensorsSettings =
+                sensorSettingsDao.getRawSensorsSettingsByMetadataId(roomThermometerProfileMetadata.getId());
 
         deleteAbsentSensorsSettings(storedSensorsSettings, sensorsSettings);
-        updateAssociatedSensorsSettings(sensorsSettings, thermometerProfileMetadata.getId());
+        updateAssociatedSensorsSettings(sensorsSettings, roomThermometerProfileMetadata.getId());
     }
 
-    private void deleteAbsentSensorsSettings(List<SensorSettings> storedSensorsSettings,
-                                             List<SensorSettings> sensorsSettings) {
-        for (SensorSettings storedSensorSettings : storedSensorsSettings) {
-            if (!listContainsId(sensorsSettings, storedSensorSettings.getId()))
-                sensorSettingsDao.delete(storedSensorSettings);
+    private void deleteAbsentSensorsSettings(List<RoomSensorSettings> storedSensorsSettings,
+                                             List<RoomSensorSettings> sensorsSettings) {
+        for (RoomSensorSettings storedRoomSensorSettings : storedSensorsSettings) {
+            if (!listContainsId(sensorsSettings, storedRoomSensorSettings.getId()))
+                sensorSettingsDao.delete(storedRoomSensorSettings);
         }
     }
 
-    private boolean listContainsId(List<SensorSettings> sensorsSettings, int searchedId) {
-        for (SensorSettings sensorSettings : sensorsSettings) {
-            if (areIdentifiersEqual(sensorSettings.getId(), searchedId)) {
+    private boolean listContainsId(List<RoomSensorSettings> sensorsSettings, int searchedId) {
+        for (RoomSensorSettings roomSensorSettings : sensorsSettings) {
+            if (areIdentifiersEqual(roomSensorSettings.getId(), searchedId)) {
                 return true;
             }
         }
@@ -85,27 +85,27 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<Thermomet
         return id == searchedId;
     }
 
-    private void updateAssociatedSensorsSettings(List<SensorSettings> sensorsSettings, int metadataId) {
-        for (SensorSettings sensorSettings : sensorsSettings) {
-            if (!isAssociated(sensorSettings)) {
-                associateSensorSettingsToMetadataById(sensorSettings, metadataId);
+    private void updateAssociatedSensorsSettings(List<RoomSensorSettings> sensorsSettings, int metadataId) {
+        for (RoomSensorSettings roomSensorSettings : sensorsSettings) {
+            if (!isAssociated(roomSensorSettings)) {
+                associateSensorSettingsToMetadataById(roomSensorSettings, metadataId);
             }
 
-            sensorSettingsDao.update(sensorSettings);
+            sensorSettingsDao.update(roomSensorSettings);
         }
     }
 
-    private boolean isAssociated(SensorSettings sensorSettings) {
-        return sensorSettings.getId() != 0 &&
-                sensorSettings.getThermometerProfileMetadataId() != 0;
+    private boolean isAssociated(RoomSensorSettings roomSensorSettings) {
+        return roomSensorSettings.getId() != 0 &&
+                roomSensorSettings.getThermometerProfileMetadataId() != 0;
     }
 
     @Override
     @Transaction
-    public void delete(ThermometerProfile thermometerProfile) {
-        thermometerProfileMetadataDao.delete(thermometerProfile.getMetadata());
-        for (SensorSettings sensorSettings : thermometerProfile.getSensorSettings()) {
-            sensorSettingsDao.delete(sensorSettings);
+    public void delete(RoomThermometerProfile roomThermometerProfile) {
+        thermometerProfileMetadataDao.delete(roomThermometerProfile.getMetadata());
+        for (RoomSensorSettings roomSensorSettings : roomThermometerProfile.getRoomSensorSettings()) {
+            sensorSettingsDao.delete(roomSensorSettings);
         }
     }
 }

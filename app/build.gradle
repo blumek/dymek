@@ -46,6 +46,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
+    def lombok_version = "1.18.12"
+    compileOnly "org.projectlombok:lombok:$lombok_version"
+    annotationProcessor "org.projectlombok:lombok:$lombok_version"
+
     def guava_version = "28.1"
     implementation("com.google.guava:guava:$guava_version-android")
 

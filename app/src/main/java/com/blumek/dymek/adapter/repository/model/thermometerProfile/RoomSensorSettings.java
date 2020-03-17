@@ -1,9 +1,11 @@
-package com.blumek.dymek.domain.entity.thermometerProfile;
+package com.blumek.dymek.adapter.repository.model.thermometerProfile;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSetting;
 
 import java.util.Objects;
 
@@ -11,10 +13,10 @@ import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(foreignKeys ={
         @ForeignKey(onDelete = CASCADE, onUpdate = CASCADE,
-                entity = ThermometerProfileMetadata.class,
+                entity = RoomThermometerProfileMetadata.class,
                 parentColumns = "id",childColumns = "thermometerProfileMetadataId")}
         )
-public class SensorSettings {
+public class RoomSensorSettings {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
@@ -22,14 +24,14 @@ public class SensorSettings {
     private double maxTemperatureValue;
     private int thermometerProfileMetadataId;
 
-    private SensorSettings() {
+    private RoomSensorSettings() {
     }
 
-    public static SensorSettings emptySensorSettings() {
-        return new SensorSettings();
+    public static RoomSensorSettings emptySensorSettings() {
+        return new RoomSensorSettings();
     }
 
-    public SensorSettings(String name, double minTemperatureValue, double maxTemperatureValue) {
+    public RoomSensorSettings(String name, double minTemperatureValue, double maxTemperatureValue) {
         this.name = name;
         this.minTemperatureValue = minTemperatureValue;
         this.maxTemperatureValue = maxTemperatureValue;
@@ -91,7 +93,7 @@ public class SensorSettings {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SensorSettings that = (SensorSettings) o;
+        RoomSensorSettings that = (RoomSensorSettings) o;
         return id == that.id &&
                 Double.compare(that.minTemperatureValue, minTemperatureValue) == 0 &&
                 Double.compare(that.maxTemperatureValue, maxTemperatureValue) == 0 &&
@@ -102,5 +104,31 @@ public class SensorSettings {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, minTemperatureValue, maxTemperatureValue, thermometerProfileMetadataId);
+    }
+
+    public SensorSetting toSensorSettings() {
+        return SensorSetting.builder()
+                .id(this.id)
+                .name(this.name)
+                .minTemperatureValue(this.minTemperatureValue)
+                .maxTemperatureValue(this.maxTemperatureValue)
+                .build();
+    }
+
+    public static RoomSensorSettings toRoomSensorSettings(final SensorSetting sensorSetting) {
+        Objects.requireNonNull(sensorSetting);
+        RoomSensorSettings roomSensorSettings = new RoomSensorSettings();
+        roomSensorSettings.setId(sensorSetting.getId());
+        roomSensorSettings.setName(sensorSetting.getName());
+        roomSensorSettings.setMinTemperatureValue(sensorSetting.getMinTemperatureValue());
+        roomSensorSettings.setMaxTemperatureValue(sensorSetting.getMaxTemperatureValue());
+        return roomSensorSettings;
+    }
+
+    public static RoomSensorSettings toRoomSensorSettings(final SensorSetting sensorSetting,
+                                                          int thermometerProfileMetadataId) {
+        RoomSensorSettings roomSensorSettings = toRoomSensorSettings(sensorSetting);
+        roomSensorSettings.setThermometerProfileMetadataId(thermometerProfileMetadataId);
+        return roomSensorSettings;
     }
 }

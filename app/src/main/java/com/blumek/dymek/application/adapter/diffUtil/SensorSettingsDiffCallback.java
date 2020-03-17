@@ -3,16 +3,16 @@ package com.blumek.dymek.application.adapter.diffUtil;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
 
 import java.util.List;
 
 public class SensorSettingsDiffCallback extends DiffUtil.Callback {
-    private List<SensorSettings> oldSensorsSettings;
-    private List<SensorSettings> newSensorsSettings;
+    private List<RoomSensorSettings> oldSensorsSettings;
+    private List<RoomSensorSettings> newSensorsSettings;
 
-    public SensorSettingsDiffCallback(List<SensorSettings> oldSensorsSettings,
-                                      List<SensorSettings> newSensorsSettings) {
+    public SensorSettingsDiffCallback(List<RoomSensorSettings> oldSensorsSettings,
+                                      List<RoomSensorSettings> newSensorsSettings) {
         this.oldSensorsSettings = oldSensorsSettings;
         this.newSensorsSettings = newSensorsSettings;
     }
@@ -35,10 +35,10 @@ public class SensorSettingsDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        SensorSettings oldSensorSettings = oldSensorsSettings.get(oldItemPosition);
-        SensorSettings newSensorSettings = newSensorsSettings.get(newItemPosition);
+        RoomSensorSettings oldRoomSensorSettings = oldSensorsSettings.get(oldItemPosition);
+        RoomSensorSettings newRoomSensorSettings = newSensorsSettings.get(newItemPosition);
 
-        return oldSensorSettings.getId() == newSensorSettings.getId();
+        return oldRoomSensorSettings.getId() == newRoomSensorSettings.getId();
     }
 
     @Override

@@ -14,19 +14,19 @@ import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
 import com.blumek.dymek.adapter.repository.dao.SensorSettingsDao;
 import com.blumek.dymek.adapter.repository.dao.ThermometerProfileDao;
 import com.blumek.dymek.adapter.repository.dao.ThermometerProfileMetadataDao;
-import com.blumek.dymek.domain.entity.thermometerProfile.SensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
+import com.blumek.dymek.domain.entity.thermometerProfile.SensorSetting;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfileMetadata;
 import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.converters.DateConverters;
-import com.google.common.collect.Lists;
 
 import java.util.Date;
 
 @Database(entities = {
-        ThermometerProfileMetadata.class,
-        SensorSettings.class
-        }, version = 1)
+        RoomThermometerProfileMetadata.class,
+        RoomSensorSettings.class
+        }, version = 2)
 @TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "app_database";
@@ -74,10 +74,20 @@ public abstract class AppDatabase extends RoomDatabase {
         }
 
         private void persistFakeData() {
-            ThermometerProfileMetadata thermometerProfileMetadata = new ThermometerProfileMetadata("Profile Test 1", new Date());
-            SensorSettings sensorSettings1 = new SensorSettings("Settings Test 1", 20, 40);
-            SensorSettings sensorSettings2 = new SensorSettings("Settings Test 2", 10, 30);
-            ThermometerProfile thermometerProfile = new ThermometerProfile(thermometerProfileMetadata, Lists.newArrayList(sensorSettings1, sensorSettings2));
+            ThermometerProfile thermometerProfile = ThermometerProfile.builder()
+                    .name("Profile Test 1")
+                    .createdAt(new Date())
+                    .addSensorSetting(SensorSetting.builder()
+                            .name("Settings Test 1")
+                            .minTemperatureValue(20)
+                            .maxTemperatureValue(40)
+                            .build())
+                    .addSensorSetting(SensorSetting.builder()
+                            .name("Settings Test 2")
+                            .minTemperatureValue(10)
+                            .maxTemperatureValue(30)
+                            .build())
+                    .build();
             thermometerProfileRepository.save(thermometerProfile);
         }
     }

@@ -9,7 +9,7 @@ import lombok.Value;
 @Builder
 @Value
 public class SensorSetting {
-    int id;
+    String id;
     String name;
     double minTemperatureValue;
     double maxTemperatureValue;

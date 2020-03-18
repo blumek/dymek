@@ -10,6 +10,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.blumek.dymek.adapter.idGenerator.UUIDGenerator;
+import com.blumek.dymek.adapter.repository.AndroidSensorSettingRepository;
 import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
 import com.blumek.dymek.adapter.repository.dao.SensorSettingsDao;
 import com.blumek.dymek.adapter.repository.dao.ThermometerProfileDao;
@@ -18,15 +20,20 @@ import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSe
 import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
 import com.blumek.dymek.domain.entity.thermometerProfile.SensorSetting;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.port.SensorSettingRepository;
 import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.converters.DateConverters;
+import com.blumek.dymek.useCase.CreateSensorSetting;
+import com.blumek.dymek.useCase.CreateThermometerProfile;
+import com.blumek.dymek.useCase.validator.SensorSettingValidator;
+import com.blumek.dymek.useCase.validator.ThermometerProfileValidator;
 
 import java.util.Date;
 
 @Database(entities = {
         RoomThermometerProfileMetadata.class,
         RoomSensorSettings.class
-        }, version = 2)
+        }, version = 1)
 @TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "app_database";
@@ -61,10 +68,13 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void> {
         private ThermometerProfileRepository thermometerProfileRepository;
+        private SensorSettingRepository sensorSettingRepository;
 
         private PopulateDbAsyncTask(AppDatabase database) {
             thermometerProfileRepository =
                     new AndroidThermometerProfileRepository(database.thermometerProfileDao());
+            sensorSettingRepository =
+                    new AndroidSensorSettingRepository(database.sensorSettingsDao());
         }
 
         @Override
@@ -88,7 +98,17 @@ public abstract class AppDatabase extends RoomDatabase {
                             .maxTemperatureValue(30)
                             .build())
                     .build();
-            thermometerProfileRepository.save(thermometerProfile);
+
+            new CreateThermometerProfile(
+                    thermometerProfileRepository,
+                    new UUIDGenerator(),
+                    new ThermometerProfileValidator(),
+                    new CreateSensorSetting(
+                            sensorSettingRepository,
+                            new UUIDGenerator(),
+                            new SensorSettingValidator()
+                    )
+            ).create(thermometerProfile);
         }
     }
 }

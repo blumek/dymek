@@ -7,8 +7,8 @@ import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 
 import java.util.List;
 
-public class FindThermometerProfile {
-    private ThermometerProfileRepository repository;
+public final class FindThermometerProfile {
+    private final ThermometerProfileRepository repository;
 
     public FindThermometerProfile(ThermometerProfileRepository repository) {
         this.repository = repository;

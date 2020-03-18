@@ -14,15 +14,16 @@ import static androidx.room.ForeignKey.CASCADE;
 @Entity(foreignKeys ={
         @ForeignKey(onDelete = CASCADE, onUpdate = CASCADE,
                 entity = RoomThermometerProfileMetadata.class,
-                parentColumns = "id",childColumns = "thermometerProfileMetadataId")}
+                parentColumns = "id", childColumns = "thermometerProfileMetadataId")}
         )
 public class RoomSensorSettings {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     private String name;
     private double minTemperatureValue;
     private double maxTemperatureValue;
-    private int thermometerProfileMetadataId;
+    private String thermometerProfileMetadataId;
 
     private RoomSensorSettings() {
     }
@@ -37,11 +38,11 @@ public class RoomSensorSettings {
         this.maxTemperatureValue = maxTemperatureValue;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -69,11 +70,11 @@ public class RoomSensorSettings {
         this.maxTemperatureValue = maxTemperatureValue;
     }
 
-    public int getThermometerProfileMetadataId() {
+    public String getThermometerProfileMetadataId() {
         return thermometerProfileMetadataId;
     }
 
-    public void setThermometerProfileMetadataId(int thermometerProfileMetadataId) {
+    public void setThermometerProfileMetadataId(String thermometerProfileMetadataId) {
         this.thermometerProfileMetadataId = thermometerProfileMetadataId;
     }
 
@@ -94,10 +95,10 @@ public class RoomSensorSettings {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoomSensorSettings that = (RoomSensorSettings) o;
-        return id == that.id &&
+        return id.equals(that.id) &&
                 Double.compare(that.minTemperatureValue, minTemperatureValue) == 0 &&
                 Double.compare(that.maxTemperatureValue, maxTemperatureValue) == 0 &&
-                thermometerProfileMetadataId == that.thermometerProfileMetadataId &&
+                thermometerProfileMetadataId.equals(that.thermometerProfileMetadataId) &&
                 Objects.equals(name, that.name);
     }
 
@@ -126,7 +127,7 @@ public class RoomSensorSettings {
     }
 
     public static RoomSensorSettings toRoomSensorSettings(final SensorSetting sensorSetting,
-                                                          int thermometerProfileMetadataId) {
+                                                          String thermometerProfileMetadataId) {
         RoomSensorSettings roomSensorSettings = toRoomSensorSettings(sensorSetting);
         roomSensorSettings.setThermometerProfileMetadataId(thermometerProfileMetadataId);
         return roomSensorSettings;

@@ -5,8 +5,8 @@ import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 
 
-public class DeleteThermometerProfile {
-    private ThermometerProfileRepository repository;
+public final class DeleteThermometerProfile {
+    private final ThermometerProfileRepository repository;
 
     public DeleteThermometerProfile(ThermometerProfileRepository repository) {
         this.repository = repository;

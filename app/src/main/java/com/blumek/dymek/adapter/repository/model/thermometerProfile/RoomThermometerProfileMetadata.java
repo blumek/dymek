@@ -9,8 +9,9 @@ import java.util.Objects;
 
 @Entity
 public class RoomThermometerProfileMetadata {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    private String id;
     private String name;
     private Date lastUsage;
     private Date createdAt;
@@ -27,11 +28,11 @@ public class RoomThermometerProfileMetadata {
         return new RoomThermometerProfileMetadata();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -14,7 +14,7 @@ import lombok.Value;
 @Builder
 @Value
 public class ThermometerProfile implements Serializable {
-    int id;
+    String id;
     String name;
     Date lastUsage;
     Date createdAt;

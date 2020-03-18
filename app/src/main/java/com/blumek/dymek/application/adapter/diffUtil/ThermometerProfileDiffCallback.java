@@ -38,8 +38,7 @@ public class ThermometerProfileDiffCallback extends DiffUtil.Callback {
         ThermometerProfile oldThermometerProfile = oldThermometersProfiles.get(oldItemPosition);
         ThermometerProfile newThermometerProfile = newThermometersProfiles.get(newItemPosition);
 
-        return oldThermometerProfile.getId() ==
-                newThermometerProfile.getId();
+        return oldThermometerProfile.getId().equals(newThermometerProfile.getId());
     }
 
     @Override

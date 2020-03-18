@@ -12,5 +12,5 @@ import java.util.List;
 public interface SensorSettingsDao extends BaseDao<RoomSensorSettings> {
 
     @Query("SELECT * FROM RoomSensorSettings WHERE thermometerProfileMetadataId=:metadataId")
-    List<RoomSensorSettings> getRawSensorsSettingsByMetadataId(int metadataId);
+    List<RoomSensorSettings> getRawSensorsSettingsByMetadataId(String metadataId);
 }

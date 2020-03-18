@@ -29,25 +29,25 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<RoomTherm
 
     @Transaction
     @Query("SELECT * FROM RoomThermometerProfileMetadata WHERE id=:metadataId")
-    public abstract LiveData<RoomThermometerProfile> getThermometerProfileByMetadataId(int metadataId);
+    public abstract LiveData<RoomThermometerProfile> getThermometerProfileByMetadataId(String metadataId);
 
     @Override
     @Transaction
     public void save(RoomThermometerProfile roomThermometerProfile) {
-        int generatedMetadataId = (int) thermometerProfileMetadataDao.save(roomThermometerProfile.getMetadata());
-        associateSensorsSettingsToMetadataByMetadataId(roomThermometerProfile.getRoomSensorSettings(), generatedMetadataId);
+        saveThermometerProfileMetadata(roomThermometerProfile.getMetadata());
+        associateSensorSettingsToThermometerProfile(roomThermometerProfile.getMetadata().getId(),
+                roomThermometerProfile.getRoomSensorSettings());
     }
 
-    private void associateSensorsSettingsToMetadataByMetadataId(List<RoomSensorSettings> sensorsSettings,
-                                                                int generatedMetadataId) {
-        for (RoomSensorSettings roomSensorSettings : sensorsSettings) {
-            associateSensorSettingsToMetadataById(roomSensorSettings, generatedMetadataId);
+    private void saveThermometerProfileMetadata(RoomThermometerProfileMetadata metadata) {
+        thermometerProfileMetadataDao.save(metadata);
+    }
+
+    private void associateSensorSettingsToThermometerProfile(String id, List<RoomSensorSettings> roomSensorSettings) {
+        for (RoomSensorSettings sensorSettings : roomSensorSettings) {
+            sensorSettings.setThermometerProfileMetadataId(id);
+            sensorSettingsDao.update(sensorSettings);
         }
-    }
-
-    private void associateSensorSettingsToMetadataById(RoomSensorSettings roomSensorSettings, int metadataId) {
-        roomSensorSettings.setThermometerProfileMetadataId(metadataId);
-        sensorSettingsDao.save(roomSensorSettings);
     }
 
     @Override
@@ -56,12 +56,14 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<RoomTherm
         RoomThermometerProfileMetadata roomThermometerProfileMetadata = roomThermometerProfile.getMetadata();
         thermometerProfileMetadataDao.update(roomThermometerProfileMetadata);
 
+        associateSensorSettingsToThermometerProfile(roomThermometerProfile.getMetadata().getId(),
+                roomThermometerProfile.getRoomSensorSettings());
+
         List<RoomSensorSettings> sensorsSettings = roomThermometerProfile.getRoomSensorSettings();
         List<RoomSensorSettings> storedSensorsSettings =
                 sensorSettingsDao.getRawSensorsSettingsByMetadataId(roomThermometerProfileMetadata.getId());
 
         deleteAbsentSensorsSettings(storedSensorsSettings, sensorsSettings);
-        updateAssociatedSensorsSettings(sensorsSettings, roomThermometerProfileMetadata.getId());
     }
 
     private void deleteAbsentSensorsSettings(List<RoomSensorSettings> storedSensorsSettings,
@@ -72,7 +74,7 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<RoomTherm
         }
     }
 
-    private boolean listContainsId(List<RoomSensorSettings> sensorsSettings, int searchedId) {
+    private boolean listContainsId(List<RoomSensorSettings> sensorsSettings, String searchedId) {
         for (RoomSensorSettings roomSensorSettings : sensorsSettings) {
             if (areIdentifiersEqual(roomSensorSettings.getId(), searchedId)) {
                 return true;
@@ -81,23 +83,8 @@ public abstract class ThermometerProfileDao implements BaseRelationDao<RoomTherm
         return false;
     }
 
-    private boolean areIdentifiersEqual(int id, int searchedId) {
-        return id == searchedId;
-    }
-
-    private void updateAssociatedSensorsSettings(List<RoomSensorSettings> sensorsSettings, int metadataId) {
-        for (RoomSensorSettings roomSensorSettings : sensorsSettings) {
-            if (!isAssociated(roomSensorSettings)) {
-                associateSensorSettingsToMetadataById(roomSensorSettings, metadataId);
-            }
-
-            sensorSettingsDao.update(roomSensorSettings);
-        }
-    }
-
-    private boolean isAssociated(RoomSensorSettings roomSensorSettings) {
-        return roomSensorSettings.getId() != 0 &&
-                roomSensorSettings.getThermometerProfileMetadataId() != 0;
+    private boolean areIdentifiersEqual(String id, String searchedId) {
+        return id != null && id.equals(searchedId);
     }
 
     @Override

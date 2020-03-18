@@ -38,7 +38,12 @@ public class SensorSettingsDiffCallback extends DiffUtil.Callback {
         RoomSensorSettings oldRoomSensorSettings = oldSensorsSettings.get(oldItemPosition);
         RoomSensorSettings newRoomSensorSettings = newSensorsSettings.get(newItemPosition);
 
-        return oldRoomSensorSettings.getId() == newRoomSensorSettings.getId();
+        return equalIdentifiers(oldRoomSensorSettings.getId(), newRoomSensorSettings.getId());
+    }
+
+    private boolean equalIdentifiers(String oldRoomSensorSettingsId, String newRoomSensorSettingsId) {
+        return oldRoomSensorSettingsId != null &&
+                oldRoomSensorSettingsId.equals(newRoomSensorSettingsId);
     }
 
     @Override

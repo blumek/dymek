@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.adapter.idGenerator.UUIDGenerator;
 import com.blumek.dymek.adapter.repository.AndroidSensorSettingRepository;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
+import com.blumek.dymek.application.model.ViewSensorSetting;
+import com.blumek.dymek.application.model.ViewThermometerProfile;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.domain.port.SensorSettingRepository;
 import com.blumek.dymek.shared.AppDatabase;
@@ -37,17 +37,17 @@ public class CreationThermometerProfileViewModel extends PersistenceThermometerP
                 new SensorSettingValidator()
         ));
 
-        setEmptyMetadata();
+        setEmptyThermometerProfile();
         setEmptySensorsSettingsList();
         addNewEmptySensorSettingsTemplate();
     }
 
-    private void setEmptyMetadata() {
-        metadata = new MutableLiveData<>(RoomThermometerProfileMetadata.emptyThermometerProfileMetadata());
+    private void setEmptyThermometerProfile() {
+        thermometerProfile = new MutableLiveData<>(new ViewThermometerProfile());
     }
 
     private void setEmptySensorsSettingsList() {
-        List<RoomSensorSettings> emptySensorsSettings = Lists.newArrayList();
+        List<ViewSensorSetting> emptySensorsSettings = Lists.newArrayList();
         sensorsSettings = new MutableLiveData<>(emptySensorsSettings);
     }
 

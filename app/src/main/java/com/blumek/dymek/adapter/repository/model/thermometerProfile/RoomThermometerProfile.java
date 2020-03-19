@@ -96,7 +96,6 @@ public class RoomThermometerProfile implements Serializable {
 
     private static List<RoomSensorSettings> getRoomSensorSettings(ThermometerProfile thermometerProfile) {
         List<RoomSensorSettings> roomSensorSettings = Lists.newArrayList();
-
         for (SensorSetting sensorSetting : thermometerProfile.getSensorSettings())
             roomSensorSettings.add(RoomSensorSettings
                     .toRoomSensorSettings(sensorSetting, thermometerProfile.getId()));

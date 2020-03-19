@@ -10,9 +10,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
 import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfile;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
+import com.blumek.dymek.application.model.ViewSensorSetting;
+import com.blumek.dymek.application.model.ViewThermometerProfile;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.AppDatabase;
@@ -22,9 +21,8 @@ import java.util.List;
 
 public abstract class PersistenceThermometerProfileViewModel extends AndroidViewModel {
     final ThermometerProfileRepository thermometerProfileRepository;
-    MutableLiveData<RoomThermometerProfileMetadata> metadata;
-    MutableLiveData<List<RoomSensorSettings>> sensorsSettings;
-    // TODO CHANGE ROOM TO NORMAL
+    MutableLiveData<ViewThermometerProfile> thermometerProfile;
+    MutableLiveData<List<ViewSensorSetting>> sensorsSettings;
 
     PersistenceThermometerProfileViewModel(@NonNull Application application) {
         super(application);
@@ -33,12 +31,12 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
                 new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
     }
 
-    public LiveData<List<RoomSensorSettings>> getSensorsSettings() {
+    public LiveData<List<ViewSensorSetting>> getSensorsSettings() {
         return sensorsSettings;
     }
 
-    public LiveData<RoomThermometerProfileMetadata> getMetadata() {
-        return metadata;
+    public LiveData<ViewThermometerProfile> getThermometerProfile() {
+        return thermometerProfile;
     }
 
     public void onAddSensorSettingsTemplate() {
@@ -46,27 +44,27 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
     }
 
     void addNewEmptySensorSettingsTemplate() {
-        List<RoomSensorSettings> currentSensorsSettings = getSensorsSettingsValue();
-        currentSensorsSettings.add(RoomSensorSettings.emptySensorSettings());
+        List<ViewSensorSetting> currentSensorsSettings = getSensorsSettingsValue();
+        currentSensorsSettings.add(new ViewSensorSetting());
         sensorsSettings.setValue(currentSensorsSettings);
     }
 
-    private List<RoomSensorSettings> getSensorsSettingsValue() {
+    private List<ViewSensorSetting> getSensorsSettingsValue() {
         if (sensorsSettings.getValue() == null)
             return Lists.newArrayList();
         return Lists.newArrayList(sensorsSettings.getValue());
     }
 
-    public void onRemoveSensorSettingsTemplateClick(RoomSensorSettings roomSensorSettings) {
-        List<RoomSensorSettings> currentSensorsSettings = getSensorsSettingsValue();
-        currentSensorsSettings.remove(roomSensorSettings);
+    public void onRemoveSensorSettingsTemplateClick(ViewSensorSetting viewSensorSetting) {
+        List<ViewSensorSetting> currentSensorsSettings = getSensorsSettingsValue();
+        currentSensorsSettings.remove(viewSensorSetting);
         sensorsSettings.setValue(currentSensorsSettings);
     }
 
     public void onPersistClick(View view) {
-        RoomThermometerProfile roomThermometerProfile =
-                new RoomThermometerProfile(metadata.getValue(), sensorsSettings.getValue());
-        persistThermometerProfile(roomThermometerProfile.toThermometerProfile());
+        ViewThermometerProfile viewThermometerProfile = thermometerProfile.getValue();
+        viewThermometerProfile.setViewSensorSettings(sensorsSettings.getValue());
+        persistThermometerProfile(viewThermometerProfile.toThermometerProfile());
 
         Navigation.findNavController(view).navigateUp();
     }

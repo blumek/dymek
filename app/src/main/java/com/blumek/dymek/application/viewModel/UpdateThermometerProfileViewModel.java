@@ -7,9 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.adapter.idGenerator.UUIDGenerator;
 import com.blumek.dymek.adapter.repository.AndroidSensorSettingRepository;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfile;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomThermometerProfileMetadata;
+import com.blumek.dymek.application.model.ViewSensorSetting;
+import com.blumek.dymek.application.model.ViewThermometerProfile;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.useCase.CreateSensorSetting;
@@ -41,18 +40,18 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
                         new SensorSettingValidator()
                 ));
 
-        RoomThermometerProfile roomThermometerProfile = RoomThermometerProfile
-                .toRoomThermometerProfile(thermometerProfile);
-        setMetadata(roomThermometerProfile.getMetadata());
-        setSensorsSettingsList(roomThermometerProfile.getRoomSensorSettings());
+        ViewThermometerProfile viewThermometerProfile = ViewThermometerProfile
+                .from(thermometerProfile);
+        setThermometerProfile(viewThermometerProfile);
+        setSensorsSettingsList(viewThermometerProfile.getViewSensorSettings());
     }
 
-    private void setMetadata(RoomThermometerProfileMetadata roomThermometerProfileMetadata) {
-        metadata = new MutableLiveData<>(roomThermometerProfileMetadata);
+    private void setThermometerProfile(ViewThermometerProfile viewThermometerProfile) {
+        thermometerProfile = new MutableLiveData<>(viewThermometerProfile);
     }
 
-    private void setSensorsSettingsList(List<RoomSensorSettings> sensorsSettings) {
-        this.sensorsSettings = new MutableLiveData<>(sensorsSettings);
+    private void setSensorsSettingsList(List<ViewSensorSetting> viewSensorSettings) {
+        this.sensorsSettings = new MutableLiveData<>(viewSensorSettings);
     }
 
     public void persistThermometerProfile(ThermometerProfile thermometerProfile) {

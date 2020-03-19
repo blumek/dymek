@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
 import com.blumek.dymek.application.adapter.diffUtil.SensorSettingsDiffCallback;
+import com.blumek.dymek.application.model.ViewSensorSetting;
 import com.blumek.dymek.application.viewModel.PersistenceThermometerProfileViewModel;
 import com.blumek.dymek.databinding.CreationSensorSettingsListItemBinding;
 import com.google.common.collect.Lists;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettingsAdapter.ViewHolder> {
     private PersistenceThermometerProfileViewModel viewModel;
-    private List<RoomSensorSettings> sensorsSettings;
+    private List<ViewSensorSetting> viewSensorSettings;
 
     public SensorsSettingsAdapter(PersistenceThermometerProfileViewModel viewModel) {
         this.viewModel = viewModel;
@@ -27,19 +27,19 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
     }
 
     private void setUpSensorsSettingsList() {
-        sensorsSettings = Lists.newArrayList();
+        viewSensorSettings = Lists.newArrayList();
     }
 
-    public void updateSensorsSettings(List<RoomSensorSettings> sensorsSettings) {
-        DiffUtil.DiffResult diffResultOfSensorsSettings = getDiffResult(sensorsSettings);
+    public void updateSensorsSettings(List<ViewSensorSetting> viewSensorSettings) {
+        DiffUtil.DiffResult diffResultOfSensorsSettings = getDiffResult(viewSensorSettings);
 
-        this.sensorsSettings = sensorsSettings;
+        this.viewSensorSettings = viewSensorSettings;
         diffResultOfSensorsSettings.dispatchUpdatesTo(this);
     }
 
-    private DiffUtil.DiffResult getDiffResult(List<RoomSensorSettings> sensorsSettings) {
+    private DiffUtil.DiffResult getDiffResult(List<ViewSensorSetting> viewSensorSettings) {
         SensorSettingsDiffCallback profileDiffCallback =
-                new SensorSettingsDiffCallback(this.sensorsSettings, sensorsSettings);
+                new SensorSettingsDiffCallback(this.viewSensorSettings, viewSensorSettings);
         return DiffUtil.calculateDiff(profileDiffCallback);
     }
 
@@ -54,13 +54,13 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        RoomSensorSettings roomSensorSettings = sensorsSettings.get(position);
-        viewHolder.bind(viewModel, roomSensorSettings);
+        ViewSensorSetting viewSensorSetting = viewSensorSettings.get(position);
+        viewHolder.bind(viewModel, viewSensorSetting);
     }
 
     @Override
     public int getItemCount() {
-        return sensorsSettings != null ? sensorsSettings.size() : 0;
+        return viewSensorSettings != null ? viewSensorSettings.size() : 0;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -72,9 +72,9 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
         }
 
         void bind(PersistenceThermometerProfileViewModel viewModel,
-                  RoomSensorSettings roomSensorSettings) {
+                  ViewSensorSetting viewSensorSetting) {
             binding.setViewModel(viewModel);
-            binding.setSensorsSettings(roomSensorSettings);
+            binding.setSensorsSetting(viewSensorSetting);
             binding.executePendingBindings();
         }
     }

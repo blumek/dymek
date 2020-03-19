@@ -3,16 +3,16 @@ package com.blumek.dymek.application.adapter.diffUtil;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
-import com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings;
+import com.blumek.dymek.application.model.ViewSensorSetting;
 
 import java.util.List;
 
 public class SensorSettingsDiffCallback extends DiffUtil.Callback {
-    private List<RoomSensorSettings> oldSensorsSettings;
-    private List<RoomSensorSettings> newSensorsSettings;
+    private List<ViewSensorSetting> oldSensorsSettings;
+    private List<ViewSensorSetting> newSensorsSettings;
 
-    public SensorSettingsDiffCallback(List<RoomSensorSettings> oldSensorsSettings,
-                                      List<RoomSensorSettings> newSensorsSettings) {
+    public SensorSettingsDiffCallback(List<ViewSensorSetting> oldSensorsSettings,
+                                      List<ViewSensorSetting> newSensorsSettings) {
         this.oldSensorsSettings = oldSensorsSettings;
         this.newSensorsSettings = newSensorsSettings;
     }
@@ -35,10 +35,10 @@ public class SensorSettingsDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        RoomSensorSettings oldRoomSensorSettings = oldSensorsSettings.get(oldItemPosition);
-        RoomSensorSettings newRoomSensorSettings = newSensorsSettings.get(newItemPosition);
+        ViewSensorSetting oldSensorSettings = oldSensorsSettings.get(oldItemPosition);
+        ViewSensorSetting newSensorSettings = newSensorsSettings.get(newItemPosition);
 
-        return equalIdentifiers(oldRoomSensorSettings.getId(), newRoomSensorSettings.getId());
+        return equalIdentifiers(oldSensorSettings.getId(), newSensorSettings.getId());
     }
 
     private boolean equalIdentifiers(String oldRoomSensorSettingsId, String newRoomSensorSettingsId) {

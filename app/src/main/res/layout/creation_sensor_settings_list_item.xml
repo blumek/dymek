@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="sensorsSettings"
-            type="com.blumek.dymek.adapter.repository.model.thermometerProfile.RoomSensorSettings" />
+            name="sensorsSetting"
+            type="com.blumek.dymek.application.model.ViewSensorSetting" />
 
         <variable
             name="viewModel"
@@ -26,7 +26,7 @@
             android:src="@android:drawable/ic_menu_delete"
             android:contentDescription="@string/remove"
             android:layout_gravity="end"
-            android:onClick="@{() -> viewModel.onRemoveSensorSettingsTemplateClick(sensorsSettings)}"/>
+            android:onClick="@{() -> viewModel.onRemoveSensorSettingsTemplateClick(sensorsSetting)}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
 
             <EditText
                 android:id="@+id/sensor_name"
-                android:text="@={sensorsSettings.name}"
+                android:text="@={sensorsSetting.name}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
@@ -63,7 +63,7 @@
 
             <EditText
                 android:id="@+id/min_temp_val"
-                android:text="@={`` + sensorsSettings.minTemperatureValue}"
+                android:text="@={`` + sensorsSetting.minTemperatureValue}"
                 android:inputType="number|numberDecimal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
 
             <EditText
                 android:id="@+id/max_temp_val"
-                android:text="@={`` + sensorsSettings.maxTemperatureValue}"
+                android:text="@={`` + sensorsSetting.maxTemperatureValue}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"

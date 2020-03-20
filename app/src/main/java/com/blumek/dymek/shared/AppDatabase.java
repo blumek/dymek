@@ -33,7 +33,7 @@ import java.util.Date;
 @Database(entities = {
         RoomThermometerProfileMetadata.class,
         RoomSensorSettings.class
-        }, version = 1)
+        }, version = 2)
 @TypeConverters({DateConverters.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "app_database";

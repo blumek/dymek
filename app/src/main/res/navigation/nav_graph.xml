@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/thermometerProfileFragment">
+    app:startDestination="@id/thermometerFragment">
 
     <fragment
         android:id="@+id/thermometerProfileFragment"
-        android:name="com.blumek.dymek.application.fragment.ThermometerProfileFragment"
+        android:name="com.blumek.dymek.application.fragment.ThermometerProfileManagementFragment"
         android:label="thermometer_profile_fragment"
         tools:layout="@layout/thermometer_profile_fragment">
         <action

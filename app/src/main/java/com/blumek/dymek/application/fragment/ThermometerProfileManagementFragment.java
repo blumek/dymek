@@ -12,14 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.blumek.dymek.R;
-import com.blumek.dymek.application.adapter.ThermometerProfileCreationAdapter;
-import com.blumek.dymek.application.viewModel.ThermometerProfileCreationViewModel;
+import com.blumek.dymek.application.adapter.ThermometerProfileManagementAdapter;
+import com.blumek.dymek.application.viewModel.ThermometerProfileManagementViewModel;
 import com.blumek.dymek.databinding.ThermometerProfileFragmentBinding;
 
 
-public class ThermometerProfileFragment extends Fragment {
-    private ThermometerProfileCreationAdapter thermometerProfileCreationAdapter;
-    private ThermometerProfileCreationViewModel viewModel;
+public class ThermometerProfileManagementFragment extends Fragment {
+    private ThermometerProfileManagementAdapter thermometerProfileManagementAdapter;
+    private ThermometerProfileManagementViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -28,12 +28,12 @@ public class ThermometerProfileFragment extends Fragment {
                 DataBindingUtil.inflate(inflater, R.layout.thermometer_profile_fragment,
                 container, false);
 
-        thermometerProfileCreationAdapter = new ThermometerProfileCreationAdapter(viewModel);
+        thermometerProfileManagementAdapter = new ThermometerProfileManagementAdapter(viewModel);
 
         observeThermometersProfiles();
 
         binding.setViewModel(viewModel);
-        binding.setAdapter(thermometerProfileCreationAdapter);
+        binding.setAdapter(thermometerProfileManagementAdapter);
         binding.setLifecycleOwner(this);
 
         return binding.getRoot();
@@ -41,13 +41,13 @@ public class ThermometerProfileFragment extends Fragment {
 
     private void observeThermometersProfiles() {
         viewModel.getThermometersProfiles().observe(getViewLifecycleOwner(), thermometerProfiles ->
-                thermometerProfileCreationAdapter.updateThermometerProfiles(thermometerProfiles));
+                thermometerProfileManagementAdapter.updateThermometerProfiles(thermometerProfiles));
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this)
-                .get(ThermometerProfileCreationViewModel.class);
+                .get(ThermometerProfileManagementViewModel.class);
     }
 }

@@ -4,18 +4,18 @@
 
         <variable
             name="viewModel"
-            type="com.blumek.dymek.application.viewModel.ThermometerProfileCreationViewModel" />
+            type="com.blumek.dymek.application.viewModel.ThermometerProfileManagementViewModel" />
 
         <variable
             name="adapter"
-            type="com.blumek.dymek.application.adapter.ThermometerProfileCreationAdapter" />
+            type="com.blumek.dymek.application.adapter.ThermometerProfileManagementAdapter" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".application.fragment.ThermometerProfileFragment">
+        tools:context=".application.fragment.ThermometerProfileManagementFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/profile_recycler_view"
@@ -33,6 +33,6 @@
             android:src="@android:drawable/ic_input_add"
             android:layout_gravity="bottom|end"
             android:layout_margin="32dp"
-            android:onClick="@{viewModel::onCreateClicked}"/>
+            android:onClick="@{viewModel::onThermometerProfileCreate}"/>
     </FrameLayout>
 </layout>

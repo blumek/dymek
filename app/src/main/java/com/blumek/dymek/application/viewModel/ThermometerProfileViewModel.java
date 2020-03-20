@@ -14,22 +14,21 @@ import com.blumek.dymek.useCase.FindThermometerProfile;
 
 import java.util.List;
 
+import lombok.Getter;
+
 public class ThermometerProfileViewModel extends AndroidViewModel {
     private final FindThermometerProfile findThermometerProfile;
+    @Getter
     private final LiveData<List<ThermometerProfile>> thermometersProfiles;
-    final ThermometerProfileRepository thermometerProfileRepository;
 
     ThermometerProfileViewModel(@NonNull Application application) {
         super(application);
+
         AppDatabase appDatabase = AppDatabase.getInstance(application);
-        thermometerProfileRepository =
+        ThermometerProfileRepository thermometerProfileRepository =
                 new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
 
         findThermometerProfile = new FindThermometerProfile(thermometerProfileRepository);
         thermometersProfiles = findThermometerProfile.findAll();
-    }
-
-    public LiveData<List<ThermometerProfile>> getThermometersProfiles() {
-        return thermometersProfiles;
     }
 }

@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
@@ -16,9 +15,12 @@ import com.google.common.collect.Lists;
 
 import java.util.List;
 
+import lombok.Getter;
+
+@Getter
 public abstract class PersistenceThermometerProfileViewModel extends AndroidViewModel {
-    MutableLiveData<ViewThermometerProfile> thermometerProfile;
-    MutableLiveData<List<ViewSensorSetting>> sensorsSettings;
+    final MutableLiveData<ViewThermometerProfile> thermometerProfile;
+    final MutableLiveData<List<ViewSensorSetting>> sensorsSettings;
 
     PersistenceThermometerProfileViewModel(@NonNull Application application) {
         super(application);
@@ -26,37 +28,30 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
         sensorsSettings = new MutableLiveData<>(Lists.newArrayList());
     }
 
-    public LiveData<List<ViewSensorSetting>> getSensorsSettings() {
-        return sensorsSettings;
+    public void onAddSensorSetting() {
+        addEmptySensorSetting();
     }
 
-    public LiveData<ViewThermometerProfile> getThermometerProfile() {
-        return thermometerProfile;
-    }
-
-    public void onAddSensorSettingsTemplate() {
-        addNewEmptySensorSettingsTemplate();
-    }
-
-    void addNewEmptySensorSettingsTemplate() {
-        List<ViewSensorSetting> currentSensorsSettings = getSensorsSettingsValue();
+    void addEmptySensorSetting() {
+        List<ViewSensorSetting> currentSensorsSettings = getCurrentSensorsSettings();
         currentSensorsSettings.add(ViewSensorSetting.empty());
         sensorsSettings.setValue(currentSensorsSettings);
     }
 
-    private List<ViewSensorSetting> getSensorsSettingsValue() {
+    private List<ViewSensorSetting> getCurrentSensorsSettings() {
         if (sensorsSettings.getValue() == null)
             return Lists.newArrayList();
         return Lists.newArrayList(sensorsSettings.getValue());
     }
 
-    public void onRemoveSensorSettingsTemplateClick(int index) {
-        List<ViewSensorSetting> currentSensorsSettings = getSensorsSettingsValue();
+    public void onRemoveSensorSetting(int index) {
+        List<ViewSensorSetting> currentSensorsSettings = getCurrentSensorsSettings();
         currentSensorsSettings.remove(index);
         sensorsSettings.setValue(currentSensorsSettings);
     }
 
-    public void onPersistClick(View view) {
+    @SuppressWarnings("ConstantConditions")
+    public void onPersist(View view) {
         ViewThermometerProfile viewThermometerProfile = thermometerProfile.getValue();
         viewThermometerProfile.setViewSensorSettings(sensorsSettings.getValue());
         persistThermometerProfile(viewThermometerProfile.toThermometerProfile());

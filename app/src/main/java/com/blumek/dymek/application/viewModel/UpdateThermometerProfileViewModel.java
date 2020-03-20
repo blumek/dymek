@@ -3,7 +3,6 @@ package com.blumek.dymek.application.viewModel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.adapter.idGenerator.UUIDGenerator;
 import com.blumek.dymek.adapter.repository.AndroidSensorSettingRepository;
@@ -48,16 +47,17 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
 
         ViewThermometerProfile viewThermometerProfile = ViewThermometerProfile
                 .from(thermometerProfile);
+
         setThermometerProfile(viewThermometerProfile);
         setSensorsSettingsList(viewThermometerProfile.getViewSensorSettings());
     }
 
     private void setThermometerProfile(ViewThermometerProfile viewThermometerProfile) {
-        thermometerProfile = new MutableLiveData<>(viewThermometerProfile);
+        super.thermometerProfile.setValue(viewThermometerProfile);
     }
 
     private void setSensorsSettingsList(List<ViewSensorSetting> viewSensorSettings) {
-        this.sensorsSettings = new MutableLiveData<>(viewSensorSettings);
+        this.sensorsSettings.setValue(viewSensorSettings);
     }
 
     public void persistThermometerProfile(ThermometerProfile thermometerProfile) {

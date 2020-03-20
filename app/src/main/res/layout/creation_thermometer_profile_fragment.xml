@@ -68,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="@string/add_another_sensor"
-                    android:onClick="@{() -> viewModel.onAddSensorSettingsTemplate()}"
+                    android:onClick="@{() -> viewModel.onAddSensorSetting()}"
                     android:layout_gravity="center"/>
 
                 <Button
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:text="@string/save"
-                    android:onClick="@{viewModel::onPersistClick}"
+                    android:onClick="@{viewModel::onPersist}"
                     android:layout_gravity="center"/>
             </LinearLayout>
 

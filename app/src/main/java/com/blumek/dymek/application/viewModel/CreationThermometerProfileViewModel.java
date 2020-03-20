@@ -35,7 +35,8 @@ public class CreationThermometerProfileViewModel extends PersistenceThermometerP
                 new UUIDGenerator(),
                 new SensorSettingValidator()
         ));
-        addNewEmptySensorSettingsTemplate();
+
+        addEmptySensorSetting();
     }
 
     public void persistThermometerProfile(ThermometerProfile thermometerProfile) {

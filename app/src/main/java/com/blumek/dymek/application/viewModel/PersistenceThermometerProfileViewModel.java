@@ -9,26 +9,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.Navigation;
 
-import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
 import com.blumek.dymek.application.model.ViewSensorSetting;
 import com.blumek.dymek.application.model.ViewThermometerProfile;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
-import com.blumek.dymek.domain.port.ThermometerProfileRepository;
-import com.blumek.dymek.shared.AppDatabase;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 public abstract class PersistenceThermometerProfileViewModel extends AndroidViewModel {
-    final ThermometerProfileRepository thermometerProfileRepository;
     MutableLiveData<ViewThermometerProfile> thermometerProfile;
     MutableLiveData<List<ViewSensorSetting>> sensorsSettings;
 
     PersistenceThermometerProfileViewModel(@NonNull Application application) {
         super(application);
-        AppDatabase appDatabase = AppDatabase.getInstance(application);
-        thermometerProfileRepository =
-                new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
+        thermometerProfile = new MutableLiveData<>(ViewThermometerProfile.empty());
+        sensorsSettings = new MutableLiveData<>(Lists.newArrayList());
     }
 
     public LiveData<List<ViewSensorSetting>> getSensorsSettings() {
@@ -45,7 +40,7 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
 
     void addNewEmptySensorSettingsTemplate() {
         List<ViewSensorSetting> currentSensorsSettings = getSensorsSettingsValue();
-        currentSensorsSettings.add(new ViewSensorSetting());
+        currentSensorsSettings.add(ViewSensorSetting.empty());
         sensorsSettings.setValue(currentSensorsSettings);
     }
 
@@ -55,9 +50,9 @@ public abstract class PersistenceThermometerProfileViewModel extends AndroidView
         return Lists.newArrayList(sensorsSettings.getValue());
     }
 
-    public void onRemoveSensorSettingsTemplateClick(ViewSensorSetting viewSensorSetting) {
+    public void onRemoveSensorSettingsTemplateClick(int index) {
         List<ViewSensorSetting> currentSensorsSettings = getSensorsSettingsValue();
-        currentSensorsSettings.remove(viewSensorSetting);
+        currentSensorsSettings.remove(index);
         sensorsSettings.setValue(currentSensorsSettings);
     }
 

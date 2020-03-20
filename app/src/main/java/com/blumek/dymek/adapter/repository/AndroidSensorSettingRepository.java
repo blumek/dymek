@@ -17,19 +17,19 @@ public class AndroidSensorSettingRepository implements SensorSettingRepository {
     @Override
     public void save(SensorSetting sensorSetting) {
         new AddSensorSettingAsyncTask(sensorSettingsDao)
-                .execute(RoomSensorSettings.toRoomSensorSettings(sensorSetting));
+                .execute(RoomSensorSettings.from(sensorSetting));
     }
 
     @Override
     public void update(SensorSetting sensorSetting) {
         new UpdateSensorSettingAsyncTask(sensorSettingsDao)
-                .execute(RoomSensorSettings.toRoomSensorSettings(sensorSetting));
+                .execute(RoomSensorSettings.from(sensorSetting));
     }
 
     @Override
     public void delete(SensorSetting sensorSetting) {
         new DeleteSensorSettingAsyncTask(sensorSettingsDao)
-                .execute(RoomSensorSettings.toRoomSensorSettings(sensorSetting));
+                .execute(RoomSensorSettings.from(sensorSetting));
     }
 
     private static class AddSensorSettingAsyncTask extends AsyncTask<RoomSensorSettings, Void, Void> {

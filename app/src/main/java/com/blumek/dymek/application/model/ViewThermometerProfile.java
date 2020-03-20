@@ -5,25 +5,32 @@ import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
 import com.google.common.collect.Lists;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
 public final class ViewThermometerProfile implements Serializable {
     String id;
     String name;
     Date lastUsage;
     Date createdAt;
     List<ViewSensorSetting> viewSensorSettings;
+
+    private ViewThermometerProfile() {
+        viewSensorSettings = new ArrayList<>();
+    }
+
+    public static ViewThermometerProfile empty() {
+        return new ViewThermometerProfile();
+    }
 
     public ThermometerProfile toThermometerProfile() {
         return ThermometerProfile.builder()

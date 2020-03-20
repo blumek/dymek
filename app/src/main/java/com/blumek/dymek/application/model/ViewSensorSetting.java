@@ -17,6 +17,10 @@ public final class ViewSensorSetting {
     double minTemperatureValue;
     double maxTemperatureValue;
 
+    public static ViewSensorSetting empty() {
+        return new ViewSensorSetting();
+    }
+
     public SensorSetting toSensorSettings() {
         return SensorSetting.builder()
                 .id(this.id)

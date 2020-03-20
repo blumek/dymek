@@ -7,9 +7,11 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.blumek.dymek.adapter.idGenerator.UUIDGenerator;
 import com.blumek.dymek.adapter.repository.AndroidSensorSettingRepository;
+import com.blumek.dymek.adapter.repository.AndroidThermometerProfileRepository;
 import com.blumek.dymek.application.model.ViewSensorSetting;
 import com.blumek.dymek.application.model.ViewThermometerProfile;
 import com.blumek.dymek.domain.entity.thermometerProfile.ThermometerProfile;
+import com.blumek.dymek.domain.port.ThermometerProfileRepository;
 import com.blumek.dymek.shared.AppDatabase;
 import com.blumek.dymek.useCase.CreateSensorSetting;
 import com.blumek.dymek.useCase.UpdateSensorSetting;
@@ -25,6 +27,10 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
     public UpdateThermometerProfileViewModel(@NonNull Application application,
                                              ThermometerProfile thermometerProfile) {
         super(application);
+
+        AppDatabase appDatabase = AppDatabase.getInstance(application);
+        ThermometerProfileRepository thermometerProfileRepository =
+                new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
 
         updateThermometerProfile = new UpdateThermometerProfile(thermometerProfileRepository,
                 new ThermometerProfileValidator(),

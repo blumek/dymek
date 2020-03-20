@@ -54,8 +54,7 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        ViewSensorSetting viewSensorSetting = viewSensorSettings.get(position);
-        viewHolder.bind(viewModel, viewSensorSetting);
+        viewHolder.bind(viewModel, position);
     }
 
     @Override
@@ -63,7 +62,7 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
         return viewSensorSettings != null ? viewSensorSettings.size() : 0;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         private CreationSensorSettingsListItemBinding binding;
 
         ViewHolder(CreationSensorSettingsListItemBinding binding) {
@@ -71,10 +70,9 @@ public class SensorsSettingsAdapter extends RecyclerView.Adapter<SensorsSettings
             this.binding = binding;
         }
 
-        void bind(PersistenceThermometerProfileViewModel viewModel,
-                  ViewSensorSetting viewSensorSetting) {
+        void bind(PersistenceThermometerProfileViewModel viewModel, int index) {
             binding.setViewModel(viewModel);
-            binding.setSensorsSetting(viewSensorSetting);
+            binding.setIndex(index);
             binding.executePendingBindings();
         }
     }

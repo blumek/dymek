@@ -102,7 +102,7 @@ public abstract class AppDatabase extends RoomDatabase {
             new CreateThermometerProfile(
                     thermometerProfileRepository,
                     new UUIDGenerator(),
-                    new ThermometerProfileValidator(),
+                    new ThermometerProfileValidator(new SensorSettingValidator()),
                     new CreateSensorSetting(
                             sensorSettingRepository,
                             new UUIDGenerator(),

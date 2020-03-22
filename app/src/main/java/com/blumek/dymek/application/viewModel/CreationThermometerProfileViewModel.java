@@ -30,7 +30,8 @@ public class CreationThermometerProfileViewModel extends PersistenceThermometerP
                 new AndroidSensorSettingRepository(appDatabase.sensorSettingsDao());
 
         createThermometerProfile = new CreateThermometerProfile(thermometerProfileRepository,
-                new UUIDGenerator(), new ThermometerProfileValidator(), new CreateSensorSetting(
+                new UUIDGenerator(), new ThermometerProfileValidator(new SensorSettingValidator()),
+                new CreateSensorSetting(
                 sensorSettingRepository,
                 new UUIDGenerator(),
                 new SensorSettingValidator()

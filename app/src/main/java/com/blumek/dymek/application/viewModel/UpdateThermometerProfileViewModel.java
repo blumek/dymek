@@ -32,7 +32,7 @@ public class UpdateThermometerProfileViewModel extends PersistenceThermometerPro
                 new AndroidThermometerProfileRepository(appDatabase.thermometerProfileDao());
 
         updateThermometerProfile = new UpdateThermometerProfile(thermometerProfileRepository,
-                new ThermometerProfileValidator(),
+                new ThermometerProfileValidator(new SensorSettingValidator()),
                 new CreateSensorSetting(
                         new AndroidSensorSettingRepository(AppDatabase
                                 .getInstance(application).sensorSettingsDao()),
